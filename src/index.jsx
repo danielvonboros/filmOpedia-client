@@ -4,13 +4,14 @@ import ReactDOM from 'react-dom';
 // Import statement to bundle `./index.scss`
 import './index.scss';
 
+// Import statement for MainView
+import MainView from './src/components/main-view'
+
 // Main component
 class filmOpediaApplication extends React.Component {
     render () {
         return (
-            <div className="filmopedia">
-                <div>Good morning</div>
-            </div>
+            <MainView />
         );
     }
 }
