@@ -2,6 +2,7 @@ import React from 'react';
 
 export class MovieCard extends React.Component {
     render() {
-        return <div class="movie-card">some title</div>
+        const { movieData } = this.props;
+        return <div class="movie-card">{ movie.title }</div>
     }
 }

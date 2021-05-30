@@ -872,23 +872,19 @@ var _reactDom = require("react-dom");
 var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
 // Import statement to bundle `./index.scss`
 var _indexScss = require("./index.scss");
+// Import statement for MainView
+var _mainView = require("./components/main-view/main-view");
+var _mainViewDefault = parcelHelpers.interopDefault(_mainView);
 // Main component
 class filmOpediaApplication extends _reactDefault.default.Component {
     render() {
-        return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
-            className: "filmopedia",
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_mainViewDefault.default, {
             __source: {
                 fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/index.jsx",
-                lineNumber: 11
+                lineNumber: 14
             },
             __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement("div", {
-            __source: {
-                fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/index.jsx",
-                lineNumber: 12
-            },
-            __self: this
-        }, "Good morning")));
+        }));
     }
 }
 // Find the root of the app
@@ -901,7 +897,7 @@ _reactDomDefault.default.render(/*#__PURE__*/ _reactDefault.default.createElemen
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","react-dom":"2sg1U","./index.scss":"WWPzp","@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu","../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}],"3b2NM":[function(require,module,exports) {
+},{"react":"3b2NM","react-dom":"2sg1U","./index.scss":"WWPzp","@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu","../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./components/main-view/main-view":"6aw4d"}],"3b2NM":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react.development.js');
 
@@ -22002,6 +21998,116 @@ function registerExportsForReactRefresh(module) {
     }
 }
 
-},{"react-refresh/runtime":"11YIR"}]},["1j6wU","4wMZ4","BMqY8"], "BMqY8", "parcelRequire0d81")
+},{"react-refresh/runtime":"11YIR"}],"6aw4d":[function(require,module,exports) {
+var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MainView", ()=>MainView
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _movieCard = require("../movie-card/movie-card");
+class MainView extends _reactDefault.default.Component {
+    constructor(){
+        super(); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
+        this.state = {
+            movies: [
+                {
+                    _id: 1,
+                    title: 'Inception',
+                    description: 'desc1',
+                    imagePath: ''
+                },
+                {
+                    _id: 2,
+                    title: 'The Shawshank Redemption',
+                    description: 'desc2',
+                    imagePath: ''
+                },
+                {
+                    _id: 3,
+                    title: 'Gladiator',
+                    description: 'desc3',
+                    imagePath: ''
+                }
+            ]
+        };
+    }
+    render() {
+        const movies = this.state.movies;
+        if (movies.length === 0) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+            class: "",
+            "main-view": true,
+            __source: {
+                fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/components/main-view/main-view.jsx",
+                lineNumber: 18
+            },
+            __self: this
+        }, "'The list is empty'"));
+        return(// <React.Fragment> or <>
+        /*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "main-view",
+            __source: {
+                fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/components/main-view/main-view.jsx",
+                lineNumber: 22
+            },
+            __self: this
+        }, movies.map((movie)=>/*#__PURE__*/ _reactDefault.default.createElement(_movieCard.MovieCard, {
+                key: movie.__id,
+                movieData: movie,
+                __source: {
+                    fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/components/main-view/main-view.jsx",
+                    lineNumber: 23
+                },
+                __self: this
+            })
+        )));
+    }
+}
+exports.default = MainView;
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","../movie-card/movie-card":"1heQ8"}],"1heQ8":[function(require,module,exports) {
+var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+class MovieCard extends _reactDefault.default.Component {
+    render() {
+        const { movieData  } = this.props;
+        return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
+            class: "movie-card",
+            __source: {
+                fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/components/movie-card/movie-card.jsx",
+                lineNumber: 6
+            },
+            __self: this
+        }, movie.title));
+    }
+}
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}]},["1j6wU","4wMZ4","BMqY8"], "BMqY8", "parcelRequire0d81")
 
 //# sourceMappingURL=index.a64948ae.js.map

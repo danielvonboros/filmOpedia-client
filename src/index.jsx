@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 
 // Import statement for MainView
-import MainView from './src/components/main-view'
+import MainView from './components/main-view/main-view'
 
 // Main component
 class filmOpediaApplication extends React.Component {
