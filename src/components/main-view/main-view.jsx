@@ -20,7 +20,7 @@ export class MainView extends React.Component {
             // <React.Fragment> or <>
             <div className="main-view">
                 {movies.map((movie) => {
-                    return <div>{movie.title}</div>
+                    <MovieCard />
                 })}
             </div>
             // < /React.Fragment> or </>
