@@ -12,12 +12,16 @@ export class MainView extends React.Component {
         }
     }
     render() {
+        const movies = this.state.movies;
+        if (movies.length === 0) {
+            return <div class=""main-view>'The list is empty'</div>
+        }
         return (
             // <React.Fragment> or <>
             <div className="main-view">
-                <div>Inception</div>
-                <div>The Shawshank Redemption</div>
-                <div>Gladiator</div>
+                {movies.map((movie) => {
+                    return <div>{movie.Title}</div>
+                })}
             </div>
             // < /React.Fragment> or </>
         );
