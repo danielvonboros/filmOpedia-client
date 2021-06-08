@@ -865,39 +865,127 @@ var prevRefreshSig = window.$RefreshSig$;
 helpers.prelude(module);
 
 try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactDom = require("react-dom");
-var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
-// Import statement for MainView
-var _mainViewJsx = require("./components/main-view/main-view.jsx");
-var _mainViewJsxDefault = parcelHelpers.interopDefault(_mainViewJsx);
-// Import statement to bundle `./index.scss`
-var _indexScss = require("./index.scss");
-// Main component
-class filmOpediaApplication extends _reactDefault.default.Component {
-    render() {
-        return(/*#__PURE__*/ _reactDefault.default.createElement(_mainViewJsxDefault.default, {
-            __source: {
-                fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/index.jsx",
-                lineNumber: 14
-            },
-            __self: this
-        }));
+"use strict";
+function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") _typeof = function _typeof1(obj1) {
+        return typeof obj1;
+    };
+    else _typeof = function _typeof2(obj1) {
+        return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : typeof obj1;
+    };
+    return _typeof(obj);
+}
+var _react = _interopRequireDefault(require("react"));
+var _reactDom = _interopRequireDefault(require("react-dom"));
+var _mainView = _interopRequireDefault(require("./components/main-view/main-view"));
+require("./index.scss");
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        "default": obj
+    };
+}
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
+}
+function _defineProperties(target, props) {
+    for(var i = 0; i < props.length; i++){
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
     }
 }
-// Find the root of the app
-const container = document.getElementsByClassName('app-container')[0];
-// Tells React to render your app in the root DOM
-_reactDomDefault.default.render(/*#__PURE__*/ _reactDefault.default.createElement(filmOpediaApplication), container);
+function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+}
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+            value: subClass,
+            writable: true,
+            configurable: true
+        }
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
+}
+function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf1(o1, p1) {
+        o1.__proto__ = p1;
+        return o1;
+    };
+    return _setPrototypeOf(o, p);
+}
+function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+    return function _createSuperInternal() {
+        var Super = _getPrototypeOf(Derived), result;
+        if (hasNativeReflectConstruct) {
+            var NewTarget = _getPrototypeOf(this).constructor;
+            result = Reflect.construct(Super, arguments, NewTarget);
+        } else result = Super.apply(this, arguments);
+        return _possibleConstructorReturn(this, result);
+    };
+}
+function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
+    return _assertThisInitialized(self);
+}
+function _assertThisInitialized(self) {
+    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    return self;
+}
+function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+    try {
+        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+        }));
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf1(o1) {
+        return o1.__proto__ || Object.getPrototypeOf(o1);
+    };
+    return _getPrototypeOf(o);
+}
+// Main component
+var filmOpediaApplication1 = /*#__PURE__*/ function(_React$Component) {
+    _inherits(filmOpediaApplication2, _React$Component);
+    var _super = _createSuper(filmOpediaApplication2);
+    function filmOpediaApplication2() {
+        _classCallCheck(this, filmOpediaApplication2);
+        return _super.apply(this, arguments);
+    }
+    _createClass(filmOpediaApplication2, [
+        {
+            key: "render",
+            value: function render() {
+                return(/*#__PURE__*/ _react["default"].createElement(_mainView["default"], null));
+            }
+        }
+    ]);
+    return filmOpediaApplication2;
+}(_react["default"].Component); // Find the root of the app
+_c = filmOpediaApplication1;
+var container = document.getElementsByClassName('app-container')[0]; // Tells React to render your app in the root DOM
+_reactDom["default"].render(/*#__PURE__*/ _react["default"].createElement(filmOpediaApplication1), container);
+var _c;
+$RefreshReg$(_c, "filmOpediaApplication");
 
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","react-dom":"2sg1U","./index.scss":"WWPzp","@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu","../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./components/main-view/main-view.jsx":"6aw4d"}],"3b2NM":[function(require,module,exports) {
+},{"react":"3b2NM","react-dom":"2sg1U","./index.scss":"WWPzp","../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./components/main-view/main-view":"6aw4d"}],"3b2NM":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react.development.js');
 
@@ -21846,39 +21934,7 @@ module.exports = require('./cjs/scheduler-tracing.development.js');
     exports.unstable_wrap = unstable_wrap;
 })();
 
-},{}],"WWPzp":[function() {},{}],"3hoTu":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule') return;
-        // Skip duplicate re-exports when they have the same value.
-        if (key in dest && dest[key] === source[key]) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"2FZ5L":[function(require,module,exports) {
+},{}],"WWPzp":[function() {},{}],"2FZ5L":[function(require,module,exports) {
 "use strict";
 var Refresh = require('react-refresh/runtime');
 function debounce(func, delay) {
@@ -22005,17 +22061,108 @@ var prevRefreshSig = window.$RefreshSig$;
 helpers.prelude(module);
 
 try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MainView", ()=>MainView
-);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
+"use strict";
+function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") _typeof = function _typeof1(obj1) {
+        return typeof obj1;
+    };
+    else _typeof = function _typeof2(obj1) {
+        return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : typeof obj1;
+    };
+    return _typeof(obj);
+}
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports["default"] = exports.MainView = void 0;
+var _react = _interopRequireDefault(require("react"));
 var _movieCard = require("../movie-card/movie-card");
-class MainView extends _reactDefault.default.Component {
-    constructor(){
-        super(); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
-        this.state = {
+var _movieView = require("../movie-view/movie-view");
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        "default": obj
+    };
+}
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
+}
+function _defineProperties(target, props) {
+    for(var i = 0; i < props.length; i++){
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+    }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+}
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+            value: subClass,
+            writable: true,
+            configurable: true
+        }
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
+}
+function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf1(o1, p1) {
+        o1.__proto__ = p1;
+        return o1;
+    };
+    return _setPrototypeOf(o, p);
+}
+function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+    return function _createSuperInternal() {
+        var Super = _getPrototypeOf(Derived), result;
+        if (hasNativeReflectConstruct) {
+            var NewTarget = _getPrototypeOf(this).constructor;
+            result = Reflect.construct(Super, arguments, NewTarget);
+        } else result = Super.apply(this, arguments);
+        return _possibleConstructorReturn(this, result);
+    };
+}
+function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
+    return _assertThisInitialized(self);
+}
+function _assertThisInitialized(self) {
+    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    return self;
+}
+function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+    try {
+        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+        }));
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf1(o1) {
+        return o1.__proto__ || Object.getPrototypeOf(o1);
+    };
+    return _getPrototypeOf(o);
+}
+var MainView1 = /*#__PURE__*/ function(_React$Component) {
+    _inherits(MainView2, _React$Component);
+    var _super = _createSuper(MainView2);
+    function MainView2() {
+        var _this;
+        _classCallCheck(this, MainView2);
+        _this = _super.call(this); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
+        _this.state = {
             movies: [
                 {
                     _id: 1,
@@ -22038,76 +22185,325 @@ class MainView extends _reactDefault.default.Component {
             ],
             selectedMovie: null
         };
+        return _this;
     }
-    render() {
-        const { movies  } = this.state;
-        if (movies.length === 0) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
-            class: "main-view",
-            __source: {
-                fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/components/main-view/main-view.jsx",
-                lineNumber: 18
-            },
-            __self: this
-        }, "'The list is empty'"));
-        return(// <React.Fragment> or <>
-        /*#__PURE__*/ _reactDefault.default.createElement("div", {
-            className: "main-view",
-            __source: {
-                fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/components/main-view/main-view.jsx",
-                lineNumber: 22
-            },
-            __self: this
-        }, movies.map((movie)=>/*#__PURE__*/ _reactDefault.default.createElement(_movieCard.MovieCard, {
-                key: movie._id,
-                movieData: movie,
-                __source: {
-                    fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/components/main-view/main-view.jsx",
-                    lineNumber: 23
-                },
-                __self: this
-            })
-        )));
-    }
-}
-exports.default = MainView;
+    _createClass(MainView2, [
+        {
+            key: "setSelectedMovie",
+            value: function setSelectedMovie(newSelectedMovie) {
+                this.setState({
+                    selectedMovie: newSelectedMovie
+                });
+            }
+        },
+        {
+            key: "render",
+            value: function render() {
+                var _this2 = this;
+                var _this$state = this.state, movies = _this$state.movies, selectedMovie = _this$state.selectedMovie;
+                if (selectedMovie) return(/*#__PURE__*/ _react["default"].createElement(_movieView.MovieView, {
+                    movieData: selectedMovie
+                }));
+                if (movies.length === 0) return(/*#__PURE__*/ _react["default"].createElement("div", {
+                    "class": "main-view"
+                }, "'The list is empty'"));
+                return(/*#__PURE__*/ // <React.Fragment> or <>
+                _react["default"].createElement("div", {
+                    className: "main-view"
+                }, movies.map(function(movie) {
+                    return(/*#__PURE__*/ _react["default"].createElement(_movieCard.MovieCard, {
+                        key: movie._id,
+                        movieData: movie,
+                        onMovieClick: function onMovieClick(movie1) {
+                            _this2.setSelectedMovie(movie1);
+                        }
+                    }));
+                })));
+            }
+        }
+    ]);
+    return MainView2;
+}(_react["default"].Component);
+exports.MainView = MainView1;
+var _default = MainView1;
+exports["default"] = _default;
 
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","../movie-card/movie-card":"1heQ8"}],"1heQ8":[function(require,module,exports) {
+},{"react":"3b2NM","../movie-card/movie-card":"1heQ8","../movie-view/movie-view":"1wBzQ","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}],"1heQ8":[function(require,module,exports) {
 var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
 helpers.prelude(module);
 
 try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
-);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-class MovieCard extends _reactDefault.default.Component {
-    render() {
-        const { movieData  } = this.props;
-        return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
-            class: "movie-card",
-            __source: {
-                fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/components/movie-card/movie-card.jsx",
-                lineNumber: 6
-            },
-            __self: this
-        }, movie.title));
+"use strict";
+function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") _typeof = function _typeof1(obj1) {
+        return typeof obj1;
+    };
+    else _typeof = function _typeof2(obj1) {
+        return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : typeof obj1;
+    };
+    return _typeof(obj);
+}
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.MovieCard = void 0;
+var _react = _interopRequireDefault(require("react"));
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        "default": obj
+    };
+}
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
+}
+function _defineProperties(target, props) {
+    for(var i = 0; i < props.length; i++){
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
     }
 }
+function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+}
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+            value: subClass,
+            writable: true,
+            configurable: true
+        }
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
+}
+function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf1(o1, p1) {
+        o1.__proto__ = p1;
+        return o1;
+    };
+    return _setPrototypeOf(o, p);
+}
+function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+    return function _createSuperInternal() {
+        var Super = _getPrototypeOf(Derived), result;
+        if (hasNativeReflectConstruct) {
+            var NewTarget = _getPrototypeOf(this).constructor;
+            result = Reflect.construct(Super, arguments, NewTarget);
+        } else result = Super.apply(this, arguments);
+        return _possibleConstructorReturn(this, result);
+    };
+}
+function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
+    return _assertThisInitialized(self);
+}
+function _assertThisInitialized(self) {
+    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    return self;
+}
+function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+    try {
+        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+        }));
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf1(o1) {
+        return o1.__proto__ || Object.getPrototypeOf(o1);
+    };
+    return _getPrototypeOf(o);
+}
+var MovieCard1 = /*#__PURE__*/ function(_React$Component) {
+    _inherits(MovieCard2, _React$Component);
+    var _super = _createSuper(MovieCard2);
+    function MovieCard2() {
+        _classCallCheck(this, MovieCard2);
+        return _super.apply(this, arguments);
+    }
+    _createClass(MovieCard2, [
+        {
+            key: "render",
+            value: function render() {
+                var _this$props = this.props, movieData = _this$props.movieData, onMovieClick = _this$props.onMovieClick;
+                return(/*#__PURE__*/ _react["default"].createElement("div", {
+                    "class": "movie-card",
+                    onClick: function onClick() {
+                        onMovieClick(movieData);
+                    }
+                }, movieData.title));
+            }
+        }
+    ]);
+    return MovieCard2;
+}(_react["default"].Component);
+exports.MovieCard = MovieCard1;
 
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}]},["1j6wU","4wMZ4","BMqY8"], "BMqY8", "parcelRequire0d81")
+},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}],"1wBzQ":[function(require,module,exports) {
+var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+"use strict";
+function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") _typeof = function _typeof1(obj1) {
+        return typeof obj1;
+    };
+    else _typeof = function _typeof2(obj1) {
+        return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : typeof obj1;
+    };
+    return _typeof(obj);
+}
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.MovieView = void 0;
+var _react = _interopRequireDefault(require("react"));
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        "default": obj
+    };
+}
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
+}
+function _defineProperties(target, props) {
+    for(var i = 0; i < props.length; i++){
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+    }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+}
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+            value: subClass,
+            writable: true,
+            configurable: true
+        }
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
+}
+function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf1(o1, p1) {
+        o1.__proto__ = p1;
+        return o1;
+    };
+    return _setPrototypeOf(o, p);
+}
+function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+    return function _createSuperInternal() {
+        var Super = _getPrototypeOf(Derived), result;
+        if (hasNativeReflectConstruct) {
+            var NewTarget = _getPrototypeOf(this).constructor;
+            result = Reflect.construct(Super, arguments, NewTarget);
+        } else result = Super.apply(this, arguments);
+        return _possibleConstructorReturn(this, result);
+    };
+}
+function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
+    return _assertThisInitialized(self);
+}
+function _assertThisInitialized(self) {
+    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    return self;
+}
+function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+    try {
+        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+        }));
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf1(o1) {
+        return o1.__proto__ || Object.getPrototypeOf(o1);
+    };
+    return _getPrototypeOf(o);
+}
+var MovieView1 = /*#__PURE__*/ function(_React$Component) {
+    _inherits(MovieView2, _React$Component);
+    var _super = _createSuper(MovieView2);
+    function MovieView2() {
+        _classCallCheck(this, MovieView2);
+        return _super.apply(this, arguments);
+    }
+    _createClass(MovieView2, [
+        {
+            key: "render",
+            value: function render() {
+                var movieData = this.props.movieData;
+                return(/*#__PURE__*/ _react["default"].createElement("div", {
+                    className: "movie-view"
+                }, /*#__PURE__*/ _react["default"].createElement("div", {
+                    className: "movie-poster"
+                }, /*#__PURE__*/ _react["default"].createElement("img", {
+                    src: "{movie.imagePath}"
+                })), /*#__PURE__*/ _react["default"].createElement("div", {
+                    className: "movie-title"
+                }, /*#__PURE__*/ _react["default"].createElement("span", {
+                    className: "label"
+                }, "Title: "), /*#__PURE__*/ _react["default"].createElement("span", {
+                    className: "value"
+                }, movieData.title)), /*#__PURE__*/ _react["default"].createElement("div", {
+                    className: "movie-description"
+                }, /*#__PURE__*/ _react["default"].createElement("span", {
+                    className: "label"
+                }, "Description: "), /*#__PURE__*/ _react["default"].createElement("span", {
+                    className: "value"
+                }, movieData.description))));
+            }
+        }
+    ]);
+    return MovieView2;
+}(_react["default"].Component);
+exports.MovieView = MovieView1;
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}]},["1j6wU","4wMZ4","BMqY8"], "BMqY8", "parcelRequire0d81")
 
 //# sourceMappingURL=index.a64948ae.js.map
