@@ -23,6 +23,7 @@ export class MainView extends React.Component {
         return (
             // <React.Fragment> or <>
             <div className="main-view">
+                <button onClick={() => {alert('Nice!')}}>Click me!</button>
                 {movies.map((movie) => <MovieCard key={movie._id} movieData={movie} /> )}
             </div>
             // </React.Fragment> or </>
