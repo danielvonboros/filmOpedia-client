@@ -22493,7 +22493,7 @@ var MovieView1 = /*#__PURE__*/ function(_React$Component) {
                     className: "label"
                 }, "Description: "), /*#__PURE__*/ _react["default"].createElement("span", {
                     className: "value"
-                }, movieData.description))));
+                }, movieData.description)), /*#__PURE__*/ _react["default"].createElement("button", null, "Back")));
             }
         }
     ]);
