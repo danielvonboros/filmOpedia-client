@@ -870,15 +870,15 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactDom = require("react-dom");
 var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
+// Import statement for MainView
+var _mainViewJsx = require("./components/main-view/main-view.jsx");
+var _mainViewJsxDefault = parcelHelpers.interopDefault(_mainViewJsx);
 // Import statement to bundle `./index.scss`
 var _indexScss = require("./index.scss");
-// Import statement for MainView
-var _mainView = require("./components/main-view/main-view");
-var _mainViewDefault = parcelHelpers.interopDefault(_mainView);
 // Main component
 class filmOpediaApplication extends _reactDefault.default.Component {
     render() {
-        return(/*#__PURE__*/ _reactDefault.default.createElement(_mainViewDefault.default, {
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_mainViewJsxDefault.default, {
             __source: {
                 fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/index.jsx",
                 lineNumber: 14
@@ -897,7 +897,7 @@ _reactDomDefault.default.render(/*#__PURE__*/ _reactDefault.default.createElemen
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","react-dom":"2sg1U","./index.scss":"WWPzp","@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu","../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./components/main-view/main-view":"6aw4d"}],"3b2NM":[function(require,module,exports) {
+},{"react":"3b2NM","react-dom":"2sg1U","./index.scss":"WWPzp","@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu","../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./components/main-view/main-view.jsx":"6aw4d"}],"3b2NM":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react.development.js');
 
@@ -22035,14 +22035,14 @@ class MainView extends _reactDefault.default.Component {
                     description: 'desc3',
                     imagePath: ''
                 }
-            ]
+            ],
+            selectedMovie: null
         };
     }
     render() {
-        const movies = this.state.movies;
+        const { movies  } = this.state;
         if (movies.length === 0) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
-            class: "",
-            "main-view": true,
+            class: "main-view",
             __source: {
                 fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/components/main-view/main-view.jsx",
                 lineNumber: 18
@@ -22058,7 +22058,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         }, movies.map((movie)=>/*#__PURE__*/ _reactDefault.default.createElement(_movieCard.MovieCard, {
-                key: movie.__id,
+                key: movie._id,
                 movieData: movie,
                 __source: {
                     fileName: "/Users/danielvonboros/Documents/code/careerFoundry/ClientSideProgramming/ClientSideInProgress/filmOpedia-client/src/components/main-view/main-view.jsx",
