@@ -23,15 +23,19 @@ export class MainView extends React.Component {
 
     render() {
         const {movies, selectedMovie } = this.state;
-        if (selectedMovie) return <MovieView movieData={selectedMovie} />;
 
         if (movies.length === 0) return <div class="main-view">'The list is empty'</div>;
 
         return (
             // <React.Fragment> or <>
             <div className="main-view">
-                {movies.map((movie) => <MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => {this.setSelectedMovie(movie)} }/> )}
-            </div>
+                {selectedMovie
+                ? <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+                : movies.map(movie => (
+                    <MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }}/>
+        ))
+      }
+    </div>
             // </React.Fragment> or </>
         );
     }

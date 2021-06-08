@@ -22201,16 +22201,18 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
             value: function render() {
                 var _this2 = this;
                 var _this$state = this.state, movies = _this$state.movies, selectedMovie = _this$state.selectedMovie;
-                if (selectedMovie) return(/*#__PURE__*/ _react["default"].createElement(_movieView.MovieView, {
-                    movieData: selectedMovie
-                }));
                 if (movies.length === 0) return(/*#__PURE__*/ _react["default"].createElement("div", {
                     "class": "main-view"
                 }, "'The list is empty'"));
                 return(/*#__PURE__*/ // <React.Fragment> or <>
                 _react["default"].createElement("div", {
                     className: "main-view"
-                }, movies.map(function(movie) {
+                }, selectedMovie ? /*#__PURE__*/ _react["default"].createElement(_movieView.MovieView, {
+                    movieData: selectedMovie,
+                    onBackClick: function onBackClick(newSelectedMovie) {
+                        _this2.setSelectedMovie(newSelectedMovie);
+                    }
+                }) : movies.map(function(movie) {
                     return(/*#__PURE__*/ _react["default"].createElement(_movieCard.MovieCard, {
                         key: movie._id,
                         movieData: movie,
