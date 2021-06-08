@@ -22167,20 +22167,20 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                 {
                     _id: 1,
                     title: 'Inception',
-                    description: 'desc1',
-                    imagePath: ''
+                    description: 'Dom Cobb (Leonardo DiCaprio) is a thief with the rare ability to enter people\'s dreams and steal their secrets from their subconscious. His skill has made him a hot commodity in the world of corporate espionage but has also cost him everything he loves. Cobb gets a chance at redemption when he is offered a seemingly impossible task: Plant an idea in someone\'s mind. If he succeeds, it will be the perfect crime, but a dangerous enemy anticipates Cobb\'s every move.',
+                    imagePath: 'https://resizing.flixster.com/4MrL62heb7yBgBt8zllSeqNZxg4=/206x305/v2/https://flxt.tmsimg.com/assets/p7825626_p_v10_af.jpg'
                 },
                 {
                     _id: 2,
                     title: 'The Shawshank Redemption',
-                    description: 'desc2',
-                    imagePath: ''
+                    description: 'Andy Dufresne (Tim Robbins) is sentenced to two consecutive life terms in prison for the murders of his wife and her lover and is sentenced to a tough prison. However, only Andy knows he didn\'t commit the crimes. While there, he forms a friendship with Red (Morgan Freeman), experiences brutality of prison life, adapts, helps the warden, etc., all in 19 years.',
+                    imagePath: 'https://resizing.flixster.com/U8DOCAyL0efMS6cA0UmrNi8oyQk=/206x305/v2/https://flxt.tmsimg.com/NowShowing/3725/3725_aa.jpg'
                 },
                 {
                     _id: 3,
                     title: 'Gladiator',
-                    description: 'desc3',
-                    imagePath: ''
+                    description: 'Commodus (Joaquin Phoenix) takes power and strips rank from Maximus (Russell Crowe), one of the favored generals of his predecessor and father, Emperor Marcus Aurelius, the great stoical philosopher. Maximus is then relegated to fighting to the death in the gladiator arenas.',
+                    imagePath: 'https://resizing.flixster.com/z1uxBIn8PvwL-9RdEvzLbHJbc9Y=/206x305/v2/https://flxt.tmsimg.com/assets/p24674_p_v13_bc.jpg'
                 }
             ],
             selectedMovie: null
@@ -22474,13 +22474,13 @@ var MovieView1 = /*#__PURE__*/ function(_React$Component) {
         {
             key: "render",
             value: function render() {
-                var movieData = this.props.movieData;
+                var _this$props = this.props, movieData = _this$props.movieData, onBackClick = _this$props.onBackClick;
                 return(/*#__PURE__*/ _react["default"].createElement("div", {
                     className: "movie-view"
                 }, /*#__PURE__*/ _react["default"].createElement("div", {
                     className: "movie-poster"
                 }, /*#__PURE__*/ _react["default"].createElement("img", {
-                    src: "{movie.imagePath}"
+                    src: movieData.imagePath
                 })), /*#__PURE__*/ _react["default"].createElement("div", {
                     className: "movie-title"
                 }, /*#__PURE__*/ _react["default"].createElement("span", {
@@ -22493,7 +22493,11 @@ var MovieView1 = /*#__PURE__*/ function(_React$Component) {
                     className: "label"
                 }, "Description: "), /*#__PURE__*/ _react["default"].createElement("span", {
                     className: "value"
-                }, movieData.description)), /*#__PURE__*/ _react["default"].createElement("button", null, "Back")));
+                }, movieData.description)), /*#__PURE__*/ _react["default"].createElement("button", {
+                    onClick: function onClick() {
+                        onBackClick(null);
+                    }
+                }, "Back")));
             }
         }
     ]);
