@@ -22269,6 +22269,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.MovieCard = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
+require("./movie-card.scss");
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         "default": obj
@@ -22396,7 +22397,7 @@ MovieCard1.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","prop-types":"4dfy5"}],"4dfy5":[function(require,module,exports) {
+},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","prop-types":"4dfy5","./movie-card.scss":"2VsNo"}],"4dfy5":[function(require,module,exports) {
 var ReactIs = require('react-is');
 // By explicitly using `prop-types` you are opting into new development behavior.
 // http://fb.me/prop-types-in-prod
@@ -23075,7 +23076,7 @@ printWarning = function(text) {
 };
 module.exports = checkPropTypes;
 
-},{"./lib/ReactPropTypesSecret":"3OVnw"}],"1wBzQ":[function(require,module,exports) {
+},{"./lib/ReactPropTypesSecret":"3OVnw"}],"2VsNo":[function() {},{}],"1wBzQ":[function(require,module,exports) {
 var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -23097,6 +23098,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.MovieView = void 0;
 var _react = _interopRequireDefault(require("react"));
+require("./movie-view.scss");
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         "default": obj
@@ -23257,7 +23259,7 @@ exports.MovieView = MovieView1;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}],"7rA65":[function(require,module,exports) {
+},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./movie-view.scss":"vefjh"}],"vefjh":[function() {},{}],"7rA65":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"4qfhW"}],"4qfhW":[function(require,module,exports) {
