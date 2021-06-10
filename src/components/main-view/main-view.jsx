@@ -3,14 +3,19 @@ import axios from 'axios';
 
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
+import {LoginView} from '../login-view/login-view';
+
+import './main-view.scss';
 
 export class MainView extends React.Component {
     constructor() {
         super(); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
         this.state = {
             movies: [],
-            selectedMovie: null
-        }
+            selectedMovie: null,
+            user: null
+        };
+        
     }
 
     componentDidMount() {
@@ -31,18 +36,26 @@ export class MainView extends React.Component {
         });
     }
 
-    render() {
-        const {movies, selectedMovie } = this.state;
+    onLoggedIn(user) {
+        this.setState({
+            user
+        });
+    }
 
-        if (movies.length === 0) return <div class="main-view">'The list is empty'</div>;
+    render() {
+        const { user, movies, selectedMovie } = this.state; // I had to include {user} here, it wasn't in the task, but otherwise it wouldn't work, showing me the error, that user isn't defined.
+
+        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+
+        if (movies.length === 0) return <div className="main-view">'The list is empty'</div>;
 
         return (
             // <React.Fragment> or <>
             <div className="main-view">
                 {selectedMovie
-                ? <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+                ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
                 : movies.map(movie => (
-                    <MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(newSelectedMovie) }}/>
+                    <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
         ))
       }
     </div>
