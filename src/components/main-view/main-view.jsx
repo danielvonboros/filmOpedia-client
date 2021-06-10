@@ -4,6 +4,7 @@ import axios from 'axios';
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
 import {LoginView} from '../login-view/login-view';
+import {RegistrationView} from '../registration-view/registration-view';
 
 import './main-view.scss';
 
@@ -42,10 +43,25 @@ export class MainView extends React.Component {
         });
     }
 
-    render() {
-        const { user, movies, selectedMovie } = this.state; // I had to include {user} here, it wasn't in the task, but otherwise it wouldn't work, showing me the error, that user isn't defined.
+    onRegister(register) {
+        this.setState({
+            register
+        });
+    }
 
-        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    toggleRegister = (e) => {
+        e.preventDefault();
+        this.setState({
+          register: !this.state.register
+        })
+    }
+
+    render() {
+        const { user, movies, selectedMovie, register } = this.state; // I had to include {user} here, it wasn't in the task, but otherwise it wouldn't work, showing me the error, that user isn't defined.
+
+        if (register) return <RegistrationView onRegister={register => this.onRegister(register)} toggleRegister={this.toggleRegister} />;
+
+        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} toggleRegister={this.toggleRegister} />;
 
         if (movies.length === 0) return <div className="main-view">'The list is empty'</div>;
 

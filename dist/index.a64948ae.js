@@ -22080,6 +22080,7 @@ var _axios = _interopRequireDefault(require("axios"));
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
 var _loginView = require("../login-view/login-view");
+var _registrationView = require("../registration-view/registration-view");
 require("./main-view.scss");
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -22158,6 +22159,16 @@ function _getPrototypeOf(o) {
     };
     return _getPrototypeOf(o);
 }
+function _defineProperty(obj, key, value) {
+    if (key in obj) Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+    });
+    else obj[key] = value;
+    return obj;
+}
 var MainView1 = /*#__PURE__*/ function(_React$Component) {
     _inherits(MainView2, _React$Component);
     var _super = _createSuper(MainView2);
@@ -22165,6 +22176,12 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
         var _this;
         _classCallCheck(this, MainView2);
         _this = _super.call(this); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
+        _defineProperty(_assertThisInitialized(_this), "toggleRegister", function(e) {
+            e.preventDefault();
+            _this.setState({
+                register: !_this.state.register
+            });
+        });
         _this.state = {
             movies: [],
             selectedMovie: null,
@@ -22203,14 +22220,29 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
             }
         },
         {
+            key: "onRegister",
+            value: function onRegister(register) {
+                this.setState({
+                    register: register
+                });
+            }
+        },
+        {
             key: "render",
             value: function render() {
                 var _this3 = this;
-                var _this$state = this.state, user = _this$state.user, movies = _this$state.movies, selectedMovie = _this$state.selectedMovie; // I had to include {user} here, it wasn't in the task, but otherwise it wouldn't work, showing me the error, that user isn't defined.
+                var _this$state = this.state, user = _this$state.user, movies = _this$state.movies, selectedMovie = _this$state.selectedMovie, register = _this$state.register; // I had to include {user} here, it wasn't in the task, but otherwise it wouldn't work, showing me the error, that user isn't defined.
+                if (register) return(/*#__PURE__*/ _react["default"].createElement(_registrationView.RegistrationView, {
+                    onRegister: function onRegister(register1) {
+                        return _this3.onRegister(register1);
+                    },
+                    toggleRegister: this.toggleRegister
+                }));
                 if (!user) return(/*#__PURE__*/ _react["default"].createElement(_loginView.LoginView, {
                     onLoggedIn: function onLoggedIn(user1) {
                         return _this3.onLoggedIn(user1);
-                    }
+                    },
+                    toggleRegister: this.toggleRegister
                 }));
                 if (movies.length === 0) return(/*#__PURE__*/ _react["default"].createElement("div", {
                     className: "main-view"
@@ -22246,7 +22278,7 @@ exports["default"] = _default;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","../movie-card/movie-card":"1heQ8","../movie-view/movie-view":"1wBzQ","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","axios":"7rA65","../login-view/login-view":"1vwH2","./main-view.scss":"6OS2x"}],"1heQ8":[function(require,module,exports) {
+},{"react":"3b2NM","../movie-card/movie-card":"1heQ8","../movie-view/movie-view":"1wBzQ","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","axios":"7rA65","../login-view/login-view":"1vwH2","./main-view.scss":"6OS2x","../registration-view/registration-view":"3rk1E"}],"1heQ8":[function(require,module,exports) {
 var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -24647,7 +24679,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.LoginView = LoginView;
 var _react = _interopRequireWildcard(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
 require("./login-view.scss");
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        "default": obj
+    };
+}
 function _getRequireWildcardCache(nodeInterop) {
     if (typeof WeakMap !== "function") return null;
     var cacheBabelInterop = new WeakMap();
@@ -24744,7 +24782,10 @@ function LoginView(props) {
     })), /*#__PURE__*/ _react["default"].createElement("button", {
         type: "submit",
         onClick: handleSubmit
-    }, "Submit")));
+    }, "Submit"), /*#__PURE__*/ _react["default"].createElement("button", {
+        type: "button",
+        onClick: props.toggleRegister
+    }, "Register")));
 }
 _c = LoginView;
 var _c;
@@ -24755,6 +24796,154 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./login-view.scss":"3heKR"}],"3heKR":[function() {},{}],"6OS2x":[function() {},{}]},["1j6wU","4wMZ4","BMqY8"], "BMqY8", "parcelRequire0d81")
+},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./login-view.scss":"3heKR","prop-types":"4dfy5"}],"3heKR":[function() {},{}],"6OS2x":[function() {},{}],"3rk1E":[function(require,module,exports) {
+var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+"use strict";
+function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") _typeof = function _typeof1(obj1) {
+        return typeof obj1;
+    };
+    else _typeof = function _typeof2(obj1) {
+        return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : typeof obj1;
+    };
+    return _typeof(obj);
+}
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.RegistrationView = RegistrationView;
+var _react = _interopRequireWildcard(require("react"));
+require("./registration-view.scss");
+function _getRequireWildcardCache(nodeInterop) {
+    if (typeof WeakMap !== "function") return null;
+    var cacheBabelInterop = new WeakMap();
+    var cacheNodeInterop = new WeakMap();
+    return (_getRequireWildcardCache = function _getRequireWildcardCache1(nodeInterop1) {
+        return nodeInterop1 ? cacheNodeInterop : cacheBabelInterop;
+    })(nodeInterop);
+}
+function _interopRequireWildcard(obj, nodeInterop) {
+    if (!nodeInterop && obj && obj.__esModule) return obj;
+    if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") return {
+        "default": obj
+    };
+    var cache = _getRequireWildcardCache(nodeInterop);
+    if (cache && cache.has(obj)) return cache.get(obj);
+    var newObj = {
+    };
+    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+    for(var key in obj)if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+        var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+        if (desc && (desc.get || desc.set)) Object.defineProperty(newObj, key, desc);
+        else newObj[key] = obj[key];
+    }
+    newObj["default"] = obj;
+    if (cache) cache.set(obj, newObj);
+    return newObj;
+}
+function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
+    return arr2;
+}
+function _iterableToArrayLimit(arr, i) {
+    var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
+    if (_i == null) return;
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _s, _e;
+    try {
+        for(_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true){
+            _arr.push(_s.value);
+            if (i && _arr.length === i) break;
+        }
+    } catch (err) {
+        _d = true;
+        _e = err;
+    } finally{
+        try {
+            if (!_n && _i["return"] != null) _i["return"]();
+        } finally{
+            if (_d) throw _e;
+        }
+    }
+    return _arr;
+}
+function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+}
+function RegistrationView(props) {
+    var _useState = _react.useState(''), _useState2 = _slicedToArray(_useState, 2), username = _useState2[0], setUsername = _useState2[1];
+    var _useState3 = _react.useState(''), _useState4 = _slicedToArray(_useState3, 2), password = _useState4[0], setPassword = _useState4[1];
+    var _useState5 = _react.useState(''), _useState6 = _slicedToArray(_useState5, 2), email = _useState6[0], setEmail = _useState6[1];
+    var _useState7 = _react.useState(''), _useState8 = _slicedToArray(_useState7, 2), birthday = _useState8[0], setBirthday = _useState8[1];
+    var handleSubmit = function handleSubmit1(e) {
+        e.preventDefault();
+        console.log(username, password.email, birthday);
+        props.onRegister(username);
+    };
+    return(/*#__PURE__*/ _react["default"].createElement("form", null, /*#__PURE__*/ _react["default"].createElement("label", null, "Username:", /*#__PURE__*/ _react["default"].createElement("input", {
+        type: "text",
+        value: username,
+        onChange: function onChange(e) {
+            return setUsername(e.target.value);
+        }
+    })), /*#__PURE__*/ _react["default"].createElement("label", null, "Password:", /*#__PURE__*/ _react["default"].createElement("input", {
+        type: "password",
+        value: password,
+        onChange: function onChange(e) {
+            return setPassword(e.target.value);
+        }
+    })), /*#__PURE__*/ _react["default"].createElement("label", null, "eMail:", /*#__PURE__*/ _react["default"].createElement("input", {
+        type: "email",
+        value: username,
+        onChange: function onChange(e) {
+            return setEmail(e.target.value);
+        }
+    })), /*#__PURE__*/ _react["default"].createElement("label", null, "Username:", /*#__PURE__*/ _react["default"].createElement("input", {
+        type: "date",
+        value: birthday,
+        onChange: function onChange(e) {
+            return setBirthday(e.target.value);
+        }
+    })), /*#__PURE__*/ _react["default"].createElement("button", {
+        type: "submit",
+        onClick: handleSubmit
+    }, "Submit"), /*#__PURE__*/ _react["default"].createElement("button", {
+        onClick: function onClick() {
+            onBackClick(null);
+        }
+    }, "Back")));
+}
+_c = RegistrationView;
+var _c;
+$RefreshReg$(_c, "RegistrationView");
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"3b2NM","./registration-view.scss":"5we5E","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}],"5we5E":[function() {},{}]},["1j6wU","4wMZ4","BMqY8"], "BMqY8", "parcelRequire0d81")
 
 //# sourceMappingURL=index.a64948ae.js.map
