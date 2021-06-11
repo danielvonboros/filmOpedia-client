@@ -1,9 +1,47 @@
 .filmopedia {
   color: steelblue;
 }
+.movie-title {
+  color: #ff4136;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+}
+.img-center-align {
+  display: flex;
+  justify-content: center;
+  width: 99.5%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 
+.button-float-right {
+  float: right;
+}
+.login-margin-top {
+  margin-top: 33vh;
+}
+.card {
+  margin: 10px 0 10px;
+}
 
+.card-text {
+  -webkit-line-clamp: 4;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
 
+.movie-title {
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+.button-float-right {
+  float: right;
+}
 
-
+.reg-margin-top {
+  margin-top: 21.5vh;
+}
 /*# sourceMappingURL=index.77275f4d.css.map */

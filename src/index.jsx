@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Container from 'react-bootstrap/Container';
 
 // Import statement for MainView
 import MainView from './components/main-view/main-view';
@@ -11,7 +12,9 @@ import './index.scss';
 class filmOpediaApplication extends React.Component {
     render () {
         return (
-            <MainView />
+            <Container>
+                <MainView />
+            </Container>
         );
     }
 }

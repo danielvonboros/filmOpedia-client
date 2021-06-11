@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
@@ -69,12 +71,21 @@ export class MainView extends React.Component {
             // <React.Fragment> or <>
             <div className="main-view">
                 {selectedMovie
-                ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-                : movies.map(movie => (
-                    <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
-        ))
-      }
-    </div>
+                ? (
+                    <Row className="justify-content-md-center">
+                        <Col md={8}>
+                            <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+                        </Col>
+                    </Row>
+                    )
+                : ( <Row className="justify-content-md-center"> {movies.map(movie => (
+                    <Col sm={12} md={6} lg={4} xl={3}>
+                        <MovieCard className="max-char-length" key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
+                    </Col> ))}
+                </Row>
+                )
+                }
+            </div>
             // </React.Fragment> or </>
         );
     }
