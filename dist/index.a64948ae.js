@@ -976,7 +976,7 @@ var filmOpediaApplication1 = /*#__PURE__*/ function(_React$Component) {
     return filmOpediaApplication2;
 }(_react["default"].Component); // Find the root of the app
 _c = filmOpediaApplication1;
-var container = document.getElementsByClassName('app-container')[0]; // Tells React to render your app in the root DOM
+var container = document.getElementById('app-container'); // Tells React to render your app in the root DOM
 _reactDom["default"].render(/*#__PURE__*/ _react["default"].createElement(filmOpediaApplication1), container);
 var _c;
 $RefreshReg$(_c, "filmOpediaApplication");
