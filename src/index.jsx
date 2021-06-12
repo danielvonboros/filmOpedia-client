@@ -20,7 +20,7 @@ class filmOpediaApplication extends React.Component {
 }
 
 // Find the root of the app
-const container = document.getElementsByClassName('app-container')[0];
+const container = document.getElementsById('app-container')[0];
 
 // Tells React to render your app in the root DOM
 ReactDOM.render(React.createElement(filmOpediaApplication), container);
