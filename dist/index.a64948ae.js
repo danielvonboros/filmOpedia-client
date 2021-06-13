@@ -22080,6 +22080,7 @@ var _react = _interopRequireDefault(require("react"));
 var _axios = _interopRequireDefault(require("axios"));
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
 var _loginView = require("../login-view/login-view");
@@ -22252,6 +22253,16 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
             }
         },
         {
+            key: "onLoggedOut",
+            value: function onLoggedOut() {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                this.setState({
+                    user: null
+                });
+            }
+        },
+        {
             key: "render",
             value: function render() {
                 var _this3 = this;
@@ -22274,7 +22285,13 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                 return(/*#__PURE__*/ // <React.Fragment> or <>
                 _react["default"].createElement("div", {
                     className: "main-view"
-                }, selectedMovie ? /*#__PURE__*/ _react["default"].createElement(_Row["default"], {
+                }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+                    variant: "danger",
+                    type: "button",
+                    onClick: function onClick() {
+                        _this3.onLoggedOut();
+                    }
+                }, "Logout"), selectedMovie ? /*#__PURE__*/ _react["default"].createElement(_Row["default"], {
                     className: "justify-content-md-center"
                 }, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
                     md: 8
@@ -22314,7 +22331,7 @@ exports["default"] = _default;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","../movie-card/movie-card":"1heQ8","../movie-view/movie-view":"1wBzQ","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","axios":"7rA65","../login-view/login-view":"1vwH2","./main-view.scss":"6OS2x","../registration-view/registration-view":"3rk1E","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8"}],"1heQ8":[function(require,module,exports) {
+},{"react":"3b2NM","../movie-card/movie-card":"1heQ8","../movie-view/movie-view":"1wBzQ","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","axios":"7rA65","../login-view/login-view":"1vwH2","./main-view.scss":"6OS2x","../registration-view/registration-view":"3rk1E","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","react-bootstrap/Button":"1ru0l"}],"1heQ8":[function(require,module,exports) {
 var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

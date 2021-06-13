@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
@@ -76,6 +77,14 @@ export class MainView extends React.Component {
         })
     }
 
+    onLoggedOut() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        this.setState({
+            user: null
+        });
+    }
+
     render() {
         const { user, movies, selectedMovie, register } = this.state; // I had to include {user} here, it wasn't in the task, but otherwise it wouldn't work, showing me the error, that user isn't defined.
 
@@ -88,6 +97,7 @@ export class MainView extends React.Component {
         return (
             // <React.Fragment> or <>
             <div className="main-view">
+                <Button variant="danger" type="button" onClick={() => { this.onLoggedOut() }}>Logout</Button>
                 {selectedMovie
                 ? (
                     <Row className="justify-content-md-center">
