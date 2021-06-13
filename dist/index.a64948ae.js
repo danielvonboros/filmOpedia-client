@@ -25345,6 +25345,7 @@ var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+var _axios = _interopRequireDefault(require("axios"));
 require("./login-view.scss");
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -25429,8 +25430,15 @@ function LoginView(props) {
     var _useState3 = _react.useState(''), _useState4 = _slicedToArray(_useState3, 2), password = _useState4[0], setPassword = _useState4[1];
     var handleSubmit = function handleSubmit1(e) {
         e.preventDefault();
-        console.log(username, password);
-        props.onLoggedIn(username);
+        /* Send a request to the server for authentication */ _axios["default"].post('http://filmopedia.herokuapp.com/login', {
+            username: username,
+            password: password
+        }).then(function(response) {
+            var data = response.data;
+            /* then call props.onLoggedIn(username), which provides the username to our parent component (child to parent communication) */ props.onLoggedIn(data);
+        })["catch"](function(e1) {
+            console.log('no such user');
+        });
     };
     return(/*#__PURE__*/ _react["default"].createElement(_Row["default"], {
         className: "login-margin-top justify-content-md-center"
@@ -25475,7 +25483,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./login-view.scss":"3heKR","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8"}],"3heKR":[function() {},{}],"6A5ko":[function(require,module,exports) {
+},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./login-view.scss":"3heKR","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","axios":"7rA65"}],"3heKR":[function() {},{}],"6A5ko":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;

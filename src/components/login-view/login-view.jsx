@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import axios from 'axios';
 
 import './login-view.scss';
 
@@ -12,10 +13,19 @@ export function LoginView(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, password);
         /* Send a request to the server for authentication */
-        /* then call props.onLoggedIn(username), which provides the username to our parent component (child to parent communication) */
-        props.onLoggedIn(username);
+        axios.post('http://filmopedia.herokuapp.com/login', {
+            username: username,
+            password: password
+        })
+        .then(response => {
+            const data = response.data;
+            /* then call props.onLoggedIn(username), which provides the username to our parent component (child to parent communication) */
+            props.onLoggedIn(data);
+        })
+        .catch(e => {
+            console.log('no such user')
+        });
     };
 
     return (
