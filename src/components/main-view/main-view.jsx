@@ -4,6 +4,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
 import {LoginView} from '../login-view/login-view';
@@ -90,30 +92,55 @@ export class MainView extends React.Component {
 
         if (register) return <RegistrationView onRegister={register => this.onRegister(register)} toggleRegister={this.toggleRegister} />;
 
-        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} toggleRegister={this.toggleRegister} />;
-
-        if (movies.length === 0) return <div className="main-view">'The list is empty'</div>;
+        if (!user) return 
+            <Row>
+                <Col>
+                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} toggleRegister={this.toggleRegister} />;
+                </Col>
+            </Row>
+        
+        if (movies.length === 0) return <div className="main-view" />;
 
         return (
-            // <React.Fragment> or <>
-            <div className="main-view">
-                <Button variant="danger" type="button" onClick={() => { this.onLoggedOut() }}>Logout</Button>
-                {selectedMovie
-                ? (
-                    <Row className="justify-content-md-center">
-                        <Col md={8}>
-                            <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+            <Router>
+                <Row className="main-view justify-content-md-center">
+                    <Route exact path="/" render={() => {
+                    return movies.map(m => 
+                        (<Col sm={12} md={6} lg={4} xl={3} key={m._id}>
+                            <MovieCard movie={m} />
+                        </Col>))}} />
+                    <Route path="/movies/:movieId" render={({match}) => {
+                        return <Col md={8}>
+                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} />
                         </Col>
-                    </Row>
-                    )
-                : ( <Row className="justify-content-md-center"> {movies.map(movie => (
-                    <Col sm={12} md={6} lg={4} xl={3}>
-                        <MovieCard className="max-char-length" key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
-                    </Col> ))}
+                    }} />
+                    <Route path="/directors/:name" render={({match}) => {
+                        if (movies.length === 0) return <div className="main-view" />
+                        return <Col md={8}>
+                            <DirectorView director={movies.find(m => m.director.name === match.params.name).director} />
+                        </Col>
+                    }} />
                 </Row>
-                )
-                }
-            </div>
+            </Router>
+            // <React.Fragment> or <>
+            // <div className="main-view">
+            //     <Button variant="danger" type="button" onClick={() => { this.onLoggedOut() }}>Logout</Button>
+            //     {selectedMovie
+            //     ? (
+            //         <Row className="justify-content-md-center">
+            //             <Col md={8}>
+            //                 <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+            //             </Col>
+            //         </Row>
+            //         )
+            //     : ( <Row className="justify-content-md-center"> {movies.map(movie => (
+            //         <Col sm={12} md={6} lg={4} xl={3}>
+            //             <MovieCard className="max-char-length" key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
+            //         </Col> ))}
+            //     </Row>
+            //     )
+            //     }
+            // </div>
             // </React.Fragment> or </>
         );
     }
