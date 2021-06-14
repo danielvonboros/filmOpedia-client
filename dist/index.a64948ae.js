@@ -22258,6 +22258,11 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                     path: "/movies/:movieId",
                     render: function render1(_ref) {
                         var match = _ref.match, history = _ref.history;
+                        if (!user) return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], null, /*#__PURE__*/ _react["default"].createElement(_loginView.LoginView, {
+                            onLoggedIn: function onLoggedIn(user1) {
+                                return _this3.onLoggedIn(user1);
+                            }
+                        })));
                         return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
                             md: 8
                         }, /*#__PURE__*/ _react["default"].createElement(_movieView.MovieView, {
@@ -22276,6 +22281,11 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                         if (movies.length === 0) return(/*#__PURE__*/ _react["default"].createElement("div", {
                             className: "main-view"
                         }));
+                        if (!user) return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], null, /*#__PURE__*/ _react["default"].createElement(_loginView.LoginView, {
+                            onLoggedIn: function onLoggedIn(user1) {
+                                return _this3.onLoggedIn(user1);
+                            }
+                        })));
                         return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
                             md: 8
                         }, /*#__PURE__*/ _react["default"].createElement(DirectorView, {
@@ -22294,6 +22304,11 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                         if (movies.length === 0) return(/*#__PURE__*/ _react["default"].createElement("div", {
                             className: "main-view"
                         }));
+                        if (!user) return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], null, /*#__PURE__*/ _react["default"].createElement(_loginView.LoginView, {
+                            onLoggedIn: function onLoggedIn(user1) {
+                                return _this3.onLoggedIn(user1);
+                            }
+                        })));
                         return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
                             md: 8
                         }, /*#__PURE__*/ _react["default"].createElement(GenreView, {
@@ -26196,12 +26211,6 @@ var MovieView1 = /*#__PURE__*/ function(_React$Component) {
             key: "componentDidMount",
             value: function componentDidMount() {
                 document.addEventListener('keypress', this.keypressCallback);
-            }
-        },
-        {
-            key: "componentWillUnmount",
-            value: function componentWillUnmount() {
-                document.removeEventListener('keypress', this.keypressCallback);
             }
         },
         {
