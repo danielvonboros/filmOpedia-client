@@ -22317,6 +22317,42 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                             }
                         })));
                     }
+                }), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Route, {
+                    path: "/director/:name",
+                    render: function render1(_ref2) {
+                        var match = _ref2.match;
+                        if (movies.length === 0) return(/*#__PURE__*/ _react["default"].createElement("div", {
+                            className: "main-view"
+                        }));
+                        return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
+                            md: 8
+                        }, /*#__PURE__*/ _react["default"].createElement(DirectorView, {
+                            director: movies.find(function(m) {
+                                return m.director.name === match.params.name;
+                            }).director,
+                            onBackClick: function onBackClick() {
+                                return history.goBack();
+                            }
+                        })));
+                    }
+                }), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Route, {
+                    path: "/genres/:name",
+                    render: function render1(_ref3) {
+                        var match = _ref3.match;
+                        if (movies.length === 0) return(/*#__PURE__*/ _react["default"].createElement("div", {
+                            className: "main-view"
+                        }));
+                        return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
+                            md: 8
+                        }, /*#__PURE__*/ _react["default"].createElement(GenreView, {
+                            genre: movies.find(function(m) {
+                                return m.genre.name === match.params.name;
+                            }).genre,
+                            onBackClick: function onBackClick() {
+                                return history.goBack();
+                            }
+                        })));
+                    }
                 }))));
             }
         }
@@ -22446,18 +22482,17 @@ var MovieCard1 = /*#__PURE__*/ function(_React$Component) {
         {
             key: "render",
             value: function render() {
-                var _this$props = this.props, movie = _this$props.movie, onMovieClick = _this$props.onMovieClick;
+                var movie = this.props.movie;
                 return(/*#__PURE__*/ _react["default"].createElement(_Card["default"], null, /*#__PURE__*/ _react["default"].createElement(_Card["default"].Img, {
                     variant: "top",
                     src: movie.imageUrl
                 }), /*#__PURE__*/ _react["default"].createElement(_Card["default"].Body, null, /*#__PURE__*/ _react["default"].createElement(_Card["default"].Title, {
                     "class": "movie-title"
-                }, movie.title), /*#__PURE__*/ _react["default"].createElement(_Card["default"].Text, null, movie.description), /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
-                    variant: "outline-danger",
-                    onClick: function onClick() {
-                        return onMovieClick(movie);
-                    }
-                }, "Open"))));
+                }, movie.title), /*#__PURE__*/ _react["default"].createElement(_Card["default"].Text, null, movie.description), /*#__PURE__*/ _react["default"].createElement(Link, {
+                    to: "/movies/".concat(movie._id)
+                }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+                    variant: "outline-danger"
+                }, "Open")))));
             }
         }
     ]);
