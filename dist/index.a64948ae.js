@@ -22164,16 +22164,6 @@ function _getPrototypeOf(o) {
     };
     return _getPrototypeOf(o);
 }
-function _defineProperty(obj, key, value) {
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
 var MainView1 = /*#__PURE__*/ function(_React$Component) {
     _inherits(MainView2, _React$Component);
     var _super = _createSuper(MainView2);
@@ -22181,12 +22171,6 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
         var _this;
         _classCallCheck(this, MainView2);
         _this = _super.call(this); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
-        _defineProperty(_assertThisInitialized(_this), "toggleRegister", function(e) {
-            e.preventDefault();
-            _this.setState({
-                register: !_this.state.register
-            });
-        });
         _this.state = {
             movies: [],
             selectedMovie: null,
@@ -22208,26 +22192,6 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
             }
         },
         {
-            key: "setSelectedMovie",
-            value: function setSelectedMovie(newSelectedMovie) {
-                this.setState({
-                    selectedMovie: newSelectedMovie
-                });
-            }
-        },
-        {
-            key: "onLoggedIn",
-            value: function onLoggedIn(authData) {
-                console.log(authData);
-                this.setState({
-                    user: authData.user.username
-                });
-                localStorage.setItem('token', authData.token);
-                localStorage.setItem('user', authData.user.username);
-                this.getMovies(authData.token);
-            }
-        },
-        {
             key: "getMovies",
             value: function getMovies(token) {
                 var _this2 = this;
@@ -22246,21 +22210,15 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
             }
         },
         {
-            key: "onRegister",
-            value: function onRegister(register) {
+            key: "onLoggedIn",
+            value: function onLoggedIn(authData) {
+                console.log(authData);
                 this.setState({
-                    register: register
+                    user: authData.user.username
                 });
-            }
-        },
-        {
-            key: "onLoggedOut",
-            value: function onLoggedOut() {
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                this.setState({
-                    user: null
-                });
+                localStorage.setItem('token', authData.token);
+                localStorage.setItem('user', authData.user.username);
+                this.getMovies(authData.token);
             }
         },
         {

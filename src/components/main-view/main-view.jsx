@@ -34,23 +34,6 @@ export class MainView extends React.Component {
         }
     }
 
-    setSelectedMovie(newSelectedMovie) {
-        this.setState({
-            selectedMovie: newSelectedMovie
-        });
-    }
-
-    onLoggedIn(authData) {
-        console.log(authData);
-        this.setState({
-            user: authData.user.username
-        });
-
-        localStorage.setItem('token', authData.token);
-        localStorage.setItem('user', authData.user.username);
-        this.getMovies(authData.token);
-    }
-
     getMovies(token) {
         axios.get('http://filmopedia.herokuapp.com/movies', {
             headers: { Authorization: `Bearer ${token}`}
@@ -66,25 +49,15 @@ export class MainView extends React.Component {
         });
     }
 
-    onRegister(register) {
+    onLoggedIn(authData) {
+        console.log(authData);
         this.setState({
-            register
+            user: authData.user.username
         });
-    }
 
-    toggleRegister = (e) => {
-        e.preventDefault();
-        this.setState({
-          register: !this.state.register
-        })
-    }
-
-    onLoggedOut() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        this.setState({
-            user: null
-        });
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.username);
+        this.getMovies(authData.token);
     }
 
     render() {
