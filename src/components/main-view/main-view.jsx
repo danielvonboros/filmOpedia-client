@@ -61,27 +61,20 @@ export class MainView extends React.Component {
     }
 
     render() {
-        const { user, movies, register } = this.state; // I had to include {user} here, it wasn't in the task, but otherwise it wouldn't work, showing me the error, that user isn't defined.
-
-        if (register) return <RegistrationView onRegister={register => this.onRegister(register)} toggleRegister={this.toggleRegister} />;
-
-        if (!user) return 
-            <Row>
-                <Col>
-                    <LoginView onLoggedIn={user => this.onLoggedIn(user)} toggleRegister={this.toggleRegister} />;
-                </Col>
-            </Row>
-        
-        if (movies.length === 0) return <div className="main-view" />;
+        const { movies, user } = this.state; 
 
         return (
             <Router>
                 <Row className="main-view justify-content-md-center">
                     <Route exact path="/" render={() => {
-                    return movies.map(m => 
-                        (<Col sm={12} md={6} lg={4} xl={3} key={m._id}>
+                        if (!user) return <Col>
+                            <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+                        </Col>
+                    return movies.map(m => (
+                        <Col sm={12} md={6} lg={4} xl={3} key={m._id}>
                             <MovieCard movie={m} />
-                        </Col>))
+                        </Col>
+                        ))
                     }} />
                     <Route path="/movies/:movieId" render={({match}) => {
                         return <Col md={8}>
@@ -91,13 +84,13 @@ export class MainView extends React.Component {
                     <Route path="/director/:name" render={({match}) => {
                         if (movies.length === 0) return <div className="main-view" />
                         return <Col md={8}>
-                            <DirectorView director={movies.find(m => m.director.name === match.params.name).director} onBackClick={() => history.goBack()} />
+                            <DirectorView director={movies.find(m => m.director.name === match.params.name).Director} onBackClick={() => history.goBack()} />
                         </Col>
                     }} />
                     <Route path="/genres/:name" render={({match}) => {
                         if (movies.length === 0) return <div className="main-view" />
                         return <Col md={8}>
-                            <GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} onBackClick={() => history.goBack()} />
+                            <GenreView genre={movies.find(m => m.genre.name === match.params.name).Genre} onBackClick={() => history.goBack()} />
                         </Col>
                     }} />
                 </Row>
