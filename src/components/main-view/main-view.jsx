@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
@@ -77,6 +77,7 @@ export class MainView extends React.Component {
                         ))
                     }} />
                     <Route path="/register" render={() => {
+                        if (user) return <Redirect to="/" />
                         return <Col>
                             <RegistrationView />
                         </Col>

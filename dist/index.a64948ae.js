@@ -22252,6 +22252,9 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                 }), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Route, {
                     path: "/register",
                     render: function render1() {
+                        if (user) return(/*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Redirect, {
+                            to: "/"
+                        }));
                         return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], null, /*#__PURE__*/ _react["default"].createElement(_registrationView.RegistrationView, null)));
                     }
                 }), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Route, {
@@ -26211,6 +26214,12 @@ var MovieView1 = /*#__PURE__*/ function(_React$Component) {
             key: "componentDidMount",
             value: function componentDidMount() {
                 document.addEventListener('keypress', this.keypressCallback);
+            }
+        },
+        {
+            key: "componentWillUnmount",
+            value: function componentWillUnmount() {
+                document.removeEventListener('keypress', this.keypressCallback);
             }
         },
         {
