@@ -20,7 +20,7 @@
 
 .button-float-left {
   float: left;
-  padding-right: 10px;
+  margin-right: 10px;
 }
 .login-margin-top {
   margin-top: 33vh;

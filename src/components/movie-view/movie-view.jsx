@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import { Link } from "react-router-dom";
+
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
@@ -18,7 +20,7 @@ export class MovieView extends React.Component {
         document.removeEventListener('keypress', this.keypressCallback);
     }
     render () {
-        const { movie, onBackClick } = this.props;
+        const { movie } = this.props;
 
         return (
             <Row className="justify-content-center">
@@ -26,7 +28,7 @@ export class MovieView extends React.Component {
                     <div>
                         <div className="movie-poster">
                             <img className="img-center-align" src={movie.imageUrl} />
-                        </div>
+                         </div>
                         <ul className="movie-view list-group">
                         <li className="movie-title list-group-item">
                             <span className="value">{ movie.title }</span>
@@ -45,13 +47,13 @@ export class MovieView extends React.Component {
                             <span className="value">{ movie.director.name }</span>
                         </li>
                         <li class="list-group-item">
-                            <Link to={`/director/${movies.director.name}`}>
-                                <Button className="button-float-left" variant="danger">Director</Button>
+                            <Link to={`/director/${movie.director.name}`}>
+                                <Button className="button-float-left" variant="danger">{movie.director.name}</Button>
                             </Link>
-                            <Link to={`/genres/${movies.genre.name}`}>
-                                <Button className="button-float-left" variant="danger">Genre</Button>
+                            <Link to={`/genres/${movie.genre.name}`}>
+                                <Button className="button-float-left" variant="danger">{movie.genre.name}</Button>
                             </Link>
-                            <Button className="button-float-right" variant="outline-danger" onClick={() => { onBackClick(null); }}>Back</Button>
+                            <Button className="button-float-right" variant="outline-danger" onBackClick={() => history.goBack()}>Back</Button>
                         </li>
                         </ul>
                     </div>

@@ -22250,9 +22250,14 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                         });
                     }
                 }), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Route, {
+                    path: "/register",
+                    render: function render1() {
+                        return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], null, /*#__PURE__*/ _react["default"].createElement(_registrationView.RegistrationView, null)));
+                    }
+                }), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Route, {
                     path: "/movies/:movieId",
                     render: function render1(_ref) {
-                        var match = _ref.match;
+                        var match = _ref.match, history = _ref.history;
                         return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
                             md: 8
                         }, /*#__PURE__*/ _react["default"].createElement(_movieView.MovieView, {
@@ -22267,16 +22272,16 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                 }), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Route, {
                     path: "/director/:name",
                     render: function render1(_ref2) {
-                        var match = _ref2.match;
+                        var match = _ref2.match, history = _ref2.history;
                         if (movies.length === 0) return(/*#__PURE__*/ _react["default"].createElement("div", {
                             className: "main-view"
                         }));
                         return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
                             md: 8
                         }, /*#__PURE__*/ _react["default"].createElement(DirectorView, {
-                            director: movies.find(function(m) {
+                            director: movies.director.find(function(m) {
                                 return m.director.name === match.params.name;
-                            }).Director,
+                            }).director,
                             onBackClick: function onBackClick() {
                                 return history.goBack();
                             }
@@ -22285,16 +22290,16 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                 }), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Route, {
                     path: "/genres/:name",
                     render: function render1(_ref3) {
-                        var match = _ref3.match;
+                        var match = _ref3.match, history = _ref3.history;
                         if (movies.length === 0) return(/*#__PURE__*/ _react["default"].createElement("div", {
                             className: "main-view"
                         }));
                         return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
                             md: 8
                         }, /*#__PURE__*/ _react["default"].createElement(GenreView, {
-                            genre: movies.find(function(m) {
+                            genre: movies.genre.find(function(m) {
                                 return m.genre.name === match.params.name;
-                            }).Genre,
+                            }).genre,
                             onBackClick: function onBackClick() {
                                 return history.goBack();
                             }
@@ -26202,7 +26207,7 @@ var MovieView1 = /*#__PURE__*/ function(_React$Component) {
         {
             key: "render",
             value: function render() {
-                var _this$props = this.props, movie = _this$props.movie, onBackClick = _this$props.onBackClick;
+                var movie = this.props.movie;
                 return(/*#__PURE__*/ _react["default"].createElement(_Row["default"], {
                     className: "justify-content-center"
                 }, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
@@ -26214,7 +26219,7 @@ var MovieView1 = /*#__PURE__*/ function(_React$Component) {
                     className: "movie-poster"
                 }, /*#__PURE__*/ _react["default"].createElement("img", {
                     className: "img-center-align",
-                    src: movies.imageUrl
+                    src: movie.imageUrl
                 })), /*#__PURE__*/ _react["default"].createElement("ul", {
                     className: "movie-view list-group"
                 }, /*#__PURE__*/ _react["default"].createElement("li", {
@@ -26244,20 +26249,20 @@ var MovieView1 = /*#__PURE__*/ function(_React$Component) {
                 }, movie.director.name)), /*#__PURE__*/ _react["default"].createElement("li", {
                     "class": "list-group-item"
                 }, /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Link, {
-                    to: "/director/".concat(movies.director.name)
+                    to: "/director/".concat(movie.director.name)
                 }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
                     className: "button-float-left",
                     variant: "danger"
-                }, "Director")), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Link, {
-                    to: "/genres/".concat(movies.genre.name)
+                }, movie.director.name)), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Link, {
+                    to: "/genres/".concat(movie.genre.name)
                 }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
                     className: "button-float-left",
                     variant: "danger"
-                }, "Genre")), /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+                }, movie.genre.name)), /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
                     className: "button-float-right",
                     variant: "outline-danger",
-                    onClick: function onClick() {
-                        onBackClick(null);
+                    onBackClick: function onBackClick() {
+                        return history.goBack();
                     }
                 }, "Back")))))));
             }
