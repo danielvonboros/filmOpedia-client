@@ -88,7 +88,7 @@ export class MainView extends React.Component {
     }
 
     render() {
-        const { user, movies, selectedMovie, register } = this.state; // I had to include {user} here, it wasn't in the task, but otherwise it wouldn't work, showing me the error, that user isn't defined.
+        const { user, movies, register } = this.state; // I had to include {user} here, it wasn't in the task, but otherwise it wouldn't work, showing me the error, that user isn't defined.
 
         if (register) return <RegistrationView onRegister={register => this.onRegister(register)} toggleRegister={this.toggleRegister} />;
 
@@ -108,40 +108,16 @@ export class MainView extends React.Component {
                     return movies.map(m => 
                         (<Col sm={12} md={6} lg={4} xl={3} key={m._id}>
                             <MovieCard movie={m} />
-                        </Col>))}} />
+                        </Col>))
+                    }} />
                     <Route path="/movies/:movieId" render={({match}) => {
                         return <Col md={8}>
-                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} />
+                            <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
                         </Col>
                     }} />
-                    <Route path="/directors/:name" render={({match}) => {
-                        if (movies.length === 0) return <div className="main-view" />
-                        return <Col md={8}>
-                            <DirectorView director={movies.find(m => m.director.name === match.params.name).director} />
-                        </Col>
-                    }} />
+                    
                 </Row>
             </Router>
-            // <React.Fragment> or <>
-            // <div className="main-view">
-            //     <Button variant="danger" type="button" onClick={() => { this.onLoggedOut() }}>Logout</Button>
-            //     {selectedMovie
-            //     ? (
-            //         <Row className="justify-content-md-center">
-            //             <Col md={8}>
-            //                 <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-            //             </Col>
-            //         </Row>
-            //         )
-            //     : ( <Row className="justify-content-md-center"> {movies.map(movie => (
-            //         <Col sm={12} md={6} lg={4} xl={3}>
-            //             <MovieCard className="max-char-length" key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
-            //         </Col> ))}
-            //     </Row>
-            //     )
-            //     }
-            // </div>
-            // </React.Fragment> or </>
         );
     }
 }
