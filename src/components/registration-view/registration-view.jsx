@@ -3,6 +3,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import axios from 'axios';
+
+import Redirect from 'react-router-dom';
 
 import './registration-view.scss';
 
@@ -13,10 +16,30 @@ export function RegistrationView(props) {
     const [ birthday, setBirthday ] = useState('')
 
 
-const handleSubmit = (e) => {
+// const handleSubmit = (e) => {
+//     e.preventDefault();
+//     console.log(username, password. email, birthday);
+//     props.onRegister(username);
+// };
+
+const handleRegister = (e) => {
     e.preventDefault();
-    console.log(username, password. email, birthday);
-    props.onRegister(username);
+    /* Send a request to the server for authentication */
+    axios.post('http://filmopedia.herokuapp.com/users', {
+        username: username,
+        password: password,
+        email: email,
+        birthday: birthday
+    })
+    .then(response => {
+        const data = response.data;
+        console.log(data);
+        window.open('/', '_self');
+        // return <Redirect to="/" />
+    })
+    .catch(e => {
+        console.log('something went wrong')
+    });
 };
 
 return (
@@ -39,7 +62,7 @@ return (
                     <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
                 </Form.Group>
         
-        <Button variant="danger" type="submit" onClick={handleSubmit}>Submit</Button>
+        <Button variant="danger" type="submit" onClick={handleRegister}>Submit</Button>
         {' '}
         <Button variant="outline-secondary" className="button-float-right" onClick={() => { onBackClick(null); }}>Back</Button>
     </Col>

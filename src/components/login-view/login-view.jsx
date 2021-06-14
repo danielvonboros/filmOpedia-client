@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 
+import {Link} from 'react-router-dom';
+
 import './login-view.scss';
 
 export function LoginView(props) {
@@ -42,7 +44,9 @@ export function LoginView(props) {
             </Form.Group>
             <Button variant="danger" type="submit" onClick={handleSubmit}>Submit</Button>
             {' '}
-            <Button variant="outline-secondary" className="button-float-right" type="button" onClick={props.toggleRegister}>Register</Button>
+            <Link to={`/register`}>        
+            <Button variant="outline-secondary" className="button-float-right" type="button" >Register</Button>
+            </Link>
         </Form>
         </Col>
         </Row>

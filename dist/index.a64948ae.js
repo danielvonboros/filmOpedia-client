@@ -27802,6 +27802,7 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 var _axios = _interopRequireDefault(require("axios"));
+var _reactRouterDom = require("react-router-dom");
 require("./login-view.scss");
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -27923,12 +27924,13 @@ function LoginView(props) {
         variant: "danger",
         type: "submit",
         onClick: handleSubmit
-    }, "Submit"), ' ', /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+    }, "Submit"), ' ', /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Link, {
+        to: "/register"
+    }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
         variant: "outline-secondary",
         className: "button-float-right",
-        type: "button",
-        onClick: props.toggleRegister
-    }, "Register")))));
+        type: "button"
+    }, "Register"))))));
 }
 _c = LoginView;
 var _c;
@@ -27939,7 +27941,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./login-view.scss":"3heKR","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","axios":"7rA65"}],"3heKR":[function() {},{}],"6A5ko":[function(require,module,exports) {
+},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","./login-view.scss":"3heKR","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","axios":"7rA65","react-router-dom":"1PMSK"}],"3heKR":[function() {},{}],"6A5ko":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
@@ -28994,6 +28996,8 @@ var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+var _axios = _interopRequireDefault(require("axios"));
+var _reactRouterDom = _interopRequireDefault(require("react-router-dom"));
 require("./registration-view.scss");
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -29077,11 +29081,25 @@ function RegistrationView(props) {
     var _useState = _react.useState(''), _useState2 = _slicedToArray(_useState, 2), username = _useState2[0], setUsername = _useState2[1];
     var _useState3 = _react.useState(''), _useState4 = _slicedToArray(_useState3, 2), password = _useState4[0], setPassword = _useState4[1];
     var _useState5 = _react.useState(''), _useState6 = _slicedToArray(_useState5, 2), email = _useState6[0], setEmail = _useState6[1];
-    var _useState7 = _react.useState(''), _useState8 = _slicedToArray(_useState7, 2), birthday = _useState8[0], setBirthday = _useState8[1];
-    var handleSubmit = function handleSubmit1(e) {
+    var _useState7 = _react.useState(''), _useState8 = _slicedToArray(_useState7, 2), birthday = _useState8[0], setBirthday = _useState8[1]; // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log(username, password. email, birthday);
+    //     props.onRegister(username);
+    // };
+    var handleRegister = function handleRegister1(e) {
         e.preventDefault();
-        console.log(username, password.email, birthday);
-        props.onRegister(username);
+        /* Send a request to the server for authentication */ _axios["default"].post('http://filmopedia.herokuapp.com/users', {
+            username: username,
+            password: password,
+            email: email,
+            birthday: birthday
+        }).then(function(response) {
+            var data = response.data;
+            console.log(data);
+            window.open('/', '_self'); // return <Redirect to="/" />
+        })["catch"](function(e1) {
+            console.log('something went wrong');
+        });
     };
     return(/*#__PURE__*/ _react["default"].createElement(_Row["default"], {
         className: "reg-margin-top justify-content-md-center"
@@ -29125,7 +29143,7 @@ function RegistrationView(props) {
     })), /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
         variant: "danger",
         type: "submit",
-        onClick: handleSubmit
+        onClick: handleRegister
     }, "Submit"), ' ', /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
         variant: "outline-secondary",
         className: "button-float-right",
@@ -29143,7 +29161,7 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","./registration-view.scss":"5we5E","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8"}],"5we5E":[function() {},{}],"3Mt3t":[function(require,module,exports) {
+},{"react":"3b2NM","./registration-view.scss":"5we5E","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","axios":"7rA65","react-router-dom":"1PMSK"}],"5we5E":[function() {},{}],"3Mt3t":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
