@@ -58,4 +58,13 @@
   text-transform: uppercase;
   font-size: 1.25rem;
 }
+.button-float-right {
+  float: right;
+}
+
+.director-title {
+  color: #ff4136;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+}
 /*# sourceMappingURL=index.77275f4d.css.map */
