@@ -49,4 +49,13 @@
 .reg-margin-top {
   margin-top: 21.5vh;
 }
+.button-float-right {
+  float: right;
+}
+
+.genre-title {
+  color: #ff4136;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+}
 /*# sourceMappingURL=index.77275f4d.css.map */

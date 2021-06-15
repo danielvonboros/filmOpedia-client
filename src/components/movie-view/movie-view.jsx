@@ -20,7 +20,7 @@ export class MovieView extends React.Component {
         document.removeEventListener('keypress', this.keypressCallback);
     }
     render () {
-        const { movie } = this.props;
+        const { movie, onBackClick } = this.props;
 
         return (
             <Row className="justify-content-center">

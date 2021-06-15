@@ -22085,6 +22085,9 @@ var _reactRouterDom = require("react-router-dom");
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
 var _loginView = require("../login-view/login-view");
+var _genreView = require("../genre-view/genre-view");
+var _directorView = require("../director-view/director-view");
+var _profileView = require("../profile-view/profile-view");
 var _registrationView = require("../registration-view/registration-view");
 require("./main-view.scss");
 function _interopRequireDefault(obj) {
@@ -22291,8 +22294,8 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                         })));
                         return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
                             md: 8
-                        }, /*#__PURE__*/ _react["default"].createElement(DirectorView, {
-                            director: movies.director.find(function(m) {
+                        }, /*#__PURE__*/ _react["default"].createElement(_directorView.DirectorView, {
+                            director: movies.find(function(m) {
                                 return m.director.name === match.params.name;
                             }).director,
                             onBackClick: function onBackClick() {
@@ -22314,8 +22317,8 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                         })));
                         return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
                             md: 8
-                        }, /*#__PURE__*/ _react["default"].createElement(GenreView, {
-                            genre: movies.genre.find(function(m) {
+                        }, /*#__PURE__*/ _react["default"].createElement(_genreView.GenreView, {
+                            genre: movies.find(function(m) {
                                 return m.genre.name === match.params.name;
                             }).genre,
                             onBackClick: function onBackClick() {
@@ -22337,9 +22340,9 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                         })));
                         return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
                             md: 8
-                        }, /*#__PURE__*/ _react["default"].createElement(ProfileView, {
-                            genre: users.username.find(function(m) {
-                                return m.username === match.params.name;
+                        }, /*#__PURE__*/ _react["default"].createElement(_profileView.ProfileView, {
+                            user: users.username.find(function(u) {
+                                return u.username === match.params.name;
                             }),
                             onBackClick: function onBackClick() {
                                 return history.goBack();
@@ -22361,7 +22364,7 @@ exports["default"] = _default;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","../movie-card/movie-card":"1heQ8","../movie-view/movie-view":"1wBzQ","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","axios":"7rA65","../login-view/login-view":"1vwH2","./main-view.scss":"6OS2x","../registration-view/registration-view":"3rk1E","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","react-bootstrap/Button":"1ru0l","react-router-dom":"1PMSK"}],"1heQ8":[function(require,module,exports) {
+},{"react":"3b2NM","../movie-card/movie-card":"1heQ8","../movie-view/movie-view":"1wBzQ","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","axios":"7rA65","../login-view/login-view":"1vwH2","./main-view.scss":"6OS2x","../registration-view/registration-view":"3rk1E","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","react-bootstrap/Button":"1ru0l","react-router-dom":"1PMSK","../genre-view/genre-view":"QzEn9","../director-view/director-view":"zmSkS","../profile-view/profile-view":"4mUW7"}],"1heQ8":[function(require,module,exports) {
 var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -26248,7 +26251,7 @@ var MovieView1 = /*#__PURE__*/ function(_React$Component) {
         {
             key: "render",
             value: function render() {
-                var movie = this.props.movie;
+                var _this$props = this.props, movie = _this$props.movie, onBackClick = _this$props.onBackClick;
                 return(/*#__PURE__*/ _react["default"].createElement(_Row["default"], {
                     className: "justify-content-center"
                 }, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
@@ -26302,7 +26305,7 @@ var MovieView1 = /*#__PURE__*/ function(_React$Component) {
                 }, movie.genre.name)), /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
                     className: "button-float-right",
                     variant: "outline-danger",
-                    onBackClick: function onBackClick() {
+                    onBackClick: function onBackClick1() {
                         return history.goBack();
                     }
                 }, "Back")))))));
@@ -29184,7 +29187,168 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","./registration-view.scss":"5we5E","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","axios":"7rA65","react-router-dom":"1PMSK"}],"5we5E":[function() {},{}],"3Mt3t":[function(require,module,exports) {
+},{"react":"3b2NM","./registration-view.scss":"5we5E","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","axios":"7rA65","react-router-dom":"1PMSK"}],"5we5E":[function() {},{}],"QzEn9":[function(require,module,exports) {
+var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+"use strict";
+function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") _typeof = function _typeof1(obj1) {
+        return typeof obj1;
+    };
+    else _typeof = function _typeof2(obj1) {
+        return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : typeof obj1;
+    };
+    return _typeof(obj);
+}
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.GenreView = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
+var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+require("./genre-view.scss");
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        "default": obj
+    };
+}
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
+}
+function _defineProperties(target, props) {
+    for(var i = 0; i < props.length; i++){
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+    }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+}
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+            value: subClass,
+            writable: true,
+            configurable: true
+        }
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
+}
+function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf1(o1, p1) {
+        o1.__proto__ = p1;
+        return o1;
+    };
+    return _setPrototypeOf(o, p);
+}
+function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+    return function _createSuperInternal() {
+        var Super = _getPrototypeOf(Derived), result;
+        if (hasNativeReflectConstruct) {
+            var NewTarget = _getPrototypeOf(this).constructor;
+            result = Reflect.construct(Super, arguments, NewTarget);
+        } else result = Super.apply(this, arguments);
+        return _possibleConstructorReturn(this, result);
+    };
+}
+function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
+    return _assertThisInitialized(self);
+}
+function _assertThisInitialized(self) {
+    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    return self;
+}
+function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+    try {
+        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+        }));
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf1(o1) {
+        return o1.__proto__ || Object.getPrototypeOf(o1);
+    };
+    return _getPrototypeOf(o);
+}
+var GenreView1 = /*#__PURE__*/ function(_React$Component) {
+    _inherits(GenreView2, _React$Component);
+    var _super = _createSuper(GenreView2);
+    function GenreView2() {
+        _classCallCheck(this, GenreView2);
+        return _super.apply(this, arguments);
+    }
+    _createClass(GenreView2, [
+        {
+            key: "render",
+            value: function render() {
+                var _this$props = this.props, genre = _this$props.genre, onBackClick = _this$props.onBackClick;
+                return(/*#__PURE__*/ _react["default"].createElement(_Row["default"], {
+                    className: "justify-content-center"
+                }, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
+                    sm: 12,
+                    md: 10,
+                    lg: 8,
+                    xl: 6
+                }, /*#__PURE__*/ _react["default"].createElement("div", null, /*#__PURE__*/ _react["default"].createElement("ul", {
+                    className: "genre-view list-group"
+                }, /*#__PURE__*/ _react["default"].createElement("li", {
+                    className: "genre-name list-group-item"
+                }, /*#__PURE__*/ _react["default"].createElement("span", {
+                    className: "value genre-title"
+                }, genre.name)), /*#__PURE__*/ _react["default"].createElement("li", {
+                    className: "genre-description list-group-item"
+                }, /*#__PURE__*/ _react["default"].createElement("span", {
+                    className: "label"
+                }, "Description: "), /*#__PURE__*/ _react["default"].createElement("span", {
+                    className: "value"
+                }, genre.description)), /*#__PURE__*/ _react["default"].createElement("li", {
+                    className: "list-group-item"
+                }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+                    className: "button-float-right",
+                    variant: "outline-danger",
+                    onClick: function onClick() {
+                        return onBackClick();
+                    }
+                }, "Back")))))));
+            }
+        }
+    ]);
+    return GenreView2;
+}(_react["default"].Component);
+exports.GenreView = GenreView1;
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"3b2NM","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","./genre-view.scss":"8FI7a","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}],"8FI7a":[function() {},{}],"zmSkS":[function(require,module,exports) {
+"use strict";
+
+},{}],"4mUW7":[function(require,module,exports) {
+"use strict";
+
+},{}],"3Mt3t":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;

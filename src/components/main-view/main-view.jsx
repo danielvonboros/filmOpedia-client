@@ -9,6 +9,9 @@ import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
 import {LoginView} from '../login-view/login-view';
+import {GenreView} from '../genre-view/genre-view';
+import {DirectorView} from '../director-view/director-view';
+import {ProfileView} from '../profile-view/profile-view';
 import {RegistrationView} from '../registration-view/registration-view';
 
 import './main-view.scss';
@@ -96,7 +99,7 @@ export class MainView extends React.Component {
                             <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                         </Col>
                         return <Col md={8}>
-                            <DirectorView director={movies.director.find(m => m.director.name === match.params.name).director} onBackClick={() => history.goBack()} />
+                            <DirectorView director={movies.find(m => m.director.name === match.params.name).director} onBackClick={() => history.goBack()} />
                         </Col>
                     }} />
                     <Route path="/genres/:name" render={({match, history}) => {
@@ -105,7 +108,7 @@ export class MainView extends React.Component {
                             <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                         </Col>
                         return <Col md={8}>
-                            <GenreView genre={movies.genre.find(m => m.genre.name === match.params.name).genre} onBackClick={() => history.goBack()} />
+                            <GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} onBackClick={() => history.goBack()} />
                         </Col>
                     }} />
                     <Route path="/users/:username" render={({match, history}) => {
@@ -114,7 +117,7 @@ export class MainView extends React.Component {
                             <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                         </Col>
                         return <Col md={8}>
-                            <ProfileView genre={users.username.find(m => m.username === match.params.name)} onBackClick={() => history.goBack()} />
+                            <ProfileView user={users.username.find(u => u.username === match.params.name)} onBackClick={() => history.goBack()} />
                         </Col>
                     }} />
                 </Row>
