@@ -22323,6 +22323,29 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                             }
                         })));
                     }
+                }), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Route, {
+                    path: "/users/:username",
+                    render: function render1(_ref4) {
+                        var match = _ref4.match, history = _ref4.history;
+                        if (users.length === 0) return(/*#__PURE__*/ _react["default"].createElement("div", {
+                            className: "main-view"
+                        }));
+                        if (!user) return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], null, /*#__PURE__*/ _react["default"].createElement(_loginView.LoginView, {
+                            onLoggedIn: function onLoggedIn(user1) {
+                                return _this3.onLoggedIn(user1);
+                            }
+                        })));
+                        return(/*#__PURE__*/ _react["default"].createElement(_Col["default"], {
+                            md: 8
+                        }, /*#__PURE__*/ _react["default"].createElement(ProfileView, {
+                            genre: users.username.find(function(m) {
+                                return m.username === match.params.name;
+                            }),
+                            onBackClick: function onBackClick() {
+                                return history.goBack();
+                            }
+                        })));
+                    }
                 }))));
             }
         }

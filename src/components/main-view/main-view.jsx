@@ -108,6 +108,15 @@ export class MainView extends React.Component {
                             <GenreView genre={movies.genre.find(m => m.genre.name === match.params.name).genre} onBackClick={() => history.goBack()} />
                         </Col>
                     }} />
+                    <Route path="/users/:username" render={({match, history}) => {
+                        if (users.length === 0) return <div className="main-view" />
+                        if (!user) return <Col>
+                            <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+                        </Col>
+                        return <Col md={8}>
+                            <ProfileView genre={users.username.find(m => m.username === match.params.name)} onBackClick={() => history.goBack()} />
+                        </Col>
+                    }} />
                 </Row>
             </Router>
         );
