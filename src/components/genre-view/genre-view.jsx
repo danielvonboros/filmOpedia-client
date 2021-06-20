@@ -8,7 +8,8 @@ import './genre-view.scss';
 export class GenreView extends React.Component {
 
     render () {
-        const { genre, onBackClick } = this.props;
+        const { genre, onBackClick, movies } = this.props;
+        const genresMovies = movies.filter(m => m.genre.name === genre.name);
 
         return (
             <Row className="justify-content-center">
@@ -21,6 +22,10 @@ export class GenreView extends React.Component {
                         <li className="genre-description list-group-item">
                             <span className="label">Description: </span>
                             <span className="value">{ genre.description }</span>
+                        </li>
+                        <li className="other-movies list-group-item">
+                            <span className="label">Other movies with genre {`${genre.name}`}:</span>
+                            <span>{genresMovies.map((m, i) => <div className="genre-movie" key={i}>{m.title}</div>)}</span>
                         </li>
                         <li className="list-group-item">
                             <Button className="button-float-right" variant="outline-danger" onClick={() => onBackClick()}>Back</Button>

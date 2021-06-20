@@ -22321,7 +22321,8 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                             }).director,
                             onBackClick: function onBackClick() {
                                 return history.goBack();
-                            }
+                            },
+                            movies: movies
                         })));
                     }
                 }), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Route, {
@@ -22344,7 +22345,8 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                             }).genre,
                             onBackClick: function onBackClick() {
                                 return history.goBack();
-                            }
+                            },
+                            movies: movies
                         })));
                     }
                 }), /*#__PURE__*/ _react["default"].createElement(_reactRouterDom.Route, {
@@ -29322,7 +29324,10 @@ var GenreView1 = /*#__PURE__*/ function(_React$Component) {
         {
             key: "render",
             value: function render() {
-                var _this$props = this.props, genre = _this$props.genre, onBackClick = _this$props.onBackClick;
+                var _this$props = this.props, genre = _this$props.genre, onBackClick = _this$props.onBackClick, movies = _this$props.movies;
+                var genresMovies = movies.filter(function(m) {
+                    return m.genre.name === genre.name;
+                });
                 return(/*#__PURE__*/ _react["default"].createElement(_Row["default"], {
                     className: "justify-content-center"
                 }, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
@@ -29343,6 +29348,15 @@ var GenreView1 = /*#__PURE__*/ function(_React$Component) {
                 }, "Description: "), /*#__PURE__*/ _react["default"].createElement("span", {
                     className: "value"
                 }, genre.description)), /*#__PURE__*/ _react["default"].createElement("li", {
+                    className: "other-movies list-group-item"
+                }, /*#__PURE__*/ _react["default"].createElement("span", {
+                    className: "label"
+                }, "Other movies with genre ", "".concat(genre.name), ":"), /*#__PURE__*/ _react["default"].createElement("span", null, genresMovies.map(function(m, i) {
+                    return(/*#__PURE__*/ _react["default"].createElement("div", {
+                        className: "genre-movie",
+                        key: i
+                    }, m.title));
+                }))), /*#__PURE__*/ _react["default"].createElement("li", {
                     className: "list-group-item"
                 }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
                     className: "button-float-right",
@@ -29371,19 +29385,10 @@ helpers.prelude(module);
 
 try {
 "use strict";
-function _typeof(obj) {
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") _typeof = function _typeof1(obj1) {
-        return typeof obj1;
-    };
-    else _typeof = function _typeof2(obj1) {
-        return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : typeof obj1;
-    };
-    return _typeof(obj);
-}
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.DirectorView = void 0;
+exports.DirectorView = DirectorView;
 var _react = _interopRequireDefault(require("react"));
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
@@ -29394,137 +29399,64 @@ function _interopRequireDefault(obj) {
         "default": obj
     };
 }
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
-}
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
+function DirectorView(props) {
+    var director = props.director, onBackClick = props.onBackClick, movies = props.movies;
+    var directorsMovies = movies.filter(function(m) {
+        return m.director.name === director.name;
     });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-}
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf1(o1, p1) {
-        o1.__proto__ = p1;
-        return o1;
-    };
-    return _setPrototypeOf(o, p);
-}
-function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-        var Super = _getPrototypeOf(Derived), result;
-        if (hasNativeReflectConstruct) {
-            var NewTarget = _getPrototypeOf(this).constructor;
-            result = Reflect.construct(Super, arguments, NewTarget);
-        } else result = Super.apply(this, arguments);
-        return _possibleConstructorReturn(this, result);
-    };
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-    try {
-        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-        }));
-        return true;
-    } catch (e) {
-        return false;
-    }
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf1(o1) {
-        return o1.__proto__ || Object.getPrototypeOf(o1);
-    };
-    return _getPrototypeOf(o);
-}
-var deathYearState;
-var DirectorView1 = /*#__PURE__*/ function(_React$Component) {
-    _inherits(DirectorView2, _React$Component);
-    var _super = _createSuper(DirectorView2);
-    function DirectorView2() {
-        _classCallCheck(this, DirectorView2);
-        return _super.apply(this, arguments);
-    }
-    _createClass(DirectorView2, [
-        {
-            key: "render",
-            value: function render() {
-                var _this$props = this.props, director = _this$props.director, onBackClick = _this$props.onBackClick;
-                return(/*#__PURE__*/ _react["default"].createElement(_Row["default"], {
-                    className: "justify-content-center"
-                }, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
-                    sm: 12,
-                    md: 10,
-                    lg: 8,
-                    xl: 6
-                }, /*#__PURE__*/ _react["default"].createElement("div", null, /*#__PURE__*/ _react["default"].createElement("ul", {
-                    className: "director-view list-group"
-                }, /*#__PURE__*/ _react["default"].createElement("li", {
-                    className: "director-name list-group-item"
-                }, /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "value director-title"
-                }, director.name)), /*#__PURE__*/ _react["default"].createElement("li", {
-                    className: "director-bio list-group-item"
-                }, /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "label"
-                }, "Bio: "), /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "value"
-                }, director.bio)), /*#__PURE__*/ _react["default"].createElement("li", {
-                    className: "director-bio list-group-item"
-                }, /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "label"
-                }, "Birth Year: "), /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "value"
-                }, director.birthYear)), /*#__PURE__*/ _react["default"].createElement("li", {
-                    className: "director-bio list-group-item"
-                }, /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "label"
-                }, "Death Year: "), /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "value"
-                }, director.deathYear)), /*#__PURE__*/ _react["default"].createElement("li", {
-                    className: "list-group-item"
-                }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
-                    className: "button-float-right",
-                    variant: "outline-danger",
-                    onClick: function onClick() {
-                        return onBackClick();
-                    }
-                }, "Back")))))));
-            }
+    return(/*#__PURE__*/ _react["default"].createElement(_Row["default"], {
+        className: "justify-content-center"
+    }, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
+        sm: 12,
+        md: 10,
+        lg: 8,
+        xl: 6
+    }, /*#__PURE__*/ _react["default"].createElement("div", null, /*#__PURE__*/ _react["default"].createElement("ul", {
+        className: "director-view list-group"
+    }, /*#__PURE__*/ _react["default"].createElement("li", {
+        className: "director-name list-group-item"
+    }, /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "value director-title"
+    }, director.name)), /*#__PURE__*/ _react["default"].createElement("li", {
+        className: "director-bio list-group-item"
+    }, /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "label"
+    }, "Bio: "), /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "value"
+    }, director.bio)), /*#__PURE__*/ _react["default"].createElement("li", {
+        className: "director-bio list-group-item"
+    }, /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "label"
+    }, "Birth Year: "), /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "value"
+    }, director.birthYear)), /*#__PURE__*/ _react["default"].createElement("li", {
+        className: "director-bio list-group-item"
+    }, /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "label"
+    }, "Death Year: "), /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "value"
+    }, director.deathYear)), /*#__PURE__*/ _react["default"].createElement("li", {
+        className: "other-movies list-group-item"
+    }, /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "label"
+    }, "Other movies by ", "".concat(director.name), ":"), /*#__PURE__*/ _react["default"].createElement("span", null, directorsMovies.map(function(m, i) {
+        return(/*#__PURE__*/ _react["default"].createElement("div", {
+            className: "director-movie",
+            key: i
+        }, m.title));
+    }))), /*#__PURE__*/ _react["default"].createElement("li", {
+        className: "back-button list-group-item"
+    }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+        className: "button-float-right",
+        variant: "outline-danger",
+        onClick: function onClick() {
+            return onBackClick();
         }
-    ]);
-    return DirectorView2;
-}(_react["default"].Component);
-exports.DirectorView = DirectorView1;
+    }, "Back")))))));
+}
+_c = DirectorView;
+var _c;
+$RefreshReg$(_c, "DirectorView");
 
   helpers.postlude(module);
 } finally {
@@ -29552,15 +29484,45 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.ProfileView = void 0;
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+var _profileUpdateView = _interopRequireDefault(require("../profile-update-view/profile-update-view"));
 require("./profile-view.scss");
+var _axios = _interopRequireDefault(require("axios"));
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         "default": obj
     };
+}
+function _getRequireWildcardCache(nodeInterop) {
+    if (typeof WeakMap !== "function") return null;
+    var cacheBabelInterop = new WeakMap();
+    var cacheNodeInterop = new WeakMap();
+    return (_getRequireWildcardCache = function _getRequireWildcardCache1(nodeInterop1) {
+        return nodeInterop1 ? cacheNodeInterop : cacheBabelInterop;
+    })(nodeInterop);
+}
+function _interopRequireWildcard(obj, nodeInterop) {
+    if (!nodeInterop && obj && obj.__esModule) return obj;
+    if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") return {
+        "default": obj
+    };
+    var cache = _getRequireWildcardCache(nodeInterop);
+    if (cache && cache.has(obj)) return cache.get(obj);
+    var newObj = {
+    };
+    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+    for(var key in obj)if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+        var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+        if (desc && (desc.get || desc.set)) Object.defineProperty(newObj, key, desc);
+        else newObj[key] = obj[key];
+    }
+    newObj["default"] = obj;
+    if (cache) cache.set(obj, newObj);
+    return newObj;
 }
 function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
@@ -29634,19 +29596,99 @@ function _getPrototypeOf(o) {
     };
     return _getPrototypeOf(o);
 }
+function _defineProperty(obj, key, value) {
+    if (key in obj) Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+    });
+    else obj[key] = value;
+    return obj;
+}
 var ProfileView1 = /*#__PURE__*/ function(_React$Component) {
     _inherits(ProfileView2, _React$Component);
     var _super = _createSuper(ProfileView2);
     function ProfileView2() {
+        var _this;
         _classCallCheck(this, ProfileView2);
-        return _super.apply(this, arguments);
+        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
+        _this = _super.call.apply(_super, [
+            this
+        ].concat(args));
+        _defineProperty(_assertThisInitialized(_this), "handleUpdate", function(e) {
+            e.preventDefault();
+            /* Send a request to the server for authentication */ _axios["default"].put('http://filmopedia.herokuapp.com/users', {
+                headers: {
+                    Authorization: "Bearer ".concat(token)
+                }
+            }, {
+                username: username,
+                password: password,
+                email: email,
+                birthday: birthday
+            }).then(function(response) {
+                var data = response.data;
+                console.log(data);
+                window.open('/', '_self'); // return <Redirect to="/" />
+            })["catch"](function(e1) {
+                console.log('something went wrong');
+            });
+        });
+        _defineProperty(_assertThisInitialized(_this), "addFavoriteMovie", function(e) {
+            e.preventDefault();
+            _axios["default"].post('http://filmopedia.herokuapp.com/users/:username', {
+                headers: {
+                    Authorization: "Bearer ".concat(token)
+                }
+            }).then(function(response) {
+                var data = response.data;
+                console.log(data);
+                window.open('/', '_self'); // return <Redirect to="/" />
+            })["catch"](function(e1) {
+                console.log('something went wrong');
+            });
+        });
+        _defineProperty(_assertThisInitialized(_this), "removeFavoriteMovie", function(e) {
+            e.preventDefault();
+            _axios["default"]["delete"]('http://filmopedia.herokuapp.com/users/:username', {
+                headers: {
+                    Authorization: "Bearer ".concat(token)
+                }
+            }).then(function(response) {
+                var data = response.data;
+                console.log(data);
+                window.open('/', '_self'); // return <Redirect to="/" />
+            })["catch"](function(e1) {
+                console.log('something went wrong');
+            });
+        });
+        return _this;
     }
     _createClass(ProfileView2, [
+        {
+            key: "deleteAccount",
+            value: function deleteAccount(token) {
+                console.log('Not deleted yet');
+                _axios["default"]["delete"]("https://filmopedia.herokuapp.com/users/".concat(user), {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': "Bearer ".concat(token)
+                    }
+                }).then(function(response) {
+                    console.log(response);
+                    console.log("".concat(user, " has been deleted"));
+                })["catch"](function(e) {
+                    console.log('An error occured');
+                    console.log(e);
+                });
+            }
+        },
         {
             key: "render",
             value: function render() {
                 var _this$props = this.props, profiles = _this$props.profiles, onBackClick = _this$props.onBackClick;
-                return(/*#__PURE__*/ _react["default"].createElement(_Row["default"], {
+                return(/*#__PURE__*/ _react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/ _react["default"].createElement(_Row["default"], {
                     className: "justify-content-center"
                 }, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
                     sm: 12,
@@ -29685,7 +29727,7 @@ var ProfileView1 = /*#__PURE__*/ function(_React$Component) {
                     onClick: function onClick() {
                         return onBackClick();
                     }
-                }, "Back")))))));
+                }, "Back"))))))));
             }
         }
     ]);
@@ -29698,7 +29740,49 @@ exports.ProfileView = ProfileView1;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","./profile-view.scss":"14z2W","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}],"14z2W":[function() {},{}],"3Mt3t":[function(require,module,exports) {
+},{"react":"3b2NM","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","./profile-view.scss":"14z2W","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","react-bootstrap/Form":"6A5ko","../profile-update-view/profile-update-view":"KvWg2","axios":"7rA65"}],"14z2W":[function() {},{}],"KvWg2":[function(require,module,exports) {
+var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports["default"] = void 0;
+var _react = _interopRequireDefault(require("react"));
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        "default": obj
+    };
+}
+var _default = function _default1() {
+    return(/*#__PURE__*/ _react["default"].createElement("div", null, /*#__PURE__*/ _react["default"].createElement("input", {
+        value: "username",
+        type: "text"
+    }), /*#__PURE__*/ _react["default"].createElement("input", {
+        value: "password",
+        type: "password"
+    }), /*#__PURE__*/ _react["default"].createElement("input", {
+        value: "email",
+        type: "email"
+    }), /*#__PURE__*/ _react["default"].createElement("input", {
+        value: "birthday",
+        type: "date"
+    }), /*#__PURE__*/ _react["default"].createElement("button", {
+        type: "submit"
+    })));
+};
+exports["default"] = _default;
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}],"3Mt3t":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;

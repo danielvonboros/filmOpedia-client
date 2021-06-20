@@ -5,12 +5,9 @@ import Col from 'react-bootstrap/Col';
 
 import './director-view.scss';
 
-let deathYearState;
-
-export class DirectorView extends React.Component {
-
-    render () {
-        const { director, onBackClick } = this.props;
+export function DirectorView(props) {
+    const {director, onBackClick, movies } = props;
+    const directorsMovies = movies.filter(m => m.director.name === director.name);
 
         return (
             <Row className="justify-content-center">
@@ -32,7 +29,11 @@ export class DirectorView extends React.Component {
                             <span className="label">Death Year: </span>
                             <span className="value">{ director.deathYear }</span>
                         </li>
-                        <li className="list-group-item">
+                        <li className="other-movies list-group-item">
+                            <span className="label">Other movies by {`${director.name}`}:</span>
+                            <span>{directorsMovies.map((m, i) => <div className="director-movie" key={i}>{m.title}</div>)}</span>
+                        </li>
+                        <li className="back-button list-group-item">
                             <Button className="button-float-right" variant="outline-danger" onClick={() => onBackClick()}>Back</Button>
                         </li>
                         </ul>
@@ -40,5 +41,5 @@ export class DirectorView extends React.Component {
                 </Col>
             </Row>
         );
-    }
 }
+    
