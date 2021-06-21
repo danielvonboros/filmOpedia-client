@@ -133,7 +133,7 @@ export class MainView extends React.Component {
                             <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                         </Col>
                         return <Col md={8}>
-                            <ProfileView profiles={users.find(p => p.username === match.params.username)} onBackClick={() => history.goBack()} />
+                            <ProfileView profiles={users.find(p => p.username === match.params.username)} onBackClick={() => history.goBack()} token={token} onDelete={() => this.deleteUser()}  onUpdate={(data) => this.updateUser(data)} movies={movies} onMovieDelete={(data) => this.onMovieAddOrDelete(data)} />
                         </Col>
                     }} />
                 </Row>

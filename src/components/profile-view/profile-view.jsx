@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 
 import './profile-view.scss';
 import axios from 'axios';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 export function ProfileView ({ userProfile, token, onDelete, onUpdate, movies, onMovieDelete }) {
 
@@ -206,4 +207,18 @@ export function ProfileView ({ userProfile, token, onDelete, onUpdate, movies, o
             </Row>
         </>  
         );
+    }
+
+    ProfileView.propTypes = {
+        userProfile: PropTypes.shape({
+            username: PropTypes.string.isRequired,
+            password: PropTypes.string.isRequired,
+            email: PropTypes.string.isRequired,
+            birthday: PropTypes.Date.isRequired
+        }).isRequired,
+    
+    token: PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired,
+    onUpdate: PropTypes.func.isRequired,
+    onMovieDelete: PropTypes.func.isRequired,
     }
