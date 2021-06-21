@@ -3,10 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import PropTypes from 'prop-types';
 
 import './profile-view.scss';
 import axios from 'axios';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
 export function ProfileView ({ userProfile, token, onDelete, onUpdate, movies, onMovieDelete }) {
 
@@ -56,6 +56,13 @@ export function ProfileView ({ userProfile, token, onDelete, onUpdate, movies, o
         }
     }
 
+    const clearForm = () => {
+        updateUsername('');
+        updatePassword('');
+        updateEmail('');
+        updateBirthday('')
+    }
+
     const updateUser = (e) => {
         e.preventDefault();
 
@@ -69,15 +76,7 @@ export function ProfileView ({ userProfile, token, onDelete, onUpdate, movies, o
             alert('Incorrect input')
             return false
         }
-    };
-
-    const clearForm = () => {
-        updateUsername('');
-        updatePassword('');
-        updateEmail('');
-        updateBirthday('')
-    }
-
+    
     axios.put('http://filmopedia.herokuapp.com/users',{
         headers: { Authorization:  `Bearer ${token}` }},
         {
@@ -98,6 +97,8 @@ export function ProfileView ({ userProfile, token, onDelete, onUpdate, movies, o
         console.log('User data could not be updated')
         setFeedback('Submission failed')
     });
+
+    };
     
     
     handleUpdate = (e) => {

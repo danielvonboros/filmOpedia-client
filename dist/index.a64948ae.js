@@ -29500,9 +29500,9 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
 require("./profile-view.scss");
 var _axios = _interopRequireDefault(require("axios"));
-var _Image = require("react-bootstrap/esm/Image");
 var _this = void 0;
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -29612,6 +29612,12 @@ var validateBirthday = function validateBirthday1(e) {
     if (e.target.value.length > 0 && e.target.value.match(/^\d{4}-\d{2}-\d{2}$/)) setValidateBirthday('Invalid date format, please use the format YYYY-MM-DD');
     else setValidateBirthday('');
 };
+var clearForm = function clearForm1() {
+    updateUsername('');
+    updatePassword('');
+    updateEmail('');
+    updateBirthday('');
+};
 var updateUser = function updateUser1(e) {
     e.preventDefault(); //Validate potential empty inputs
     if (newUsername.length === 0 || newPassword.length === 0 || newEmail.length === 0 || newBirthday.length === 0) {
@@ -29622,32 +29628,26 @@ var updateUser = function updateUser1(e) {
         alert('Incorrect input');
         return false;
     }
+    _axios["default"].put('http://filmopedia.herokuapp.com/users', {
+        headers: {
+            Authorization: "Bearer ".concat(token)
+        }
+    }, {
+        username: newUsername,
+        password: newPassword,
+        email: newEmail,
+        birthday: newBirthday
+    }).then(function(response) {
+        var data = response.data;
+        console.log(data);
+        onUpdate(data);
+        setFeedback('Your user data has been updated');
+        clearForm();
+    })["catch"](function(e1) {
+        console.log('User data could not be updated');
+        setFeedback('Submission failed');
+    });
 };
-var clearForm = function clearForm1() {
-    updateUsername('');
-    updatePassword('');
-    updateEmail('');
-    updateBirthday('');
-};
-_axios["default"].put('http://filmopedia.herokuapp.com/users', {
-    headers: {
-        Authorization: "Bearer ".concat(token)
-    }
-}, {
-    username: newUsername,
-    password: newPassword,
-    email: newEmail,
-    birthday: newBirthday
-}).then(function(response) {
-    var data = response.data;
-    console.log(data);
-    onUpdate(data);
-    setFeedback('Your user data has been updated');
-    clearForm();
-})["catch"](function(e) {
-    console.log('User data could not be updated');
-    setFeedback('Submission failed');
-});
 handleUpdate = (function(_handleUpdate) {
     function handleUpdate(_x) {
         return _handleUpdate.apply(this, arguments);
@@ -29792,16 +29792,16 @@ handleUpdate = (function(_handleUpdate) {
     }, "Back")))));
 });
 ProfileView.propTypes = {
-    userProfile: PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        password: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-        birthday: PropTypes.Date.isRequired
+    userProfile: _propTypes["default"].shape({
+        username: _propTypes["default"].string.isRequired,
+        password: _propTypes["default"].string.isRequired,
+        email: _propTypes["default"].string.isRequired,
+        birthday: _propTypes["default"].Date.isRequired
     }).isRequired,
-    token: PropTypes.string.isRequired,
-    onDelete: PropTypes.func.isRequired,
-    onUpdate: PropTypes.func.isRequired,
-    onMovieDelete: PropTypes.func.isRequired
+    token: _propTypes["default"].string.isRequired,
+    onDelete: _propTypes["default"].func.isRequired,
+    onUpdate: _propTypes["default"].func.isRequired,
+    onMovieDelete: _propTypes["default"].func.isRequired
 };
 var _c;
 $RefreshReg$(_c, "ProfileView");
@@ -29811,188 +29811,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","./profile-view.scss":"14z2W","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","react-bootstrap/Form":"6A5ko","axios":"7rA65","react-bootstrap/esm/Image":"rzPO3"}],"14z2W":[function() {},{}],"rzPO3":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "propTypes", ()=>propTypes
-);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
-var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
-var _classnames = require("classnames");
-var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _themeProvider = require("./ThemeProvider");
-var _excluded = [
-    "bsPrefix",
-    "className",
-    "fluid",
-    "rounded",
-    "roundedCircle",
-    "thumbnail"
-];
-var propTypes = {
-    /**
-   * @default 'img'
-   */ bsPrefix: _propTypesDefault.default.string,
-    /**
-   * Sets image as fluid image.
-   */ fluid: _propTypesDefault.default.bool,
-    /**
-   * Sets image shape as rounded.
-   */ rounded: _propTypesDefault.default.bool,
-    /**
-   * Sets image shape as circle.
-   */ roundedCircle: _propTypesDefault.default.bool,
-    /**
-   * Sets image shape as thumbnail.
-   */ thumbnail: _propTypesDefault.default.bool
-};
-var defaultProps = {
-    fluid: false,
-    rounded: false,
-    roundedCircle: false,
-    thumbnail: false
-};
-var Image1 = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
-    var bsPrefix = _ref.bsPrefix, className = _ref.className, fluid = _ref.fluid, rounded = _ref.rounded, roundedCircle = _ref.roundedCircle, thumbnail = _ref.thumbnail, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
-    bsPrefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'img');
-    var classes = _classnamesDefault.default(fluid && bsPrefix + "-fluid", rounded && "rounded", roundedCircle && "rounded-circle", thumbnail && bsPrefix + "-thumbnail");
-    return(/*#__PURE__*/ _reactDefault.default.createElement("img", _extendsDefault.default({
-        // eslint-disable-line jsx-a11y/alt-text
-        ref: ref
-    }, props, {
-        className: _classnamesDefault.default(className, classes)
-    })));
-});
-Image1.displayName = 'Image';
-Image1.defaultProps = defaultProps;
-exports.default = Image1;
-
-},{"@babel/runtime/helpers/esm/extends":"5qnVv","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"6rNIl","classnames":"5aJRc","react":"3b2NM","prop-types":"4dfy5","./ThemeProvider":"6Pzum","@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu"}],"5qnVv":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-function _extends() {
-    _extends = Object.assign || function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-exports.default = _extends;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu"}],"3hoTu":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule') return;
-        // Skip duplicate re-exports when they have the same value.
-        if (key in dest && dest[key] === source[key]) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"6rNIl":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-function _objectWithoutPropertiesLoose(source, excluded) {
-    if (source == null) return {
-    };
-    var target = {
-    };
-    var sourceKeys = Object.keys(source);
-    var key, i;
-    for(i = 0; i < sourceKeys.length; i++){
-        key = sourceKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-exports.default = _objectWithoutPropertiesLoose;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu"}],"6Pzum":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "useBootstrapPrefix", ()=>useBootstrapPrefix
-);
-parcelHelpers.export(exports, "createBootstrapComponent", ()=>createBootstrapComponent
-);
-parcelHelpers.export(exports, "ThemeConsumer", ()=>Consumer
-);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var ThemeContext = /*#__PURE__*/ _reactDefault.default.createContext({
-});
-var Consumer = ThemeContext.Consumer, Provider = ThemeContext.Provider;
-function ThemeProvider(_ref) {
-    var prefixes = _ref.prefixes, children = _ref.children;
-    var copiedPrefixes = _react.useMemo(function() {
-        return _extendsDefault.default({
-        }, prefixes);
-    }, [
-        prefixes
-    ]);
-    return(/*#__PURE__*/ _reactDefault.default.createElement(Provider, {
-        value: copiedPrefixes
-    }, children));
-}
-function useBootstrapPrefix(prefix, defaultPrefix) {
-    var prefixes = _react.useContext(ThemeContext);
-    return prefix || prefixes[defaultPrefix] || defaultPrefix;
-}
-function createBootstrapComponent(Component, opts) {
-    if (typeof opts === 'string') opts = {
-        prefix: opts
-    };
-    var isClassy = Component.prototype && Component.prototype.isReactComponent; // If it's a functional component make sure we don't break it with a ref
-    var _opts = opts, prefix = _opts.prefix, _opts$forwardRefAs = _opts.forwardRefAs, forwardRefAs = _opts$forwardRefAs === void 0 ? isClassy ? 'ref' : 'innerRef' : _opts$forwardRefAs;
-    var Wrapped = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref2, ref) {
-        var props = _extendsDefault.default({
-        }, _ref2);
-        props[forwardRefAs] = ref;
-        var bsPrefix = useBootstrapPrefix(props.bsPrefix, prefix);
-        return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
-        }, props, {
-            bsPrefix: bsPrefix
-        })));
-    });
-    Wrapped.displayName = "Bootstrap(" + (Component.displayName || Component.name) + ")";
-    return Wrapped;
-}
-exports.default = ThemeProvider;
-
-},{"@babel/runtime/helpers/esm/extends":"5qnVv","react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"3hoTu"}],"3Mt3t":[function(require,module,exports) {
+},{"react":"3b2NM","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","./profile-view.scss":"14z2W","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","react-bootstrap/Form":"6A5ko","axios":"7rA65","prop-types":"4dfy5"}],"14z2W":[function() {},{}],"3Mt3t":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
