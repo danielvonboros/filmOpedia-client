@@ -1,15 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
-import {profileUpdateView as ProfileUpdate} from '../profile-update-view/profile-update-view';
-
 import './profile-view.scss';
 import axios from 'axios';
 
-export function ProfileView (props) {
+export function ProfileView ({ userProfile, token, onDelete, onUpdate, movies, onMovieDelete }) {
 
     const [ newUsername, updateUsername ] = useState('');
     const [ newPassword, updatePassword ] = useState('');
@@ -22,32 +20,91 @@ export function ProfileView (props) {
     const [ validateBirthday, setValidateBirthday ] = useState('');
     const [ feedback, setFeedback ] = useState('');
 
+    const validateUsername = (e) => {
+        if (e.target.value.length > 0 && e.target.length < 3) {
+            setValidateUser('Username must be longer than 3 characters.');
+        } else {
+            setValidateUser('');
+        }
+        if (e.currentTarget.value.match(/^[0-9a-zA-Z]+$/) && e.target.value.length > 0) {
+            setValidateUser('Only alphanumeric characters are allowed!')
+        }
+        }
+    }
+
+    const validatePassword = (e) => {
+        if (e.target.value.length > 0 && e.target.value.length < 8) {
+            setValidatePassword('Password has to be at least 8 characters long')
+        } else {
+            setValidatePassword('');
+        }
+    }
+
+    const validateEmail = (e) => {
+        if (e.target.value.length > 0 && e.target.value.match(/\S+@\S+\.\S+/)) {
+            setValidateEmail('Invalid Email')
+        } else {
+            setValidateEmail('');
+        }
+    }
+    const validateBirthday = (e) => {
+        if (e.target.value.length > 0 && e.target.value.match(/^\d{4}-\d{2}-\d{2}$/)) {
+            setValidateBirthday('Invalid date format, please use the format YYYY-MM-DD')
+        } else {
+            setValidateBirthday('');
+        }
+    }
+
+    const updateUser = (e) => {
+        e.preventDefault();
+
+        //Validate potential empty inputs
+        if ( newUsername.length===0 || newPassword.length===0 || newEmail.length===0 || newBirthday.length===0 ) {
+            alert('Please fill all the fields')
+            return false
+        }
+
+        if ( validateUser || validatePassword || validateEmail || validateBirthday ) {
+            alert('Incorrect input')
+            return false
+        }
+    };
+
+    const clearForm = () => {
+        updateUsername('');
+        updatePassword('');
+        updateEmail('');
+        updateBirthday('')
+    }
+
+    axios.put('http://filmopedia.herokuapp.com/users',{
+        headers: { Authorization:  `Bearer ${token}` }},
+        {
+            username: newUsername,
+            password: newPassword,
+            email: newEmail,
+            birthday: newBirthday
+        }
+    )
+    .then(response => {
+        const data = response.data;
+        console.log(data)
+        onUpdate(data)
+        setFeedback('Your user data has been updated')
+        clearForm()
+    })
+    .catch(e => {
+        console.log('User data could not be updated')
+        setFeedback('Submission failed')
+    });
+    
     
     handleUpdate = (e) => {
         e.preventDefault();
         /* Send a request to the server for authentication */
-        axios.put('http://filmopedia.herokuapp.com/users',{
-            headers: { Authorization:  `Bearer ${token}` }},
-            {
-                username: username,
-                password: password,
-                email: email,
-                birthday: birthday
-            }
-        )
-        .then(response => {
-            const data = response.data;
-            console.log(data);
-            window.open('/', '_self');
-            // return <Redirect to="/" />
-        })
-        .catch(e => {
-            console.log('something went wrong')
-        });
-    };
+       
 
-    deleteAccount(token) {
-        console.log('Not deleted yet');
+    const deleteAccount = () => {
         axios.delete(`https://filmopedia.herokuapp.com/users/${user}`, 
         { headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`}})
         .then(response => {
@@ -62,14 +119,13 @@ export function ProfileView (props) {
 
     addFavoriteMovie = (e) => {
         e.preventDefault();
-        axios.post('http://filmopedia.herokuapp.com/users/:username', {
+        axios.post(`http://filmopedia.herokuapp.com/users/${username}/favoritemovies`, {
             headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
-            const data = response.data;
-            console.log(data);
-            window.open('/', '_self');
-            // return <Redirect to="/" />
+            const data = response.data
+            console.log(data)
+            window.open('/', '_self')
         })
         .catch(e => {
             console.log('something went wrong')
@@ -78,13 +134,13 @@ export function ProfileView (props) {
 
     removeFavoriteMovie = (e) => {
         e.preventDefault();
-        axios.delete('http://filmopedia.herokuapp.com/users/:username', {
+        axios.delete(`http://filmopedia.herokuapp.com/users/${username}/favoritemovies`, {
             headers: { Authorization: `Bearer ${token}`}
         })
         .then(response => {
-            const data = response.data;
-            console.log(data);
-            window.open('/', '_self');
+            const data = response.data
+            console.log(data)
+            window.open('/', '_self')
             // return <Redirect to="/" />
         })
         .catch(e => {

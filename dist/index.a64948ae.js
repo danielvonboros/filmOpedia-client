@@ -29483,15 +29483,15 @@ function _typeof(obj) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.ProfileView = void 0;
+exports.ProfileView = ProfileView;
 var _react = _interopRequireWildcard(require("react"));
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
-var _profileUpdateView = require("../profile-update-view/profile-update-view");
 require("./profile-view.scss");
 var _axios = _interopRequireDefault(require("axios"));
+var _this = void 0;
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         "default": obj
@@ -29524,314 +29524,270 @@ function _interopRequireWildcard(obj, nodeInterop) {
     if (cache) cache.set(obj, newObj);
     return newObj;
 }
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
+function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
-function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-    }
+function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
+function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 }
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            writable: true,
-            configurable: true
-        }
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
+function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
+    return arr2;
 }
-function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf1(o1, p1) {
-        o1.__proto__ = p1;
-        return o1;
-    };
-    return _setPrototypeOf(o, p);
-}
-function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-    return function _createSuperInternal() {
-        var Super = _getPrototypeOf(Derived), result;
-        if (hasNativeReflectConstruct) {
-            var NewTarget = _getPrototypeOf(this).constructor;
-            result = Reflect.construct(Super, arguments, NewTarget);
-        } else result = Super.apply(this, arguments);
-        return _possibleConstructorReturn(this, result);
-    };
-}
-function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
-    return _assertThisInitialized(self);
-}
-function _assertThisInitialized(self) {
-    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    return self;
-}
-function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
+function _iterableToArrayLimit(arr, i) {
+    var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
+    if (_i == null) return;
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _s, _e;
     try {
-        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-        }));
-        return true;
-    } catch (e) {
+        for(_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true){
+            _arr.push(_s.value);
+            if (i && _arr.length === i) break;
+        }
+    } catch (err) {
+        _d = true;
+        _e = err;
+    } finally{
+        try {
+            if (!_n && _i["return"] != null) _i["return"]();
+        } finally{
+            if (_d) throw _e;
+        }
+    }
+    return _arr;
+}
+function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+}
+function ProfileView(_ref) {
+    var userProfile = _ref.userProfile, token = _ref.token, onDelete = _ref.onDelete, onUpdate = _ref.onUpdate, movies = _ref.movies, onMovieDelete = _ref.onMovieDelete;
+    var _useState = _react.useState(''), _useState2 = _slicedToArray(_useState, 2), newUsername = _useState2[0], updateUsername = _useState2[1];
+    var _useState3 = _react.useState(''), _useState4 = _slicedToArray(_useState3, 2), newPassword = _useState4[0], updatePassword = _useState4[1];
+    var _useState5 = _react.useState(''), _useState6 = _slicedToArray(_useState5, 2), newEmail = _useState6[0], updateEmail = _useState6[1];
+    var _useState7 = _react.useState(''), _useState8 = _slicedToArray(_useState7, 2), newBirthday = _useState8[0], updateBirthday = _useState8[1];
+    var _useState9 = _react.useState(''), _useState10 = _slicedToArray(_useState9, 2), validateUser = _useState10[0], setValidateUser = _useState10[1];
+    var _useState11 = _react.useState(''), _useState12 = _slicedToArray(_useState11, 2), validatePassword = _useState12[0], setValidatePassword = _useState12[1];
+    var _useState13 = _react.useState(''), _useState14 = _slicedToArray(_useState13, 2), validateEmail = _useState14[0], setValidateEmail = _useState14[1];
+    var _useState15 = _react.useState(''), _useState16 = _slicedToArray(_useState15, 2), validateBirthday = _useState16[0], setValidateBirthday = _useState16[1];
+    var _useState17 = _react.useState(''), _useState18 = _slicedToArray(_useState17, 2), feedback = _useState18[0], setFeedback = _useState18[1];
+    var validateUsername = function validateUsername1(e) {
+        if (e.target.value.length > 0 && e.target.length < 3) setValidateUser('Username must be longer than 3 characters.');
+        else setValidateUser('');
+        if (e.currentTarget.value.match(/^[0-9a-zA-Z]+$/) && e.target.value.length > 0) setValidateUser('Only alphanumeric characters are allowed!');
+    };
+}
+_c = ProfileView;
+var validatePassword = function validatePassword1(e) {
+    if (e.target.value.length > 0 && e.target.value.length < 8) setValidatePassword('Password has to be at least 8 characters long');
+    else setValidatePassword('');
+};
+var validateEmail = function validateEmail1(e) {
+    if (e.target.value.length > 0 && e.target.value.match(/\S+@\S+\.\S+/)) setValidateEmail('Invalid Email');
+    else setValidateEmail('');
+};
+var validateBirthday = function validateBirthday1(e) {
+    if (e.target.value.length > 0 && e.target.value.match(/^\d{4}-\d{2}-\d{2}$/)) setValidateBirthday('Invalid date format, please use the format YYYY-MM-DD');
+    else setValidateBirthday('');
+};
+var updateUser = function updateUser1(e) {
+    e.preventDefault(); //Validate potential empty inputs
+    if (newUsername.length === 0 || newPassword.length === 0 || newEmail.length === 0 || newBirthday.length === 0) {
+        alert('Please fill all the fields');
         return false;
     }
-}
-function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf1(o1) {
-        return o1.__proto__ || Object.getPrototypeOf(o1);
-    };
-    return _getPrototypeOf(o);
-}
-function _defineProperty(obj, key, value) {
-    if (key in obj) Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-    });
-    else obj[key] = value;
-    return obj;
-}
-var ProfileView1 = /*#__PURE__*/ function(_React$Component) {
-    _inherits(ProfileView2, _React$Component);
-    var _super = _createSuper(ProfileView2);
-    function ProfileView2() {
-        var _this;
-        _classCallCheck(this, ProfileView2);
-        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
-        _this = _super.call.apply(_super, [
-            this
-        ].concat(args));
-        _defineProperty(_assertThisInitialized(_this), "handleUpdate", function(e) {
-            e.preventDefault();
-            /* Send a request to the server for authentication */ _axios["default"].put('http://filmopedia.herokuapp.com/users', {
-                headers: {
-                    Authorization: "Bearer ".concat(token)
-                }
-            }, {
-                username: username,
-                password: password,
-                email: email,
-                birthday: birthday
-            }).then(function(response) {
-                var data = response.data;
-                console.log(data);
-                window.open('/', '_self'); // return <Redirect to="/" />
-            })["catch"](function(e1) {
-                console.log('something went wrong');
-            });
-        });
-        _defineProperty(_assertThisInitialized(_this), "addFavoriteMovie", function(e) {
-            e.preventDefault();
-            _axios["default"].post('http://filmopedia.herokuapp.com/users/:username', {
-                headers: {
-                    Authorization: "Bearer ".concat(token)
-                }
-            }).then(function(response) {
-                var data = response.data;
-                console.log(data);
-                window.open('/', '_self'); // return <Redirect to="/" />
-            })["catch"](function(e1) {
-                console.log('something went wrong');
-            });
-        });
-        _defineProperty(_assertThisInitialized(_this), "removeFavoriteMovie", function(e) {
-            e.preventDefault();
-            _axios["default"]["delete"]('http://filmopedia.herokuapp.com/users/:username', {
-                headers: {
-                    Authorization: "Bearer ".concat(token)
-                }
-            }).then(function(response) {
-                var data = response.data;
-                console.log(data);
-                window.open('/', '_self'); // return <Redirect to="/" />
-            })["catch"](function(e1) {
-                console.log('something went wrong');
-            });
-        });
-        return _this;
+    if (validateUser || validatePassword || validateEmail || validateBirthday) {
+        alert('Incorrect input');
+        return false;
     }
-    _createClass(ProfileView2, [
-        {
-            key: "deleteAccount",
-            value: function deleteAccount(token) {
-                console.log('Not deleted yet');
-                _axios["default"]["delete"]("https://filmopedia.herokuapp.com/users/".concat(user), {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': "Bearer ".concat(token)
-                    }
-                }).then(function(response) {
-                    console.log(response);
-                    console.log("".concat(user, " has been deleted"));
-                })["catch"](function(e) {
-                    console.log('An error occured');
-                    console.log(e);
-                });
-            }
-        },
-        {
-            key: "render",
-            value: function render() {
-                var _this$props = this.props, profiles = _this$props.profiles, onBackClick = _this$props.onBackClick;
-                return(/*#__PURE__*/ _react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/ _react["default"].createElement(_Row["default"], {
-                    className: "justify-content-center"
-                }, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
-                    sm: 12,
-                    md: 10,
-                    lg: 8,
-                    xl: 6
-                }, /*#__PURE__*/ _react["default"].createElement("div", null, /*#__PURE__*/ _react["default"].createElement("ul", {
-                    className: "profile-view list-group"
-                }, /*#__PURE__*/ _react["default"].createElement("li", {
-                    className: "profile-username list-group-item"
-                }, /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "value profile-title"
-                }, profiles.username)), /*#__PURE__*/ _react["default"].createElement("li", {
-                    className: "profile-email list-group-item"
-                }, /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "label"
-                }, "eMail: "), /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "value"
-                }, profiles.email)), /*#__PURE__*/ _react["default"].createElement("li", {
-                    className: "profile-birthday list-group-item"
-                }, /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "label"
-                }, "Birthday: "), /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "value"
-                }, profiles.birthday.slice(0, 10))), /*#__PURE__*/ _react["default"].createElement("li", {
-                    className: "profile-favoritemovies list-group-item"
-                }, /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "label"
-                }, "Favorite Movies: "), /*#__PURE__*/ _react["default"].createElement("span", {
-                    className: "value"
-                }, profiles.favoritemovies)), /*#__PURE__*/ _react["default"].createElement("li", {
-                    className: "list-group-item"
-                }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
-                    className: "button-float-right",
-                    variant: "outline-danger",
-                    onClick: function onClick() {
-                        return onBackClick();
-                    }
-                }, "Back")))))), /*#__PURE__*/ _react["default"].createElement(_Row["default"], null, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
-                    sm: 12,
-                    md: 6,
-                    lg: 6,
-                    xl: 4
-                }, /*#__PURE__*/ _react["default"].createElement(_Form["default"], {
-                    className: "update-user-account"
-                }, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
-                    controlId: "newUsername"
-                }, "New Username: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
-                    type: "text",
-                    value: newUsername,
-                    onChange: function onChange(e) {
-                        updateUsername(e.target.value), validateUsername(e);
-                    }
-                })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
-                    controlId: "newPassword"
-                }, "New Password: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
-                    type: "password",
-                    value: newPassword,
-                    onChange: function onChange(e) {
-                        updatePassword(e.target.value), validatePassword(e);
-                    }
-                })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
-                    controlId: "newEmail"
-                }, "New eMail: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
-                    type: "email",
-                    value: newEmail,
-                    onChange: function onChange(e) {
-                        updateEmail(e.target.value), validateEmail(e);
-                    }
-                })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
-                    controlId: "newBirthday"
-                }, "New Birthday: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
-                    type: "date",
-                    value: newBirthday,
-                    onChange: function onChange(e) {
-                        updateBirthday(e.target.value), validateBirthday(e);
-                    }
-                }))), /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
-                    variant: "danger",
-                    type: "submit",
-                    onClick: handleUpdate
-                }, "Submit"), ' ', /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
-                    variant: "outline-secondary",
-                    className: "button-float-right",
-                    onClick: function onClick() {
-                        onBackClick(null);
-                    }
-                }, "Back")))));
-            }
-        }
-    ]);
-    return ProfileView2;
-}(_react["default"].Component);
-exports.ProfileView = ProfileView1;
-
-  helpers.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react":"3b2NM","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","./profile-view.scss":"14z2W","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","react-bootstrap/Form":"6A5ko","../profile-update-view/profile-update-view":"KvWg2","axios":"7rA65"}],"14z2W":[function() {},{}],"KvWg2":[function(require,module,exports) {
-var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-helpers.prelude(module);
-
-try {
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports["default"] = void 0;
-var _react = _interopRequireDefault(require("react"));
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-        "default": obj
-    };
-}
-var _default = function _default1() {
-    return(/*#__PURE__*/ _react["default"].createElement("div", null, /*#__PURE__*/ _react["default"].createElement("input", {
-        value: "username",
-        type: "text"
-    }), /*#__PURE__*/ _react["default"].createElement("input", {
-        value: "password",
-        type: "password"
-    }), /*#__PURE__*/ _react["default"].createElement("input", {
-        value: "email",
-        type: "email"
-    }), /*#__PURE__*/ _react["default"].createElement("input", {
-        value: "birthday",
-        type: "date"
-    }), /*#__PURE__*/ _react["default"].createElement("button", {
-        type: "submit"
-    })));
 };
-exports["default"] = _default;
+var clearForm = function clearForm1() {
+    updateUsername('');
+    updatePassword('');
+    updateEmail('');
+    updateBirthday('');
+};
+_axios["default"].put('http://filmopedia.herokuapp.com/users', {
+    headers: {
+        Authorization: "Bearer ".concat(token)
+    }
+}, {
+    username: newUsername,
+    password: newPassword,
+    email: newEmail,
+    birthday: newBirthday
+}).then(function(response) {
+    var data = response.data;
+    console.log(data);
+    onUpdate(data);
+    setFeedback('Your user data has been updated');
+    clearForm();
+})["catch"](function(e) {
+    console.log('User data could not be updated');
+    setFeedback('Submission failed');
+});
+handleUpdate = (function(_handleUpdate) {
+    function handleUpdate(_x) {
+        return _handleUpdate.apply(this, arguments);
+    }
+    handleUpdate.toString = function() {
+        return _handleUpdate.toString();
+    };
+    return handleUpdate;
+})(function(e) {
+    e.preventDefault();
+    /* Send a request to the server for authentication */ var deleteAccount = function deleteAccount1() {
+        _axios["default"]["delete"]("https://filmopedia.herokuapp.com/users/".concat(user), {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer ".concat(token)
+            }
+        }).then(function(response) {
+            console.log(response);
+            console.log("".concat(user, " has been deleted"));
+        })["catch"](function(e1) {
+            console.log('An error occured');
+            console.log(e1);
+        });
+    };
+    addFavoriteMovie = function addFavoriteMovie(e1) {
+        e1.preventDefault();
+        _axios["default"].post("http://filmopedia.herokuapp.com/users/".concat(username, "/favoritemovies"), {
+            headers: {
+                Authorization: "Bearer ".concat(token)
+            }
+        }).then(function(response) {
+            var data = response.data;
+            console.log(data);
+            window.open('/', '_self');
+        })["catch"](function(e2) {
+            console.log('something went wrong');
+        });
+    };
+    removeFavoriteMovie = function removeFavoriteMovie(e1) {
+        e1.preventDefault();
+        _axios["default"]["delete"]("http://filmopedia.herokuapp.com/users/".concat(username, "/favoritemovies"), {
+            headers: {
+                Authorization: "Bearer ".concat(token)
+            }
+        }).then(function(response) {
+            var data = response.data;
+            console.log(data);
+            window.open('/', '_self'); // return <Redirect to="/" />
+        })["catch"](function(e2) {
+            console.log('something went wrong');
+        });
+    };
+    var _this$props = _this.props, profiles = _this$props.profiles, onBackClick = _this$props.onBackClick;
+    return(/*#__PURE__*/ _react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/ _react["default"].createElement(_Row["default"], {
+        className: "justify-content-center"
+    }, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
+        sm: 12,
+        md: 10,
+        lg: 8,
+        xl: 6
+    }, /*#__PURE__*/ _react["default"].createElement("div", null, /*#__PURE__*/ _react["default"].createElement("ul", {
+        className: "profile-view list-group"
+    }, /*#__PURE__*/ _react["default"].createElement("li", {
+        className: "profile-username list-group-item"
+    }, /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "value profile-title"
+    }, profiles.username)), /*#__PURE__*/ _react["default"].createElement("li", {
+        className: "profile-email list-group-item"
+    }, /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "label"
+    }, "eMail: "), /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "value"
+    }, profiles.email)), /*#__PURE__*/ _react["default"].createElement("li", {
+        className: "profile-birthday list-group-item"
+    }, /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "label"
+    }, "Birthday: "), /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "value"
+    }, profiles.birthday.slice(0, 10))), /*#__PURE__*/ _react["default"].createElement("li", {
+        className: "profile-favoritemovies list-group-item"
+    }, /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "label"
+    }, "Favorite Movies: "), /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "value"
+    }, profiles.favoritemovies)), /*#__PURE__*/ _react["default"].createElement("li", {
+        className: "list-group-item"
+    }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+        className: "button-float-right",
+        variant: "outline-danger",
+        onClick: function onClick() {
+            return onBackClick();
+        }
+    }, "Back")))))), /*#__PURE__*/ _react["default"].createElement(_Row["default"], null, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
+        sm: 12,
+        md: 6,
+        lg: 6,
+        xl: 4
+    }, /*#__PURE__*/ _react["default"].createElement(_Form["default"], {
+        className: "update-user-account"
+    }, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
+        controlId: "newUsername"
+    }, "New Username: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
+        type: "text",
+        value: newUsername,
+        onChange: function onChange(e1) {
+            updateUsername(e1.target.value), validateUsername(e1);
+        }
+    })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
+        controlId: "newPassword"
+    }, "New Password: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
+        type: "password",
+        value: newPassword,
+        onChange: function onChange(e1) {
+            updatePassword(e1.target.value), validatePassword(e1);
+        }
+    })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
+        controlId: "newEmail"
+    }, "New eMail: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
+        type: "email",
+        value: newEmail,
+        onChange: function onChange(e1) {
+            updateEmail(e1.target.value), validateEmail(e1);
+        }
+    })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
+        controlId: "newBirthday"
+    }, "New Birthday: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
+        type: "date",
+        value: newBirthday,
+        onChange: function onChange(e1) {
+            updateBirthday(e1.target.value), validateBirthday(e1);
+        }
+    }))), /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+        variant: "danger",
+        type: "submit",
+        onClick: handleUpdate
+    }, "Submit"), ' ', /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+        variant: "outline-secondary",
+        className: "button-float-right",
+        onClick: function onClick() {
+            onBackClick(null);
+        }
+    }, "Back")))));
+});
+var _c;
+$RefreshReg$(_c, "ProfileView");
 
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L"}],"3Mt3t":[function(require,module,exports) {
+},{"react":"3b2NM","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","./profile-view.scss":"14z2W","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","react-bootstrap/Form":"6A5ko","axios":"7rA65"}],"14z2W":[function() {},{}],"3Mt3t":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
