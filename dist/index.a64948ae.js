@@ -29648,15 +29648,7 @@ var updateUser = function updateUser1(e) {
         setFeedback('Submission failed');
     });
 };
-handleUpdate = (function(_handleUpdate) {
-    function handleUpdate(_x) {
-        return _handleUpdate.apply(this, arguments);
-    }
-    handleUpdate.toString = function() {
-        return _handleUpdate.toString();
-    };
-    return handleUpdate;
-})(function(e) {
+handleUpdate = function handleUpdate(e) {
     e.preventDefault();
     /* Send a request to the server for authentication */ var deleteAccount = function deleteAccount1() {
         _axios["default"]["delete"]("https://filmopedia.herokuapp.com/users/".concat(user), {
@@ -29702,7 +29694,7 @@ handleUpdate = (function(_handleUpdate) {
     };
     var _this$props = _this.props, profiles = _this$props.profiles, onBackClick = _this$props.onBackClick;
     return(/*#__PURE__*/ _react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/ _react["default"].createElement(_Row["default"], {
-        className: "justify-content-center"
+        className: "profile-info justify-content-center"
     }, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
         sm: 12,
         md: 10,
@@ -29714,7 +29706,7 @@ handleUpdate = (function(_handleUpdate) {
         className: "profile-username list-group-item"
     }, /*#__PURE__*/ _react["default"].createElement("span", {
         className: "value profile-title"
-    }, profiles.username)), /*#__PURE__*/ _react["default"].createElement("li", {
+    }, "Hello, ", profiles.username)), /*#__PURE__*/ _react["default"].createElement("li", {
         className: "profile-email list-group-item"
     }, /*#__PURE__*/ _react["default"].createElement("span", {
         className: "label"
@@ -29746,7 +29738,7 @@ handleUpdate = (function(_handleUpdate) {
         lg: 6,
         xl: 4
     }, /*#__PURE__*/ _react["default"].createElement(_Form["default"], {
-        className: "update-user-account"
+        className: "update-info update-user-account"
     }, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
         controlId: "newUsername"
     }, "New Username: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
@@ -29755,7 +29747,9 @@ handleUpdate = (function(_handleUpdate) {
         onChange: function onChange(e1) {
             updateUsername(e1.target.value), validateUsername(e1);
         }
-    })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
+    }), /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "validation-feedback"
+    }, validateUser)), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
         controlId: "newPassword"
     }, "New Password: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
         type: "password",
@@ -29763,7 +29757,9 @@ handleUpdate = (function(_handleUpdate) {
         onChange: function onChange(e1) {
             updatePassword(e1.target.value), validatePassword(e1);
         }
-    })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
+    }), /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "validation-feedback"
+    }, validatePassword)), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
         controlId: "newEmail"
     }, "New eMail: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
         type: "email",
@@ -29771,7 +29767,9 @@ handleUpdate = (function(_handleUpdate) {
         onChange: function onChange(e1) {
             updateEmail(e1.target.value), validateEmail(e1);
         }
-    })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
+    }), /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "validation-feedback"
+    }, validateEmail)), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
         controlId: "newBirthday"
     }, "New Birthday: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
         type: "date",
@@ -29779,24 +29777,31 @@ handleUpdate = (function(_handleUpdate) {
         onChange: function onChange(e1) {
             updateBirthday(e1.target.value), validateBirthday(e1);
         }
-    }))), /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+    }), /*#__PURE__*/ _react["default"].createElement("span", {
+        className: "validation-feedback"
+    }, validateBirthday))), /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
         variant: "danger",
         type: "submit",
-        onClick: handleUpdate
-    }, "Submit"), ' ', /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+        onClick: updateUser
+    }, "Update User"), ' ', /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+        variant: "danger",
+        className: "button-float-right",
+        type: "submit",
+        onClick: deleteUser
+    }, "DELETE USER"), /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
         variant: "outline-secondary",
         className: "button-float-right",
         onClick: function onClick() {
             onBackClick(null);
         }
     }, "Back")))));
-});
+};
 ProfileView.propTypes = {
     userProfile: _propTypes["default"].shape({
         username: _propTypes["default"].string.isRequired,
         password: _propTypes["default"].string.isRequired,
         email: _propTypes["default"].string.isRequired,
-        birthday: _propTypes["default"].Date.isRequired
+        birthday: _propTypes["default"].string.isRequired
     }).isRequired,
     token: _propTypes["default"].string.isRequired,
     onDelete: _propTypes["default"].func.isRequired,

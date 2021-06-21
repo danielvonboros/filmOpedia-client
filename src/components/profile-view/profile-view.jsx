@@ -154,12 +154,12 @@ export function ProfileView ({ userProfile, token, onDelete, onUpdate, movies, o
 
         return (
             < >
-            <Row className="justify-content-center">
+            <Row className="profile-info justify-content-center">
                 <Col sm={12} md={10} lg={8} xl={6}>
                     <div>
                         <ul className="profile-view list-group">
                         <li className="profile-username list-group-item">
-                            <span className="value profile-title">{ profiles.username }</span>
+                            <span className="value profile-title">Hello, { profiles.username }</span>
                         </li>
                         <li className="profile-email list-group-item">
                             <span className="label">eMail: </span>
@@ -182,27 +182,32 @@ export function ProfileView ({ userProfile, token, onDelete, onUpdate, movies, o
             </Row>
             <Row>
                 <Col sm={12} md={6} lg={6} xl={4}>
-                    <Form className="update-user-account">
+                    <Form className="update-info update-user-account">
                     <Form.Group>
                         <Form.Label controlId="newUsername">New Username: </Form.Label>
                         <Form.Control type="text" value={newUsername} onChange={e => {updateUsername(e.target.value), validateUsername(e)}} />
+                        <span className="validation-feedback">{validateUser}</span>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label controlId="newPassword">New Password: </Form.Label>
                         <Form.Control type="password" value={newPassword} onChange={e => {updatePassword(e.target.value), validatePassword(e)}} />
+                        <span className="validation-feedback">{validatePassword}</span>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label controlId="newEmail">New eMail: </Form.Label>
                         <Form.Control type="email" value={newEmail} onChange={e => {updateEmail(e.target.value), validateEmail(e)}} />
+                        <span className="validation-feedback">{validateEmail}</span>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label controlId="newBirthday">New Birthday: </Form.Label>
                         <Form.Control type="date" value={newBirthday} onChange={e => {updateBirthday(e.target.value), validateBirthday(e)}} />
+                        <span className="validation-feedback">{validateBirthday}</span>
                     </Form.Group>
                     </Form>
         
-                    <Button variant="danger" type="submit" onClick={handleUpdate}>Submit</Button>
+                    <Button variant="danger" type="submit" onClick={updateUser}>Update User</Button>
                     {' '}
+                    <Button variant="danger" className="button-float-right" type="submit" onClick={deleteUser}>DELETE USER</Button>
                     <Button variant="outline-secondary" className="button-float-right" onClick={() => { onBackClick(null); }}>Back</Button>
                 </Col>
             </Row>
@@ -215,7 +220,7 @@ export function ProfileView ({ userProfile, token, onDelete, onUpdate, movies, o
             username: PropTypes.string.isRequired,
             password: PropTypes.string.isRequired,
             email: PropTypes.string.isRequired,
-            birthday: PropTypes.Date.isRequired
+            birthday: PropTypes.string.isRequired
         }).isRequired,
     
     token: PropTypes.string.isRequired,
