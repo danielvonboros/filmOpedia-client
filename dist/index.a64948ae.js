@@ -29489,7 +29489,7 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
-var _profileUpdateView = _interopRequireDefault(require("../profile-update-view/profile-update-view"));
+var _profileUpdateView = require("../profile-update-view/profile-update-view");
 require("./profile-view.scss");
 var _axios = _interopRequireDefault(require("axios"));
 function _interopRequireDefault(obj) {
@@ -29713,7 +29713,7 @@ var ProfileView1 = /*#__PURE__*/ function(_React$Component) {
                     className: "label"
                 }, "Birthday: "), /*#__PURE__*/ _react["default"].createElement("span", {
                     className: "value"
-                }, profiles.birthday)), /*#__PURE__*/ _react["default"].createElement("li", {
+                }, profiles.birthday.slice(0, 10))), /*#__PURE__*/ _react["default"].createElement("li", {
                     className: "profile-favoritemovies list-group-item"
                 }, /*#__PURE__*/ _react["default"].createElement("span", {
                     className: "label"
@@ -29727,7 +29727,56 @@ var ProfileView1 = /*#__PURE__*/ function(_React$Component) {
                     onClick: function onClick() {
                         return onBackClick();
                     }
-                }, "Back"))))))));
+                }, "Back")))))), /*#__PURE__*/ _react["default"].createElement(_Row["default"], null, /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
+                    sm: 12,
+                    md: 6,
+                    lg: 6,
+                    xl: 4
+                }, /*#__PURE__*/ _react["default"].createElement(_Form["default"], {
+                    className: "update-user-account"
+                }, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
+                    controlId: "newUsername"
+                }, "New Username: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
+                    type: "text",
+                    value: newUsername,
+                    onChange: function onChange(e) {
+                        updateUsername(e.target.value), validateUsername(e);
+                    }
+                })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
+                    controlId: "newPassword"
+                }, "New Password: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
+                    type: "password",
+                    value: newPassword,
+                    onChange: function onChange(e) {
+                        updatePassword(e.target.value), validatePassword(e);
+                    }
+                })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
+                    controlId: "newEmail"
+                }, "New eMail: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
+                    type: "email",
+                    value: newEmail,
+                    onChange: function onChange(e) {
+                        updateEmail(e.target.value), validateEmail(e);
+                    }
+                })), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/ _react["default"].createElement(_Form["default"].Label, {
+                    controlId: "newBirthday"
+                }, "New Birthday: "), /*#__PURE__*/ _react["default"].createElement(_Form["default"].Control, {
+                    type: "date",
+                    value: newBirthday,
+                    onChange: function onChange(e) {
+                        updateBirthday(e.target.value), validateBirthday(e);
+                    }
+                }))), /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+                    variant: "danger",
+                    type: "submit",
+                    onClick: handleUpdate
+                }, "Submit"), ' ', /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
+                    variant: "outline-secondary",
+                    className: "button-float-right",
+                    onClick: function onClick() {
+                        onBackClick(null);
+                    }
+                }, "Back")))));
             }
         }
     ]);

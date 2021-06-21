@@ -4,17 +4,24 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
-import profileUpdateView from '../profile-update-view/profile-update-view';
+import {profileUpdateView as ProfileUpdate} from '../profile-update-view/profile-update-view';
 
 import './profile-view.scss';
 import axios from 'axios';
 
-export class ProfileView extends React.Component {
+export function ProfileView (props) {
 
-    // const [ username, setUsername ] = useState('');
-    // const [ password, setPassword ] = useState('');
-    // const [ email, setEmail ] = useState('');
-    // const [ birthday, setBirthday ] = useState('')
+    const [ newUsername, updateUsername ] = useState('');
+    const [ newPassword, updatePassword ] = useState('');
+    const [ newEmail, updateEmail ] = useState('');
+    const [ newBirthday, updateBirthday ] = useState('');
+
+    const [ validateUser, setValidateUser ] = useState('');
+    const [ validatePassword, setValidatePassword ] = useState('');
+    const [ validateEmail, setValidateEmail ] = useState('');
+    const [ validateBirthday, setValidateBirthday ] = useState('');
+    const [ feedback, setFeedback ] = useState('');
+
     
     handleUpdate = (e) => {
         e.preventDefault();
@@ -85,7 +92,6 @@ export class ProfileView extends React.Component {
         });
     };
 
-    render () {
         const { profiles, onBackClick } = this.props;
 
         return (
@@ -103,7 +109,7 @@ export class ProfileView extends React.Component {
                         </li>
                         <li className="profile-birthday list-group-item">
                             <span className="label">Birthday: </span>
-                            <span className="value">{ profiles.birthday }</span>
+                            <span className="value">{ profiles.birthday.slice(0,10) }</span>
                         </li>
                         <li className="profile-favoritemovies list-group-item">
                             <span className="label">Favorite Movies: </span>
@@ -116,31 +122,32 @@ export class ProfileView extends React.Component {
                     </div>
                 </Col>
             </Row>
-            {/* <Row>
+            <Row>
                 <Col sm={12} md={6} lg={6} xl={4}>
+                    <Form className="update-user-account">
                     <Form.Group>
-                        <Form.Label controlId="username">Username: </Form.Label>
-                        <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                        <Form.Label controlId="newUsername">New Username: </Form.Label>
+                        <Form.Control type="text" value={newUsername} onChange={e => {updateUsername(e.target.value), validateUsername(e)}} />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label controlId="password">Password: </Form.Label>
-                        <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                        <Form.Label controlId="newPassword">New Password: </Form.Label>
+                        <Form.Control type="password" value={newPassword} onChange={e => {updatePassword(e.target.value), validatePassword(e)}} />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label controlId="email">eMail: </Form.Label>
-                        <Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} />
+                        <Form.Label controlId="newEmail">New eMail: </Form.Label>
+                        <Form.Control type="email" value={newEmail} onChange={e => {updateEmail(e.target.value), validateEmail(e)}} />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label controlId="birthday">Date of Birth: </Form.Label>
-                        <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
+                        <Form.Label controlId="newBirthday">New Birthday: </Form.Label>
+                        <Form.Control type="date" value={newBirthday} onChange={e => {updateBirthday(e.target.value), validateBirthday(e)}} />
                     </Form.Group>
+                    </Form>
         
                     <Button variant="danger" type="submit" onClick={handleUpdate}>Submit</Button>
                     {' '}
                     <Button variant="outline-secondary" className="button-float-right" onClick={() => { onBackClick(null); }}>Back</Button>
                 </Col>
-            </Row> */}
+            </Row>
         </>  
         );
     }
-}
