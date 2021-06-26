@@ -46,14 +46,14 @@ export class MovieView extends React.Component {
                             <span className="label">Directed by: </span>
                             <span className="value">{ movie.director.name }</span>
                         </li>
-                        <li class="list-group-item">
+                        <li className="list-group-item">
                             <Link to={`/director/${movie.director.name}`}>
                                 <Button className="button-float-left" variant="danger">{movie.director.name}</Button>
                             </Link>
                             <Link to={`/genres/${movie.genre.name}`}>
                                 <Button className="button-float-left" variant="danger">{movie.genre.name}</Button>
                             </Link>
-                            <Button className="button-float-right" variant="outline-danger" onBackClick={() => history.goBack()}>Back</Button>
+                            <Button className="button-float-right" variant="outline-danger" onClick={onBackClick}>Back</Button>
                         </li>
                         </ul>
                     </div>

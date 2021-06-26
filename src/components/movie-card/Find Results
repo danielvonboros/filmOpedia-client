@@ -1,0 +1,451 @@
+Searching 25 files for "class"
+
+/Users/iakhator/Desktop/Daniel/filmOpedia-client/package-lock.json:
+  118        }
+  119      },
+  120:     "node_modules/@babel/helper-create-class-features-plugin": {
+  121        "version": "7.14.4",
+  122:       "resolved": "https://registry.npmjs.org/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.14.4.tgz",
+  123        "integrity": "sha512-idr3pthFlDCpV+p/rMgGLGYIVtazeatrSOQk8YzO2pAepIjQhCN3myeihVg58ax2bbbGK9PUE1reFi7axOYIOw==",
+  124        "dev": true,
+  ...
+  391        }
+  392      },
+  393:     "node_modules/@babel/plugin-proposal-class-properties": {
+  394        "version": "7.13.0",
+  395:       "resolved": "https://registry.npmjs.org/@babel/plugin-proposal-class-properties/-/plugin-proposal-class-properties-7.13.0.tgz",
+  396        "integrity": "sha512-KnTDjFNC1g+45ka0myZNvSBFLhNCLN+GeGYLDEA8Oq7MZ6yMgfLoIRh86GRT0FjtJhZw8JyUskP9uvj5pHM9Zg==",
+  397        "dev": true,
+  398        "dependencies": {
+  399:         "@babel/helper-create-class-features-plugin": "^7.13.0",
+  400          "@babel/helper-plugin-utils": "^7.13.0"
+  401        },
+  ...
+  404        }
+  405      },
+  406:     "node_modules/@babel/plugin-proposal-class-static-block": {
+  407        "version": "7.14.3",
+  408:       "resolved": "https://registry.npmjs.org/@babel/plugin-proposal-class-static-block/-/plugin-proposal-class-static-block-7.14.3.tgz",
+  409        "integrity": "sha512-HEjzp5q+lWSjAgJtSluFDrGGosmwTgKwCXdDQZvhKsRlwv3YdkUEqxNrrjesJd+B9E9zvr1PVPVBvhYZ9msjvQ==",
+  410        "dev": true,
+  411        "dependencies": {
+  412:         "@babel/helper-create-class-features-plugin": "^7.14.3",
+  413          "@babel/helper-plugin-utils": "^7.13.0",
+  414:         "@babel/plugin-syntax-class-static-block": "^7.12.13"
+  415        },
+  416        "peerDependencies": {
+  ...
+  545        "dev": true,
+  546        "dependencies": {
+  547:         "@babel/helper-create-class-features-plugin": "^7.13.0",
+  548          "@babel/helper-plugin-utils": "^7.13.0"
+  549        },
+  ...
+  559        "dependencies": {
+  560          "@babel/helper-annotate-as-pure": "^7.12.13",
+  561:         "@babel/helper-create-class-features-plugin": "^7.14.0",
+  562          "@babel/helper-plugin-utils": "^7.13.0",
+  563          "@babel/plugin-syntax-private-property-in-object": "^7.14.0"
+  ...
+  595        }
+  596      },
+  597:     "node_modules/@babel/plugin-syntax-class-properties": {
+  598        "version": "7.12.13",
+  599:       "resolved": "https://registry.npmjs.org/@babel/plugin-syntax-class-properties/-/plugin-syntax-class-properties-7.12.13.tgz",
+  600        "integrity": "sha512-fm4idjKla0YahUNgFNLCB0qySdsoPiZP3iQE3rky0mBUtMZ23yDJ9SJdg6dXTSDnulOVqiF3Hgr9nbXvXTQZYA==",
+  601        "dev": true,
+  ...
+  607        }
+  608      },
+  609:     "node_modules/@babel/plugin-syntax-class-static-block": {
+  610        "version": "7.12.13",
+  611:       "resolved": "https://registry.npmjs.org/@babel/plugin-syntax-class-static-block/-/plugin-syntax-class-static-block-7.12.13.tgz",
+  612        "integrity": "sha512-ZmKQ0ZXR0nYpHZIIuj9zE7oIqCx2hw9TKi+lIo73NNrMPAZGHfS92/VRV0ZmPj6H2ffBgyFHXvJ5NYsNeEaP2A==",
+  613        "dev": true,
+  ...
+  813        }
+  814      },
+  815:     "node_modules/@babel/plugin-transform-classes": {
+  816        "version": "7.14.4",
+  817:       "resolved": "https://registry.npmjs.org/@babel/plugin-transform-classes/-/plugin-transform-classes-7.14.4.tgz",
+  818        "integrity": "sha512-p73t31SIj6y94RDVX57rafVjttNr8MvKEgs5YFatNB/xC68zM3pyosuOEcQmYsYlyQaGY9R7rAULVRcat5FKJQ==",
+  819        "dev": true,
+  ...
+ 1236          "@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining": "^7.13.12",
+ 1237          "@babel/plugin-proposal-async-generator-functions": "^7.14.2",
+ 1238:         "@babel/plugin-proposal-class-properties": "^7.13.0",
+ 1239:         "@babel/plugin-proposal-class-static-block": "^7.14.3",
+ 1240          "@babel/plugin-proposal-dynamic-import": "^7.14.2",
+ 1241          "@babel/plugin-proposal-export-namespace-from": "^7.14.2",
+ ....
+ 1251          "@babel/plugin-proposal-unicode-property-regex": "^7.12.13",
+ 1252          "@babel/plugin-syntax-async-generators": "^7.8.4",
+ 1253:         "@babel/plugin-syntax-class-properties": "^7.12.13",
+ 1254:         "@babel/plugin-syntax-class-static-block": "^7.12.13",
+ 1255          "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+ 1256          "@babel/plugin-syntax-export-namespace-from": "^7.8.3",
+ ....
+ 1268          "@babel/plugin-transform-block-scoped-functions": "^7.12.13",
+ 1269          "@babel/plugin-transform-block-scoping": "^7.14.4",
+ 1270:         "@babel/plugin-transform-classes": "^7.14.4",
+ 1271          "@babel/plugin-transform-computed-properties": "^7.13.0",
+ 1272          "@babel/plugin-transform-destructuring": "^7.14.4",
+ ....
+ 1901        }
+ 1902      },
+ 1903:     "node_modules/classnames": {
+ 1904        "version": "2.3.1",
+ 1905:       "resolved": "https://registry.npmjs.org/classnames/-/classnames-2.3.1.tgz",
+ 1906        "integrity": "sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA=="
+ 1907      },
+ ....
+ 3561          "@types/react-transition-group": "^4.4.1",
+ 3562          "@types/warning": "^3.0.0",
+ 3563:         "classnames": "^2.3.1",
+ 3564          "dom-helpers": "^5.2.1",
+ 3565          "invariant": "^2.2.4",
+ ....
+ 4669        }
+ 4670      },
+ 4671:     "@babel/helper-create-class-features-plugin": {
+ 4672        "version": "7.14.4",
+ 4673:       "resolved": "https://registry.npmjs.org/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.14.4.tgz",
+ 4674        "integrity": "sha512-idr3pthFlDCpV+p/rMgGLGYIVtazeatrSOQk8YzO2pAepIjQhCN3myeihVg58ax2bbbGK9PUE1reFi7axOYIOw==",
+ 4675        "dev": true,
+ ....
+ 4921        }
+ 4922      },
+ 4923:     "@babel/plugin-proposal-class-properties": {
+ 4924        "version": "7.13.0",
+ 4925:       "resolved": "https://registry.npmjs.org/@babel/plugin-proposal-class-properties/-/plugin-proposal-class-properties-7.13.0.tgz",
+ 4926        "integrity": "sha512-KnTDjFNC1g+45ka0myZNvSBFLhNCLN+GeGYLDEA8Oq7MZ6yMgfLoIRh86GRT0FjtJhZw8JyUskP9uvj5pHM9Zg==",
+ 4927        "dev": true,
+ 4928        "requires": {
+ 4929:         "@babel/helper-create-class-features-plugin": "^7.13.0",
+ 4930          "@babel/helper-plugin-utils": "^7.13.0"
+ 4931        }
+ 4932      },
+ 4933:     "@babel/plugin-proposal-class-static-block": {
+ 4934        "version": "7.14.3",
+ 4935:       "resolved": "https://registry.npmjs.org/@babel/plugin-proposal-class-static-block/-/plugin-proposal-class-static-block-7.14.3.tgz",
+ 4936        "integrity": "sha512-HEjzp5q+lWSjAgJtSluFDrGGosmwTgKwCXdDQZvhKsRlwv3YdkUEqxNrrjesJd+B9E9zvr1PVPVBvhYZ9msjvQ==",
+ 4937        "dev": true,
+ 4938        "requires": {
+ 4939:         "@babel/helper-create-class-features-plugin": "^7.14.3",
+ 4940          "@babel/helper-plugin-utils": "^7.13.0",
+ 4941:         "@babel/plugin-syntax-class-static-block": "^7.12.13"
+ 4942        }
+ 4943      },
+ ....
+ 5042        "dev": true,
+ 5043        "requires": {
+ 5044:         "@babel/helper-create-class-features-plugin": "^7.13.0",
+ 5045          "@babel/helper-plugin-utils": "^7.13.0"
+ 5046        }
+ ....
+ 5053        "requires": {
+ 5054          "@babel/helper-annotate-as-pure": "^7.12.13",
+ 5055:         "@babel/helper-create-class-features-plugin": "^7.14.0",
+ 5056          "@babel/helper-plugin-utils": "^7.13.0",
+ 5057          "@babel/plugin-syntax-private-property-in-object": "^7.14.0"
+ ....
+ 5077        }
+ 5078      },
+ 5079:     "@babel/plugin-syntax-class-properties": {
+ 5080        "version": "7.12.13",
+ 5081:       "resolved": "https://registry.npmjs.org/@babel/plugin-syntax-class-properties/-/plugin-syntax-class-properties-7.12.13.tgz",
+ 5082        "integrity": "sha512-fm4idjKla0YahUNgFNLCB0qySdsoPiZP3iQE3rky0mBUtMZ23yDJ9SJdg6dXTSDnulOVqiF3Hgr9nbXvXTQZYA==",
+ 5083        "dev": true,
+ ....
+ 5086        }
+ 5087      },
+ 5088:     "@babel/plugin-syntax-class-static-block": {
+ 5089        "version": "7.12.13",
+ 5090:       "resolved": "https://registry.npmjs.org/@babel/plugin-syntax-class-static-block/-/plugin-syntax-class-static-block-7.12.13.tgz",
+ 5091        "integrity": "sha512-ZmKQ0ZXR0nYpHZIIuj9zE7oIqCx2hw9TKi+lIo73NNrMPAZGHfS92/VRV0ZmPj6H2ffBgyFHXvJ5NYsNeEaP2A==",
+ 5092        "dev": true,
+ ....
+ 5241        }
+ 5242      },
+ 5243:     "@babel/plugin-transform-classes": {
+ 5244        "version": "7.14.4",
+ 5245:       "resolved": "https://registry.npmjs.org/@babel/plugin-transform-classes/-/plugin-transform-classes-7.14.4.tgz",
+ 5246        "integrity": "sha512-p73t31SIj6y94RDVX57rafVjttNr8MvKEgs5YFatNB/xC68zM3pyosuOEcQmYsYlyQaGY9R7rAULVRcat5FKJQ==",
+ 5247        "dev": true,
+ ....
+ 5568          "@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining": "^7.13.12",
+ 5569          "@babel/plugin-proposal-async-generator-functions": "^7.14.2",
+ 5570:         "@babel/plugin-proposal-class-properties": "^7.13.0",
+ 5571:         "@babel/plugin-proposal-class-static-block": "^7.14.3",
+ 5572          "@babel/plugin-proposal-dynamic-import": "^7.14.2",
+ 5573          "@babel/plugin-proposal-export-namespace-from": "^7.14.2",
+ ....
+ 5583          "@babel/plugin-proposal-unicode-property-regex": "^7.12.13",
+ 5584          "@babel/plugin-syntax-async-generators": "^7.8.4",
+ 5585:         "@babel/plugin-syntax-class-properties": "^7.12.13",
+ 5586:         "@babel/plugin-syntax-class-static-block": "^7.12.13",
+ 5587          "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+ 5588          "@babel/plugin-syntax-export-namespace-from": "^7.8.3",
+ ....
+ 5600          "@babel/plugin-transform-block-scoped-functions": "^7.12.13",
+ 5601          "@babel/plugin-transform-block-scoping": "^7.14.4",
+ 5602:         "@babel/plugin-transform-classes": "^7.14.4",
+ 5603          "@babel/plugin-transform-computed-properties": "^7.13.0",
+ 5604          "@babel/plugin-transform-destructuring": "^7.14.4",
+ ....
+ 6101        "integrity": "sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ=="
+ 6102      },
+ 6103:     "classnames": {
+ 6104        "version": "2.3.1",
+ 6105:       "resolved": "https://registry.npmjs.org/classnames/-/classnames-2.3.1.tgz",
+ 6106        "integrity": "sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA=="
+ 6107      },
+ ....
+ 7370          "@types/react-transition-group": "^4.4.1",
+ 7371          "@types/warning": "^3.0.0",
+ 7372:         "classnames": "^2.3.1",
+ 7373          "dom-helpers": "^5.2.1",
+ 7374          "invariant": "^2.2.4",
+
+/Users/iakhator/Desktop/Daniel/filmOpedia-client/src/index.jsx:
+   10  
+   11  // Main component
+   12: class filmOpediaApplication extends React.Component {
+   13      render () {
+   14          return (
+
+/Users/iakhator/Desktop/Daniel/filmOpedia-client/src/components/director-view/director-view.jsx:
+   11  
+   12          return (
+   13:             <Row className="justify-content-center">
+   14                  <Col sm={12} md={10} lg={8} xl={6}>
+   15                      <div>
+   16:                         <ul className="director-view list-group">
+   17:                         <li className="director-name list-group-item">
+   18:                             <span className="value director-title">{ director.name }</span>
+   19                          </li>
+   20:                         <li className="director-bio list-group-item">
+   21:                             <span className="label">Bio: </span>
+   22:                             <span className="value">{ director.bio }</span>
+   23                          </li>
+   24:                         <li className="director-bio list-group-item">
+   25:                             <span className="label">Birth Year: </span>
+   26:                             <span className="value">{ director.birthYear }</span>
+   27                          </li>
+   28:                         <li className="director-bio list-group-item">
+   29:                             <span className="label">Death Year: </span>
+   30:                             <span className="value">{ director.deathYear }</span>
+   31                          </li>
+   32:                         <li className="other-movies list-group-item">
+   33:                             <span className="label">Other movies by {`${director.name}`}:</span>
+   34:                             <span>{directorsMovies.map((m, i) => <div className="director-movie" key={i}>{m.title}</div>)}</span>
+   35                          </li>
+   36:                         <li className="back-button list-group-item">
+   37:                             <Button className="button-float-right" variant="outline-danger" onClick={() => onBackClick()}>Back</Button>
+   38                          </li>
+   39                          </ul>
+
+/Users/iakhator/Desktop/Daniel/filmOpedia-client/src/components/genre-view/genre-view.jsx:
+    6  import './genre-view.scss';
+    7  
+    8: export class GenreView extends React.Component {
+    9  
+   10      render () {
+   ..
+   13  
+   14          return (
+   15:             <Row className="justify-content-center">
+   16                  <Col sm={12} md={10} lg={8} xl={6}>
+   17                      <div>
+   18:                         <ul className="genre-view list-group">
+   19:                         <li className="genre-name list-group-item">
+   20:                             <span className="value genre-title">{ genre.name }</span>
+   21                          </li>
+   22:                         <li className="genre-description list-group-item">
+   23:                             <span className="label">Description: </span>
+   24:                             <span className="value">{ genre.description }</span>
+   25                          </li>
+   26:                         <li className="other-movies list-group-item">
+   27:                             <span className="label">Other movies with genre {`${genre.name}`}:</span>
+   28:                             <span>{genresMovies.map((m, i) => <div className="genre-movie" key={i}>{m.title}</div>)}</span>
+   29                          </li>
+   30:                         <li className="list-group-item">
+   31:                             <Button className="button-float-right" variant="outline-danger" onClick={() => onBackClick()}>Back</Button>
+   32                          </li>
+   33                          </ul>
+
+/Users/iakhator/Desktop/Daniel/filmOpedia-client/src/components/login-view/login-view.jsx:
+   32  
+   33      return (
+   34:         <Row className="login-margin-top justify-content-md-center">
+   35              <Col sm={12} md={6} lg={6} xl={4}>
+   36          <Form>
+   ..
+   46              {' '}
+   47              <Link to={`/register`}>        
+   48:             <Button variant="outline-secondary" className="button-float-right" type="button" >Register</Button>
+   49              </Link>
+   50          </Form>
+
+/Users/iakhator/Desktop/Daniel/filmOpedia-client/src/components/main-view/main-view.jsx:
+   17  import './main-view.scss';
+   18  
+   19: export class MainView extends React.Component {
+   20      constructor() {
+   21:         super(); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
+   22          this.state = {
+   23              movies: [],
+   ..
+   85          return (
+   86              <Router>
+   87:                 <Row className="main-view justify-content-md-center" key="main-view">
+   88                      <Route exact path="/" render={() => {
+   89                          if (!user) return <Col>
+   ..
+  111                      }} />
+  112                      <Route path="/director/:name" render={({match, history}) => {
+  113:                         if (movies.length === 0) return <div className="main-view" />
+  114                          if (!user) return <Col>
+  115                              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+  ...
+  120                      }} />
+  121                      <Route path="/genres/:name" render={({match, history}) => {
+  122:                         if (movies.length === 0) return <div className="main-view" />
+  123                          if (!user) return <Col>
+  124                              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+  ...
+  129                      }} />
+  130                      <Route path="/users/:username" render={({match, history}) => {
+  131:                         if (movies.length === 0) return <div className="main-view" />
+  132                          if (!user) return <Col>
+  133                              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+
+/Users/iakhator/Desktop/Daniel/filmOpedia-client/src/components/movie-card/movie-card.jsx:
+    8  import './movie-card.scss';
+    9  
+   10: export class MovieCard extends React.Component {
+   11  
+   12      render() {
+   ..
+   17                  <Card.Img variant="top" src={movie.imageUrl} />
+   18                  <Card.Body>
+   19:                     <Card.Title className="movie-title">{movie.title}</Card.Title>
+   20                      <Card.Text>{movie.description}</Card.Text>
+   21                      <Link to={`/movies/${movie._id}`}>
+
+/Users/iakhator/Desktop/Daniel/filmOpedia-client/src/components/movie-view/movie-view.jsx:
+    8  import './movie-view.scss';
+    9  
+   10: export class MovieView extends React.Component {
+   11  
+   12      keypressCallback(event) {
+   ..
+   24  
+   25          return (
+   26:             <Row className="justify-content-center">
+   27                  <Col sm={12} md={10} lg={8} xl={6}>
+   28                      <div>
+   29:                         <div className="movie-poster">
+   30:                             <img className="img-center-align" src={movie.imageUrl} />
+   31                           </div>
+   32:                         <ul className="movie-view list-group">
+   33:                         <li className="movie-title list-group-item">
+   34:                             <span className="value">{ movie.title }</span>
+   35:                             <span className="value"> ({ movie.year })</span>
+   36                          </li>
+   37:                         <li className="movie-genre list-group-item">
+   38:                             <span className="label">Genre: </span>
+   39:                             <span className="value">{ movie.genre.name }</span>
+   40                          </li>
+   41:                         <li className="movie-description list-group-item">
+   42:                             <span className="label">Description: </span>
+   43:                             <span className="value">{ movie.description }</span>
+   44                          </li>
+   45:                         <li className="movie-director list-group-item">
+   46:                             <span className="label">Directed by: </span>
+   47:                             <span className="value">{ movie.director.name }</span>
+   48                          </li>
+   49:                         <li className="list-group-item">
+   50                              <Link to={`/director/${movie.director.name}`}>
+   51:                                 <Button className="button-float-left" variant="danger">{movie.director.name}</Button>
+   52                              </Link>
+   53                              <Link to={`/genres/${movie.genre.name}`}>
+   54:                                 <Button className="button-float-left" variant="danger">{movie.genre.name}</Button>
+   55                              </Link>
+   56:                             <Button className="button-float-right" variant="outline-danger" onBackClick={() => history.goBack()}>Back</Button>
+   57                          </li>
+   58                          </ul>
+
+/Users/iakhator/Desktop/Daniel/filmOpedia-client/src/components/profile-view/profile-view.jsx:
+  154          return (
+  155              < >
+  156:             <Row className="profile-info justify-content-center">
+  157                  <Col sm={12} md={10} lg={8} xl={6}>
+  158                      <div>
+  159:                         <ul className="profile-view list-group">
+  160:                         <li className="profile-username list-group-item">
+  161:                             <span className="value profile-title">Hello, { profiles.username }</span>
+  162                          </li>
+  163:                         <li className="profile-email list-group-item">
+  164:                             <span className="label">eMail: </span>
+  165:                             <span className="value">{ profiles.email }</span>
+  166                          </li>
+  167:                         <li className="profile-birthday list-group-item">
+  168:                             <span className="label">Birthday: </span>
+  169:                             <span className="value">{ profiles.birthday.slice(0,10) }</span>
+  170                          </li>
+  171:                         <li className="profile-favoritemovies list-group-item">
+  172:                             <span className="label">Favorite Movies: </span>
+  173:                             <span className="value">{ profiles.favoritemovies }</span>
+  174                          </li>
+  175:                         <li className="list-group-item">
+  176:                             <Button className="button-float-right" variant="outline-danger" onClick={() => onBackClick()}>Back</Button>
+  177                          </li>
+  178                          </ul>
+  ...
+  182              <Row>
+  183                  <Col sm={12} md={6} lg={6} xl={4}>
+  184:                     <Form className="update-info update-user-account">
+  185                      <Form.Group>
+  186                          <Form.Label controlId="newUsername">New Username: </Form.Label>
+  187                          <Form.Control type="text" value={newUsername} onChange={e => {updateUsername(e.target.value), validateUsername(e)}} />
+  188:                         <span className="validation-feedback">{validateUser}</span>
+  189                      </Form.Group>
+  190                      <Form.Group>
+  191                          <Form.Label controlId="newPassword">New Password: </Form.Label>
+  192                          <Form.Control type="password" value={newPassword} onChange={e => {updatePassword(e.target.value), validatePassword(e)}} />
+  193:                         <span className="validation-feedback">{validatePassword}</span>
+  194                      </Form.Group>
+  195                      <Form.Group>
+  196                          <Form.Label controlId="newEmail">New eMail: </Form.Label>
+  197                          <Form.Control type="email" value={newEmail} onChange={e => {updateEmail(e.target.value), validateEmail(e)}} />
+  198:                         <span className="validation-feedback">{validateEmail}</span>
+  199                      </Form.Group>
+  200                      <Form.Group>
+  201                          <Form.Label controlId="newBirthday">New Birthday: </Form.Label>
+  202                          <Form.Control type="date" value={newBirthday} onChange={e => {updateBirthday(e.target.value), validateBirthday(e)}} />
+  203:                         <span className="validation-feedback">{validateBirthday}</span>
+  204                      </Form.Group>
+  205                      </Form>
+  ...
+  207                      <Button variant="danger" type="submit" onClick={updateUser}>Update User</Button>
+  208                      {' '}
+  209:                     <Button variant="danger" className="button-float-right" type="submit" onClick={deleteUser}>DELETE USER</Button>
+  210:                     <Button variant="outline-secondary" className="button-float-right" onClick={() => { onBackClick(null); }}>Back</Button>
+  211                  </Col>
+  212              </Row>
+
+/Users/iakhator/Desktop/Daniel/filmOpedia-client/src/components/registration-view/registration-view.jsx:
+   44  
+   45  return (
+   46:     <Row className="reg-margin-top justify-content-md-center">
+   47              <Col sm={12} md={6} lg={6} xl={4}>
+   48                  <Form.Group>
+   ..
+   65          <Button variant="danger" type="submit" onClick={handleRegister}>Submit</Button>
+   66          {' '}
+   67:         <Button variant="outline-secondary" className="button-float-right" onClick={() => { onBackClick(null); }}>Back</Button>
+   68      </Col>
+   69      </Row>
+
+151 matches across 10 files
