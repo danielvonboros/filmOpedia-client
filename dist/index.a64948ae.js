@@ -29523,6 +29523,7 @@ var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
+var _reactRouterDom = require("react-router-dom");
 require("./profile-view.scss");
 var _axios = _interopRequireDefault(require("axios"));
 function _interopRequireDefault(obj) {
@@ -29604,16 +29605,36 @@ function _arrayWithHoles(arr) {
     if (Array.isArray(arr)) return arr;
 }
 function ProfileView(_ref) {
-    var profiles = _ref.profiles, token = _ref.token, onUpdate = _ref.onUpdate, movies = _ref.movies, onMovieDelete = _ref.onMovieDelete, onBackClick = _ref.onBackClick;
-    var _useState = _react.useState(""), _useState2 = _slicedToArray(_useState, 2), newUsername = _useState2[0], updateUsername = _useState2[1];
-    var _useState3 = _react.useState(""), _useState4 = _slicedToArray(_useState3, 2), newPassword = _useState4[0], updatePassword = _useState4[1];
-    var _useState5 = _react.useState(""), _useState6 = _slicedToArray(_useState5, 2), newEmail = _useState6[0], updateEmail = _useState6[1];
-    var _useState7 = _react.useState(""), _useState8 = _slicedToArray(_useState7, 2), newBirthday = _useState8[0], updateBirthday = _useState8[1];
+    var profiles = _ref.profiles, token = _ref.token, movies = _ref.movies, onMovieDelete = _ref.onMovieDelete, onBackClick = _ref.onBackClick;
+    var _useState = _react.useState(""), _useState2 = _slicedToArray(_useState, 2), newUsername = _useState2[0], setNewUsername = _useState2[1];
+    var _useState3 = _react.useState(""), _useState4 = _slicedToArray(_useState3, 2), newPassword = _useState4[0], setNewPassword = _useState4[1];
+    var _useState5 = _react.useState(""), _useState6 = _slicedToArray(_useState5, 2), newEmail = _useState6[0], setNewEmail = _useState6[1];
+    var _useState7 = _react.useState(""), _useState8 = _slicedToArray(_useState7, 2), newBirthday = _useState8[0], setNewBirthday = _useState8[1];
     var _useState9 = _react.useState(""), _useState10 = _slicedToArray(_useState9, 2), validateUser = _useState10[0], setValidateUser = _useState10[1];
     var _useState11 = _react.useState(""), _useState12 = _slicedToArray(_useState11, 2), validatePassword = _useState12[0], setValidatePassword = _useState12[1];
     var _useState13 = _react.useState(""), _useState14 = _slicedToArray(_useState13, 2), validateEmail = _useState14[0], setValidateEmail = _useState14[1];
     var _useState15 = _react.useState(""), _useState16 = _slicedToArray(_useState15, 2), validateBirthday = _useState16[0], setValidateBirthday = _useState16[1];
     var _useState17 = _react.useState(""), _useState18 = _slicedToArray(_useState17, 2), feedback = _useState18[0], setFeedback = _useState18[1];
+    var _useState19 = _react.useState(""), _useState20 = _slicedToArray(_useState19, 2), user = _useState20[0], setUser = _useState20[1];
+    var history = _reactRouterDom.useHistory();
+    var router = _reactRouterDom.useRouteMatch();
+    _react.useEffect(function() {
+        console.log(router.params.username, "a");
+        var url = "https://filmopedia.herokuapp.com/users/" + router.params.username;
+        _axios["default"].get(url, {
+            headers: {
+                Authorization: "Bearer ".concat(token)
+            }
+        }).then(function(response) {
+            var data = response.data;
+            console.log(data, "a");
+            setUser(data);
+        })["catch"](function(e) {
+            console.log("User data could not be updated");
+        });
+    }, [
+        router.params.username
+    ]);
     var validateUsername = function validateUsername1(e) {
         if (e.target.value.length > 0 && e.target.length < 3) setValidateUser("Username must be longer than 3 characters.");
         else setValidateUser("");
@@ -29632,14 +29653,13 @@ function ProfileView(_ref) {
         else setValidateBirthday("");
     };
     var clearForm = function clearForm1() {
-        updateUsername("");
-        updatePassword("");
-        updateEmail("");
-        updateBirthday("");
+        setNewUsername("");
+        setNewPassword("");
+        setNewEmail("");
+        setNewBirthday("");
     };
-    var updateUser = function updateUser1() {
-        // e.preventDefault();
-        //Validate potential empty inputs
+    var updateUser = function updateUser1(e) {
+        e.preventDefault(); //Validate potential empty inputs
         if (newUsername.length === 0 || newPassword.length === 0 || newEmail.length === 0 || newBirthday.length === 0) {
             alert("Please fill all the fields");
             return false;
@@ -29649,30 +29669,31 @@ function ProfileView(_ref) {
             return false;
         }
         var url = "https://filmopedia.herokuapp.com/users/" + profiles.username;
-        console.log(url);
+        console.log("url:", url);
+        console.log("token:", token); //   console.log(url);
         _axios["default"].put(url, {
-            headers: {
-                Authorization: "Bearer ".concat(token)
-            }
-        }, {
             username: newUsername,
             password: newPassword,
             email: newEmail,
             birthday: newBirthday
+        }, {
+            headers: {
+                Authorization: "Bearer ".concat(token)
+            }
         }).then(function(response) {
-            var data = response.data;
-            console.log(data);
-            onUpdate(data);
+            var data = response.data; // onUpdate(data);
             setFeedback("Your user data has been updated");
             clearForm();
-        })["catch"](function(e) {
+            console.log(data.username);
+            history.push("/users/".concat(data.username));
+        })["catch"](function(e1) {
             console.log("User data could not be updated");
             setFeedback("Submission failed");
         });
     }; //   const handleUpdate = (e) => {
     //     e.preventDefault();
     /* Send a request to the server for authentication */ //   };
-    var url2 = "https://filmopedia.herokuapp.com/users/" + profiles.username;
+    var url2 = "https://filmopedia.herokuapp.com/users/" + router.params.username;
     console.log(url2);
     var deleteAccount = function deleteAccount1() {
         _axios["default"]["delete"](url2, {
@@ -29729,25 +29750,25 @@ function ProfileView(_ref) {
         className: "profile-username list-group-item"
     }, /*#__PURE__*/ _react["default"].createElement("span", {
         className: "value profile-title"
-    }, "Hello, ", profiles.username)), /*#__PURE__*/ _react["default"].createElement("li", {
+    }, "Hello, ", user.username)), /*#__PURE__*/ _react["default"].createElement("li", {
         className: "profile-email list-group-item"
     }, /*#__PURE__*/ _react["default"].createElement("span", {
         className: "label"
     }, "eMail: "), /*#__PURE__*/ _react["default"].createElement("span", {
         className: "value"
-    }, profiles.email)), /*#__PURE__*/ _react["default"].createElement("li", {
+    }, user.email)), /*#__PURE__*/ _react["default"].createElement("li", {
         className: "profile-birthday list-group-item"
     }, /*#__PURE__*/ _react["default"].createElement("span", {
         className: "label"
     }, "Birthday: "), /*#__PURE__*/ _react["default"].createElement("span", {
         className: "value"
-    }, profiles.birthday.slice(0, 10))), /*#__PURE__*/ _react["default"].createElement("li", {
+    }, user.birthday.slice(0, 10))), /*#__PURE__*/ _react["default"].createElement("li", {
         className: "profile-favoritemovies list-group-item"
     }, /*#__PURE__*/ _react["default"].createElement("span", {
         className: "label"
     }, "Favorite Movies: "), /*#__PURE__*/ _react["default"].createElement("span", {
         className: "value"
-    }, profiles.favoritemovies)), /*#__PURE__*/ _react["default"].createElement("li", {
+    }, user.favoritemovies)), /*#__PURE__*/ _react["default"].createElement("li", {
         className: "list-group-item"
     }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
         className: "button-float-right",
@@ -29774,7 +29795,7 @@ function ProfileView(_ref) {
         type: "text",
         value: newUsername,
         onChange: function onChange(e) {
-            updateUsername(e.target.value), validateUsername(e);
+            setNewUsername(e.target.value), validateUsername(e);
         }
     }), /*#__PURE__*/ _react["default"].createElement("span", {
         className: "validation-feedback"
@@ -29786,7 +29807,7 @@ function ProfileView(_ref) {
         type: "password",
         value: newPassword,
         onChange: function onChange(e) {
-            updatePassword(e.target.value), validatePasswordInput(e);
+            setNewPassword(e.target.value), validatePasswordInput(e);
         }
     }), /*#__PURE__*/ _react["default"].createElement("span", {
         className: "validation-feedback"
@@ -29798,7 +29819,7 @@ function ProfileView(_ref) {
         type: "email",
         value: newEmail,
         onChange: function onChange(e) {
-            updateEmail(e.target.value), validateEmailInput(e);
+            setNewEmail(e.target.value), validateEmailInput(e);
         }
     }), /*#__PURE__*/ _react["default"].createElement("span", {
         className: "validation-feedback"
@@ -29810,7 +29831,7 @@ function ProfileView(_ref) {
         type: "date",
         value: newBirthday,
         onChange: function onChange(e) {
-            updateBirthday(e.target.value), validateBirthdayInput(e);
+            setNewBirthday(e.target.value), validateBirthdayInput(e);
         }
     }), /*#__PURE__*/ _react["default"].createElement("span", {
         className: "validation-feedback"
@@ -29819,7 +29840,7 @@ function ProfileView(_ref) {
     }, /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
         variant: "danger",
         type: "submit",
-        onClick: console.log(updateUser)
+        onClick: updateUser
     }, "Update User"), " ", /*#__PURE__*/ _react["default"].createElement(_Button["default"], {
         variant: "danger",
         className: "button-float-right",
@@ -29839,14 +29860,14 @@ function ProfileView(_ref) {
 }
 _c = ProfileView;
 ProfileView.propTypes = {
-    profiles: _propTypes["default"].shape({
-        username: _propTypes["default"].string.isRequired,
-        password: _propTypes["default"].string.isRequired,
-        email: _propTypes["default"].string.isRequired,
-        birthday: _propTypes["default"].string.isRequired
-    }).isRequired,
+    // profiles: PropTypes.shape({
+    //   username: PropTypes.string.isRequired,
+    //   password: PropTypes.string.isRequired,
+    //   email: PropTypes.string.isRequired,
+    //   birthday: PropTypes.string.isRequired,
+    // }).isRequired,
     token: _propTypes["default"].string.isRequired,
-    onUpdate: _propTypes["default"].func.isRequired,
+    // onUpdate: PropTypes.func.isRequired,
     onMovieDelete: _propTypes["default"].func.isRequired
 };
 var _c;
@@ -29857,7 +29878,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","./profile-view.scss":"14z2W","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","react-bootstrap/Form":"6A5ko","axios":"7rA65","prop-types":"4dfy5"}],"14z2W":[function() {},{}],"4fhZt":[function(require,module,exports) {
+},{"react":"3b2NM","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","./profile-view.scss":"14z2W","../../../../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2FZ5L","react-bootstrap/Form":"6A5ko","axios":"7rA65","prop-types":"4dfy5","react-router-dom":"1PMSK"}],"14z2W":[function() {},{}],"4fhZt":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;

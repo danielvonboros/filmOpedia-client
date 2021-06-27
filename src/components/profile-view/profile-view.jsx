@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 import "./profile-view.scss";
 import axios from "axios";
@@ -12,21 +13,44 @@ export function ProfileView({
   profiles,
   token,
   // deleteUser,
-  onUpdate,
+  // onUpdate,
   movies,
   onMovieDelete,
   onBackClick,
 }) {
-  const [newUsername, updateUsername] = useState("");
-  const [newPassword, updatePassword] = useState("");
-  const [newEmail, updateEmail] = useState("");
-  const [newBirthday, updateBirthday] = useState("");
+  const [newUsername, setNewUsername] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [newBirthday, setNewBirthday] = useState("");
 
   const [validateUser, setValidateUser] = useState("");
   const [validatePassword, setValidatePassword] = useState("");
   const [validateEmail, setValidateEmail] = useState("");
   const [validateBirthday, setValidateBirthday] = useState("");
   const [feedback, setFeedback] = useState("");
+
+  const [user, setUser] = useState("");
+
+  let history = useHistory();
+  let router = useRouteMatch();
+
+  useEffect(() => {
+    console.log(router.params.username, "a");
+    let url =
+      "https://filmopedia.herokuapp.com/users/" + router.params.username;
+    axios
+      .get(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        const data = response.data;
+        console.log(data, "a");
+        setUser(data);
+      })
+      .catch((e) => {
+        console.log("User data could not be updated");
+      });
+  }, [router.params.username]);
 
   const validateUsername = (e) => {
     if (e.target.value.length > 0 && e.target.length < 3) {
@@ -72,14 +96,14 @@ export function ProfileView({
   };
 
   const clearForm = () => {
-    updateUsername("");
-    updatePassword("");
-    updateEmail("");
-    updateBirthday("");
+    setNewUsername("");
+    setNewPassword("");
+    setNewEmail("");
+    setNewBirthday("");
   };
 
-  const updateUser = () => {
-    // e.preventDefault();
+  const updateUser = (e) => {
+    e.preventDefault();
 
     //Validate potential empty inputs
     if (
@@ -98,28 +122,31 @@ export function ProfileView({
     }
 
     let url = "https://filmopedia.herokuapp.com/users/" + profiles.username;
+    console.log("url:", url);
 
-    console.log(url);
+    console.log("token:", token);
+    //   console.log(url);
 
     axios
       .put(
         url,
         {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-        {
           username: newUsername,
           password: newPassword,
           email: newEmail,
           birthday: newBirthday,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
         }
       )
       .then((response) => {
         const data = response.data;
-        console.log(data);
-        onUpdate(data);
+        // onUpdate(data);
         setFeedback("Your user data has been updated");
         clearForm();
+        console.log(data.username);
+        history.push(`/users/${data.username}`);
       })
       .catch((e) => {
         console.log("User data could not be updated");
@@ -132,7 +159,7 @@ export function ProfileView({
   /* Send a request to the server for authentication */
   //   };
 
-  let url2 = "https://filmopedia.herokuapp.com/users/" + profiles.username;
+  let url2 = "https://filmopedia.herokuapp.com/users/" + router.params.username;
 
   console.log(url2);
 
@@ -203,20 +230,20 @@ export function ProfileView({
             <ul className="profile-view list-group">
               <li className="profile-username list-group-item">
                 <span className="value profile-title">
-                  Hello, {profiles.username}
+                  Hello, {user.username}
                 </span>
               </li>
               <li className="profile-email list-group-item">
                 <span className="label">eMail: </span>
-                <span className="value">{profiles.email}</span>
+                <span className="value">{user.email}</span>
               </li>
               <li className="profile-birthday list-group-item">
                 <span className="label">Birthday: </span>
-                <span className="value">{profiles.birthday.slice(0, 10)}</span>
+                <span className="value">{user.birthday.slice(0, 10)}</span>
               </li>
               <li className="profile-favoritemovies list-group-item">
                 <span className="label">Favorite Movies: </span>
-                <span className="value">{profiles.favoritemovies}</span>
+                <span className="value">{user.favoritemovies}</span>
               </li>
               <li className="list-group-item">
                 <Button
@@ -246,7 +273,7 @@ export function ProfileView({
                     type="text"
                     value={newUsername}
                     onChange={(e) => {
-                      updateUsername(e.target.value), validateUsername(e);
+                      setNewUsername(e.target.value), validateUsername(e);
                     }}
                   />
                   <span className="validation-feedback">{validateUser}</span>
@@ -261,7 +288,7 @@ export function ProfileView({
                     type="password"
                     value={newPassword}
                     onChange={(e) => {
-                      updatePassword(e.target.value), validatePasswordInput(e);
+                      setNewPassword(e.target.value), validatePasswordInput(e);
                     }}
                   />
                   <span className="validation-feedback">
@@ -276,7 +303,7 @@ export function ProfileView({
                     type="email"
                     value={newEmail}
                     onChange={(e) => {
-                      updateEmail(e.target.value), validateEmailInput(e);
+                      setNewEmail(e.target.value), validateEmailInput(e);
                     }}
                   />
                   <span className="validation-feedback">{validateEmail}</span>
@@ -291,7 +318,7 @@ export function ProfileView({
                     type="date"
                     value={newBirthday}
                     onChange={(e) => {
-                      updateBirthday(e.target.value), validateBirthdayInput(e);
+                      setNewBirthday(e.target.value), validateBirthdayInput(e);
                     }}
                   />
                   <span className="validation-feedback">
@@ -301,11 +328,7 @@ export function ProfileView({
               </li>
             </Form>
             <li className="list-group-item">
-              <Button
-                variant="danger"
-                type="submit"
-                onClick={(() => updateUser, console.log(updateUser))}
-              >
+              <Button variant="danger" type="submit" onClick={updateUser}>
                 Update User
               </Button>{" "}
               <Button
@@ -336,14 +359,14 @@ export function ProfileView({
 }
 
 ProfileView.propTypes = {
-  profiles: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    birthday: PropTypes.string.isRequired,
-  }).isRequired,
+  // profiles: PropTypes.shape({
+  //   username: PropTypes.string.isRequired,
+  //   password: PropTypes.string.isRequired,
+  //   email: PropTypes.string.isRequired,
+  //   birthday: PropTypes.string.isRequired,
+  // }).isRequired,
 
   token: PropTypes.string.isRequired,
-  onUpdate: PropTypes.func.isRequired,
+  // onUpdate: PropTypes.func.isRequired,
   onMovieDelete: PropTypes.func.isRequired,
 };
