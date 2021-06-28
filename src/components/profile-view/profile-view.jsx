@@ -3,8 +3,9 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
+import Card from "react-bootstrap/Card";
 import PropTypes from "prop-types";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory, useRouteMatch, Link } from "react-router-dom";
 import axiosInstance from "../../config";
 
 import "./profile-view.scss";
@@ -30,7 +31,7 @@ export function ProfileView({
   const [validateBirthday, setValidateBirthday] = useState("");
   const [feedback, setFeedback] = useState("");
 
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState([]);
 
   let history = useHistory();
   let router = useRouteMatch();
@@ -40,7 +41,7 @@ export function ProfileView({
       .get(`/users/${router.params.username}`)
       .then((response) => {
         const data = response.data;
-        console.log(data, "a");
+        // console.log(data, "a");
         setUser(data);
       })
       .catch((e) => {
@@ -117,31 +118,18 @@ export function ProfileView({
       return false;
     }
 
-    let url = "https://filmopedia.herokuapp.com/users/" + profiles.username;
-    console.log("url:", url);
-
-    console.log("token:", token);
-    //   console.log(url);
-
-    axios
-      .put(
-        url,
-        {
-          username: newUsername,
-          password: newPassword,
-          email: newEmail,
-          birthday: newBirthday,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+    axiosInstance
+      .put(`/users/${router.params.username}`, {
+        username: newUsername,
+        password: newPassword,
+        email: newEmail,
+        birthday: newBirthday,
+      })
       .then((response) => {
         const data = response.data;
         // onUpdate(data);
         setFeedback("Your user data has been updated");
         clearForm();
-        console.log(data.username);
         history.push(`/users/${data.username}`);
       })
       .catch((e) => {
@@ -155,18 +143,22 @@ export function ProfileView({
   /* Send a request to the server for authentication */
   //   };
 
-  let url2 = "https://filmopedia.herokuapp.com/users/" + router.params.username;
-
-  console.log(url2);
+  // console.log(
+  //   "profiles",
+  //   profiles,
+  //   "token",
+  //   token,
+  //   "movies",
+  //   movies,
+  //   "onMovieDelete",
+  //   onMovieDelete,
+  //   "onBackClick",
+  //   onBackClick
+  // );
 
   const deleteAccount = () => {
     axios
-      .delete(url2, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .delete(`/users/${router.params.username}`)
       .then((response) => {
         console.log(response);
         console.log(`${user} has been deleted`);
@@ -177,46 +169,13 @@ export function ProfileView({
       });
   };
 
-  const addFavoriteMovie = (e) => {
-    e.preventDefault();
-    axios
-      .post(
-        `http://filmopedia.herokuapp.com/users/${username}/favoritemovies`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        window.open("/", "_self");
-      })
-      .catch((e) => {
-        console.log("something went wrong");
-      });
-  };
-
-  const removeFavoriteMovie = (e) => {
-    e.preventDefault();
-    axios
-      .delete(
-        `http://filmopedia.herokuapp.com/users/${username}/favoritemovies`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        window.open("/", "_self");
-        // return <Redirect to="/" />
-      })
-      .catch((e) => {
-        console.log("something went wrong");
-      });
+  const getFavorites = (favId) => {
+    console.log(favId, "a");
   };
 
   // const { profiles, onBackClick } = this.props;
+
+  // console.log(favoriteMovies);
 
   return (
     <>
@@ -239,19 +198,18 @@ export function ProfileView({
               </li>
               <li className="profile-favoritemovies list-group-item">
                 <span className="label">Favorite Movies: </span>
-                <span className="value">{user.favoritemovies}</span>
-              </li>
-              <li className="list-group-item">
-                <Button
-                  className="button-float-right"
-                  variant="outline-danger"
-                  onClick={() => onBackClick()}
-                >
-                  Back
-                </Button>
+                {user.length > 0 &&
+                  user.favoritemovies.map((favId) => console.log(favId))}
               </li>
             </ul>
           </div>
+        </Col>
+      </Row>
+      <Row className="profile-info justify-content-center">
+        <Col className="justify-content-center">
+          {/* {profiles.favoritemovies.map((movie, index) => {
+            return <p key={index}>{movie.title}</p>;
+          })} */}
         </Col>
       </Row>
       <hr />

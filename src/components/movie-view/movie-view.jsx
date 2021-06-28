@@ -2,6 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import axios from "axios";
 
 import { Link } from "react-router-dom";
 
@@ -15,6 +16,41 @@ export class MovieView extends React.Component {
   componentDidMount() {
     document.addEventListener("keypress", this.keypressCallback);
   }
+
+  handleAdd() {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    axios
+      .post(
+        `https://filmopedia.herokuapp.com/users/${user}/` +
+          this.props.movie._id,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        console.log(response);
+        alert(this.props.movie.title + " has been added to your favorites!");
+      });
+  }
+
+  handleRemove() {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    axios
+      .post(
+        `https://filmopedia.herokuapp.com/users/${user}/` +
+          this.props.movie._id,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        console.log(response);
+        alert(
+          this.props.movie.title + " has been removed from your favorites!"
+        );
+      });
+  }
+
   componentWillUnmount() {
     document.removeEventListener("keypress", this.keypressCallback);
   }
@@ -65,7 +101,7 @@ export class MovieView extends React.Component {
                 </Button>
               </li>
               <li className="list-group-item">
-                <Link to={`/movies/${movie.Title}`}>
+                <Link to={`/movies/${movie.title}`}>
                   <Button
                     className="button-float-right"
                     type="button"
@@ -76,7 +112,7 @@ export class MovieView extends React.Component {
                   </Button>
                 </Link>
 
-                <Link to={`/movies/${movie.Title}`}>
+                <Link to={`/movies/${movie.title}`}>
                   <Button
                     className="button-float-right"
                     type="button"
