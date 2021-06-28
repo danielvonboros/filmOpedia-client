@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 import { useHistory, useRouteMatch } from "react-router-dom";
+import axiosInstance from "../../config";
 
 import "./profile-view.scss";
 import axios from "axios";
@@ -35,13 +36,8 @@ export function ProfileView({
   let router = useRouteMatch();
 
   useEffect(() => {
-    console.log(router.params.username, "a");
-    let url =
-      "https://filmopedia.herokuapp.com/users/" + router.params.username;
-    axios
-      .get(url, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+    axiosInstance
+      .get(`/users/${router.params.username}`)
       .then((response) => {
         const data = response.data;
         console.log(data, "a");
@@ -239,7 +235,7 @@ export function ProfileView({
               </li>
               <li className="profile-birthday list-group-item">
                 <span className="label">Birthday: </span>
-                <span className="value">{user.birthday.slice(0, 10)}</span>
+                <span className="value">{user.birthday}</span>
               </li>
               <li className="profile-favoritemovies list-group-item">
                 <span className="label">Favorite Movies: </span>

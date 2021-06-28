@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
+import axiosInstance from '../../config/';
+
 
 import {Link} from 'react-router-dom';
 
@@ -16,7 +18,7 @@ export function LoginView(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         /* Send a request to the server for authentication */
-        axios.post('http://filmopedia.herokuapp.com/login', {
+        axiosInstance.post('/login', {
             username: username,
             password: password
         })
