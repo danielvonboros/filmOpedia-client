@@ -3,23 +3,14 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Card from "react-bootstrap/Card";
 import PropTypes from "prop-types";
-import { useHistory, useRouteMatch, Link } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import axiosInstance from "../../config";
 
 import "./profile-view.scss";
 import axios from "axios";
 
-export function ProfileView({
-  profiles,
-  token,
-  // deleteUser,
-  // onUpdate,
-  movies,
-  onMovieDelete,
-  onBackClick,
-}) {
+export function ProfileView({ movies, onBackClick }) {
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
@@ -29,7 +20,6 @@ export function ProfileView({
   const [validatePassword, setValidatePassword] = useState("");
   const [validateEmail, setValidateEmail] = useState("");
   const [validateBirthday, setValidateBirthday] = useState("");
-  const [feedback, setFeedback] = useState("");
 
   const [user, setUser] = useState([]);
 
@@ -41,7 +31,6 @@ export function ProfileView({
       .get(`/users/${router.params.username}`)
       .then((response) => {
         const data = response.data;
-        // console.log(data, "a");
         setUser(data);
       })
       .catch((e) => {
@@ -117,7 +106,6 @@ export function ProfileView({
       alert("Incorrect input");
       return false;
     }
-
     axiosInstance
       .put(`/users/${router.params.username}`, {
         username: newUsername,
@@ -127,34 +115,16 @@ export function ProfileView({
       })
       .then((response) => {
         const data = response.data;
-        // onUpdate(data);
-        setFeedback("Your user data has been updated");
+        localStorage.setItem("user", data.username);
         clearForm();
-        history.push(`/users/${data.username}`);
+        window.location.replace(
+          `${window.location.origin}/users/${data.username}`
+        );
       })
       .catch((e) => {
-        console.log("User data could not be updated");
-        setFeedback("Submission failed");
+        console.log("User data could not be updated", e);
       });
   };
-
-  //   const handleUpdate = (e) => {
-  //     e.preventDefault();
-  /* Send a request to the server for authentication */
-  //   };
-
-  // console.log(
-  //   "profiles",
-  //   profiles,
-  //   "token",
-  //   token,
-  //   "movies",
-  //   movies,
-  //   "onMovieDelete",
-  //   onMovieDelete,
-  //   "onBackClick",
-  //   onBackClick
-  // );
 
   const deleteAccount = () => {
     axios
@@ -169,13 +139,30 @@ export function ProfileView({
       });
   };
 
-  const getFavorites = (favId) => {
-    console.log(favId, "a");
+  const removeFavorite = (id) => {
+    axiosInstance
+      .delete(`/users/${router.params.username}/favoritemovies/${id}`)
+      .then((response) => {
+        console.log(response.data.message);
+        window.location.reload();
+      })
+      .catch((error) => console.error);
   };
 
-  // const { profiles, onBackClick } = this.props;
+  const getFavorites = (favIds) => {
+    if (favIds) {
+      const fav = favIds.map((id) => {
+        return movies.find((movie) => movie._id === id);
+      });
 
-  // console.log(favoriteMovies);
+      return fav.map((fav) => (
+        <div key={fav._id}>
+          {fav.title}{" "}
+          <Button onClick={() => removeFavorite(fav._id)}>Remove</Button>
+        </div>
+      ));
+    }
+  };
 
   return (
     <>
@@ -197,21 +184,14 @@ export function ProfileView({
                 <span className="value">{user.birthday}</span>
               </li>
               <li className="profile-favoritemovies list-group-item">
-                <span className="label">Favorite Movies: </span>
-                {user.length > 0 &&
-                  user.favoritemovies.map((favId) => console.log(favId))}
+                <span className="label">Favorite Movies:</span>
+                {getFavorites(user.favoritemovies)}
               </li>
             </ul>
           </div>
         </Col>
       </Row>
-      <Row className="profile-info justify-content-center">
-        <Col className="justify-content-center">
-          {/* {profiles.favoritemovies.map((movie, index) => {
-            return <p key={index}>{movie.title}</p>;
-          })} */}
-        </Col>
-      </Row>
+
       <hr />
       <Row className="justify-content-center">
         <Col sm={12} md={10} lg={8} xl={6}>

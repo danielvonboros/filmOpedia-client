@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import axios from "axios";
+import axiosInstance from "../../config";
 
 import { Link } from "react-router-dom";
 
@@ -17,38 +17,14 @@ export class MovieView extends React.Component {
     document.addEventListener("keypress", this.keypressCallback);
   }
 
-  handleAdd() {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
-    axios
-      .post(
-        `https://filmopedia.herokuapp.com/users/${user}/` +
-          this.props.movie._id,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
+  handleAdd(movie) {
+    axiosInstance
+      .post(`/users/${this.props.user}/` + movie._id)
       .then((response) => {
         console.log(response);
         alert(this.props.movie.title + " has been added to your favorites!");
-      });
-  }
-
-  handleRemove() {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
-    axios
-      .post(
-        `https://filmopedia.herokuapp.com/users/${user}/` +
-          this.props.movie._id,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-      .then((response) => {
-        console.log(response);
-        alert(
-          this.props.movie.title + " has been removed from your favorites!"
-        );
-      });
+      })
+      .catch((error) => console.error(error));
   }
 
   componentWillUnmount() {
@@ -101,27 +77,14 @@ export class MovieView extends React.Component {
                 </Button>
               </li>
               <li className="list-group-item">
-                <Link to={`/movies/${movie.title}`}>
-                  <Button
-                    className="button-float-right"
-                    type="button"
-                    variant="danger"
-                    onClick={() => this.handleAdd(movie)}
-                  >
-                    Add to favorites
-                  </Button>
-                </Link>
-
-                <Link to={`/movies/${movie.title}`}>
-                  <Button
-                    className="button-float-right"
-                    type="button"
-                    variant="outline-danger"
-                    onClick={() => this.handleRemove(movie)}
-                  >
-                    Remove from favorites
-                  </Button>
-                </Link>
+                <Button
+                  className="button-float-right"
+                  type="button"
+                  variant="danger"
+                  onClick={() => this.handleAdd(movie)}
+                >
+                  Add to favorites
+                </Button>
               </li>
             </ul>
           </div>

@@ -1,40 +1,33 @@
 import React, { Component } from "react";
-import Link from "react-bootstrap/form";
 import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import "./navbar.scss";
 
 class NavBar extends Component {
-  state = {};
-
   render() {
-    const fork = this.props.thisUser;
-    let url3 = `/users/${fork}`;
-
     return (
-      <nav className="navbar navbar-light">
-        <h5>
-          filmOpedia{"  "}
-          <span className="span">not just another Internet Movie Database</span>
-        </h5>
-        <Link to={url3}>
-          <Button
-            variant="outline-secondary"
-            className="button-float-right"
-            type="button"
-            // onClick={this.props.toProfile}
-          >
-            {this.props.thisUser}
-          </Button>
-        </Link>
-        <Button
-          variant="outline-secondary"
-          className="button-float-right"
-          type="button"
-          onClick={this.props.onLogout}
-        >
-          Logout
-        </Button>
-      </nav>
+      <Navbar expand="lg" fixed="top">
+        <Navbar.Brand>filmOpedia{"  "}</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ml-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href={`/users/${this.props.thisUser}`}>{this.props.thisUser}</Nav.Link>
+            <Nav.Link>
+            <Button
+              variant="outline-secondary"
+              className="button-float-right"
+              type="button"
+              onClick={this.props.onLogout}
+            >
+              Logout
+            </Button>
+          </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 }
