@@ -1,17 +1,17 @@
 import React from "react";
-// import axios from "axios";
+
+import connect from "react-redux";
+
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+
+import { setMovies } from "../actions/actions";
+
+import { moviesList } from "../movies-list/movies-list";
 
 import NavBar from "../navbar/navbar.jsx";
 import { MovieCard } from "../movie-card/movie-card";
@@ -29,10 +29,10 @@ export class MainView extends React.Component {
   constructor() {
     super(); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
     this.state = {
-      movies: [],
-      selectedMovie: null,
-      user: null,
-      loading: false,
+      // movies: [], This is supposed to be removed
+      // selectedMovie: null,
+      user: null, // Just the user is supposed to be left
+      // loading: false,
       userLoading: false,
       token: null,
     };
@@ -70,15 +70,16 @@ export class MainView extends React.Component {
     axiosInstance
       .get("/movies")
       .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data,
-          loading: false,
-        });
+        // // Assign the result to the state
+        // this.setState({
+        //   movies: response.data,
+        //   loading: false,
+        // });
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
-        this.setState({ loading: false });
+        // this.setState({ loading: false });
       });
   }
 
@@ -118,7 +119,9 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user, users, token } = this.state;
+    // const { movies, user, users, token } = this.state;
+    let { movies } = this.props;
+    let { user } = this.state;
 
     return (
       <>
@@ -141,11 +144,12 @@ export class MainView extends React.Component {
                         />
                       </Col>
                     );
-                  return movies.map((m) => (
-                    <Col sm={12} md={6} lg={4} xl={3} key={m._id}>
-                      <MovieCard movie={m} />
-                    </Col>
-                  ));
+                  return <MoviesList movies={movies} />;
+                  // return movies.map((m) => (
+                  //   <Col sm={12} md={6} lg={4} xl={3} key={m._id}>
+                  //     <MovieCard movie={m} />
+                  //   </Col>
+                  // ));
                 }}
               />
               <Route
@@ -276,4 +280,9 @@ export class MainView extends React.Component {
     );
   }
 }
-export default MainView;
+
+let mapStateToProps = (state) => {
+  return { movies: state.movies };
+};
+
+export default connect(mapStateToProps, { setMovies })(MainView);
