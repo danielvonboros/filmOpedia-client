@@ -22329,7 +22329,7 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                         return _this4.state.loading ? /*#__PURE__*/ _react["default"].createElement(_Spinner["default"], {
                             animation: "border"
                         }) : /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
-                            md: 8
+                            md: 10
                         }, /*#__PURE__*/ _react["default"].createElement(_movieView.MovieView, {
                             user: user,
                             movie: movies.find(function(m) {
@@ -22355,7 +22355,7 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                         return _this4.state.loading ? /*#__PURE__*/ _react["default"].createElement(_Spinner["default"], {
                             animation: "border"
                         }) : /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
-                            md: 8
+                            md: 10
                         }, /*#__PURE__*/ _react["default"].createElement(_directorView.DirectorView, {
                             director: movies.find(function(m) {
                                 return m.director.name === match.params.name;
@@ -22381,7 +22381,7 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                         return _this4.state.loading ? /*#__PURE__*/ _react["default"].createElement(_Spinner["default"], {
                             animation: "border"
                         }) : /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
-                            md: 8
+                            md: 10
                         }, /*#__PURE__*/ _react["default"].createElement(_genreView.GenreView, {
                             genre: movies.find(function(m) {
                                 return m.genre.name === match.params.name;
@@ -22407,7 +22407,8 @@ var MainView1 = /*#__PURE__*/ function(_React$Component) {
                         return _this4.state.userLoading ? /*#__PURE__*/ _react["default"].createElement(_Spinner["default"], {
                             animation: "border"
                         }) : /*#__PURE__*/ _react["default"].createElement(_Col["default"], {
-                            md: 8
+                            md: 10,
+                            lg: 10
                         }, /*#__PURE__*/ _react["default"].createElement(_profileView.ProfileView, {
                             onBackClick: function onBackClick() {
                                 return history.goBack();
