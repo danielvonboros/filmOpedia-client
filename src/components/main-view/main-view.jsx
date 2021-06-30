@@ -173,7 +173,7 @@ export class MainView extends React.Component {
                   return this.state.loading ? (
                     <Spinner animation="border" />
                   ) : (
-                    <Col md={8}>
+                    <Col md={10}>
                       <MovieView
                         user={user}
                         movie={movies.find(
@@ -200,7 +200,7 @@ export class MainView extends React.Component {
                   return this.state.loading ? (
                     <Spinner animation="border" />
                   ) : (
-                    <Col md={8}>
+                    <Col md={10}>
                       <DirectorView
                         director={
                           movies.find(
@@ -229,7 +229,7 @@ export class MainView extends React.Component {
                   return this.state.loading ? (
                     <Spinner animation="border" />
                   ) : (
-                    <Col md={8}>
+                    <Col md={10}>
                       <GenreView
                         genre={
                           movies.find((m) => m.genre.name === match.params.name)
@@ -257,7 +257,7 @@ export class MainView extends React.Component {
                   return this.state.userLoading ? (
                     <Spinner animation="border" />
                   ) : (
-                    <Col md={8}>
+                    <Col md={10} lg={10}>
                       <ProfileView
                         onBackClick={() => history.goBack()}
                         token={token}
