@@ -1,6 +1,6 @@
 import React from "react";
 
-import connect from "react-redux";
+import { connect } from "react-redux";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
-import { setMovies } from "../actions/actions";
+import { setMovies } from "../../actions/actions";
 
 import { moviesList } from "../movies-list/movies-list";
 

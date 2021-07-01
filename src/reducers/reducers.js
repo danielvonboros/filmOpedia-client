@@ -14,15 +14,16 @@ function visibilityFilter(state = "", action) {
 function movies(state = [], action) {
   switch (action.type) {
     case SET_MOVIES:
+      console.log("SET_MOVIES reducer reached");
       return action.value;
     default:
       return state;
   }
 }
 
-const moviesApp = combineReducers({
+const movieApp = combineReducers({
   visbilityFilter,
   movies,
 });
 
-export default moviesApp;
+export default movieApp;

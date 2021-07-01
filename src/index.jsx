@@ -13,7 +13,7 @@ import MainView from "./components/main-view/main-view";
 // Import statement to bundle `./index.scss`
 import "./index.scss";
 
-const store = createStore(moviesApp, devToolsEnhancer());
+const store = createStore(movieApp, devToolsEnhancer());
 
 // Main component
 class filmOpediaApplication extends React.Component {
