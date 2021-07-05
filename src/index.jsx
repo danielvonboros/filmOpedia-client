@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Container from "react-bootstrap/container";
+import Container from "react-bootstrap/Container";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import moviesApp from "./reducers/reducers";
 import { devToolsEnhancer } from "redux-devtools-extension";
+import moviesApp from "./reducers/reducers";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // Import statement for MainView
 import MainView from "./components/main-view/main-view";
@@ -13,23 +13,23 @@ import MainView from "./components/main-view/main-view";
 // Import statement to bundle `./index.scss`
 import "./index.scss";
 
-const store = createStore(movieApp, devToolsEnhancer());
+const store = createStore(moviesApp, devToolsEnhancer());
 
 // Main component
-class filmOpediaApplication extends React.Component {
+class FilmOpediaApplication extends React.Component {
   render() {
     return (
-      <Provider store={store}>
-        <Container>
-          <MainView />
-        </Container>
-      </Provider>
+      <Container>
+        <MainView />
+      </Container>
     );
   }
 }
 
-// Find the root of the app
-const container = document.getElementById("app-container");
-
 // Tells React to render your app in the root DOM
-ReactDOM.render(React.createElement(filmOpediaApplication), container);
+ReactDOM.render(
+  <Provider store={store}>
+    <FilmOpediaApplication />
+  </Provider>,
+  document.getElementById("app-container")
+);

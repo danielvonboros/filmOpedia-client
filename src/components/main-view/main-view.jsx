@@ -1,89 +1,63 @@
 import React from "react";
+import axiosInstance from "../../config/";
 
 import { connect } from "react-redux";
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Link,
+} from "react-router-dom";
+
+import { setMovies, setUser } from "../../actions/actions";
+
+import MoviesList from "../movies-list/movies-list";
+
+import NavBar from "../navbar/navbar.jsx";
+import MovieView from "../movie-view/movie-view";
+import LoginView from "../login-view/login-view";
+import GenreView from "../genre-view/genre-view";
+import DirectorView from "../director-view/director-view";
+import ProfileView from "../profile-view/profile-view";
+import RegistrationView from "../registration-view/registration-view";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-
-import { setMovies } from "../../actions/actions";
-
-import { moviesList } from "../movies-list/movies-list";
-
-import NavBar from "../navbar/navbar.jsx";
-import { MovieCard } from "../movie-card/movie-card";
-import { MovieView } from "../movie-view/movie-view";
-import { LoginView } from "../login-view/login-view";
-import { GenreView } from "../genre-view/genre-view";
-import { DirectorView } from "../director-view/director-view";
-import { ProfileView } from "../profile-view/profile-view";
-import { RegistrationView } from "../registration-view/registration-view";
-import axiosInstance from "../../config/";
-
 import "./main-view.scss";
 
-export class MainView extends React.Component {
-  constructor() {
-    super(); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
+class MainView extends React.Component {
+  constructor(props) {
+    super(props); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
     this.state = {
-      // movies: [], This is supposed to be removed
-      // selectedMovie: null,
-      user: null, // Just the user is supposed to be left
-      // loading: false,
-      userLoading: false,
-      token: null,
+      user: null,
     };
   }
 
-  // componentDidMount() {
-  //   let accessToken = localStorage.getItem("token");
-  //   if (accessToken !== null) {
-  //     this.setState({
-  //       user: localStorage.getItem("user"),
-  //       token: accessToken,
-  //     });
-  //     this.getMovies(accessToken);
-  //     this.getUsers(accessToken);
-  //   }
-
-  // }
-
   componentDidMount() {
-    const accessToken = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
-    console.log(user, "main view");
-    if (accessToken !== null) {
-      this.setState({
-        user: user,
-        token: accessToken,
-      });
-      this.getMovies(accessToken);
-      this.getUsers(accessToken);
+    const user = JSON.parse(localStorage.getItem(user));
+    if (this.props.user.isAuth) {
+      this.getMovies();
+      this.getUsers();
+      // this.props.setUser(user);
     }
   }
 
-  getMovies(token) {
-    this.setState({ loading: true });
+  getMovies() {
     axiosInstance
       .get("/movies")
       .then((response) => {
-        // // Assign the result to the state
-        // this.setState({
-        //   movies: response.data,
-        //   loading: false,
-        // });
         this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
-        // this.setState({ loading: false });
       });
   }
 
-  getUsers(token) {
+  getUsers() {
     this.setState({ userLoading: true });
     axiosInstance
       .get("/users")
@@ -101,16 +75,17 @@ export class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log(authData);
     this.setState({
-      user: authData.user.username,
+      // user: authData.user.username,
       token: authData.token,
     });
 
     localStorage.setItem("token", authData.token);
-    localStorage.setItem("user", authData.user.username);
-    this.getMovies(authData.token);
-    this.getUsers(authData.token);
+    localStorage.setItem("user", JSON.stringify(authData.user));
+    this.getMovies();
+    this.props.setUser(authData.user);
+    // this.getUsers(authData.token);
+    window.location.reload();
   }
 
   handleLogout() {
@@ -119,14 +94,14 @@ export class MainView extends React.Component {
   }
 
   render() {
-    // const { movies, user, users, token } = this.state;
     let { movies } = this.props;
-    let { user } = this.state;
+    let { isAuth, user } = this.props.user;
+    // let { user, token } = this.state;
 
     return (
       <>
         <Router>
-          <NavBar onLogout={this.handleLogout} thisUser={this.state.user} />
+          <NavBar onLogout={this.handleLogout} />
           <Container>
             <Row
               className="main-view justify-content-md-center"
@@ -136,7 +111,7 @@ export class MainView extends React.Component {
                 exact
                 path="/"
                 render={() => {
-                  if (!user)
+                  if (!isAuth)
                     return (
                       <Col>
                         <LoginView
@@ -144,18 +119,15 @@ export class MainView extends React.Component {
                         />
                       </Col>
                     );
+                  // if (movies.length === 0) return <div className="main-view" />;
                   return <MoviesList movies={movies} />;
-                  // return movies.map((m) => (
-                  //   <Col sm={12} md={6} lg={4} xl={3} key={m._id}>
-                  //     <MovieCard movie={m} />
-                  //   </Col>
-                  // ));
                 }}
               />
+
               <Route
                 path="/register"
                 render={() => {
-                  if (user) return <Redirect to="/" />;
+                  if (isAuth) return <Redirect to="/" />;
                   return (
                     <Col>
                       <RegistrationView />
@@ -166,7 +138,7 @@ export class MainView extends React.Component {
               <Route
                 path="/movies/:movieId"
                 render={({ match, history }) => {
-                  if (!user)
+                  if (!isAuth)
                     return (
                       <Col>
                         <LoginView
@@ -174,15 +146,14 @@ export class MainView extends React.Component {
                         />
                       </Col>
                     );
-                  return this.state.loading ? (
-                    <Spinner animation="border" />
-                  ) : (
+                  return (
                     <Col md={10}>
                       <MovieView
                         user={user}
-                        movie={movies.find(
-                          (m) => m._id === match.params.movieId
-                        )}
+                        match={match}
+                        // movie={movies.find(
+                        //   (m) => m._id === match.params.movieId
+                        // )}
                         onBackClick={() => history.goBack()}
                       />
                     </Col>
@@ -193,7 +164,7 @@ export class MainView extends React.Component {
                 path="/director/:name"
                 render={({ match, history }) => {
                   if (movies.length === 0) return <div className="main-view" />;
-                  if (!user)
+                  if (!isAuth)
                     return (
                       <Col>
                         <LoginView
@@ -222,7 +193,7 @@ export class MainView extends React.Component {
                 path="/genres/:name"
                 render={({ match, history }) => {
                   if (movies.length === 0) return <div className="main-view" />;
-                  if (!user)
+                  if (!isAuth)
                     return (
                       <Col>
                         <LoginView
@@ -250,7 +221,7 @@ export class MainView extends React.Component {
                 path="/users/:username"
                 render={({ match, history }) => {
                   if (movies.length === 0) return <div className="main-view" />;
-                  if (!user)
+                  if (!isAuth)
                     return (
                       <Col>
                         <LoginView
@@ -264,7 +235,7 @@ export class MainView extends React.Component {
                     <Col md={10} lg={10}>
                       <ProfileView
                         onBackClick={() => history.goBack()}
-                        token={token}
+                        // token={token}
                         // onUpdate={(data) => this.updateUser(data)}
                         movies={movies}
                         onMovieDelete={(data) => this.onMovieAddOrDelete(data)}
@@ -282,7 +253,7 @@ export class MainView extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-  return { movies: state.movies };
+  return { movies: state.movies, user: state.user };
 };
 
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);

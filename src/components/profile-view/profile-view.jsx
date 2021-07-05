@@ -10,7 +10,7 @@ import axiosInstance from "../../config";
 import "./profile-view.scss";
 import axios from "axios";
 
-export function ProfileView({ movies, onBackClick }) {
+export default function ProfileView({ movies, onBackClick }) {
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
@@ -300,7 +300,7 @@ ProfileView.propTypes = {
   //   birthday: PropTypes.string.isRequired,
   // }).isRequired,
 
-  token: PropTypes.string.isRequired,
+  // token: PropTypes.string.isRequired,
   // onUpdate: PropTypes.func.isRequired,
   onMovieDelete: PropTypes.func.isRequired,
 };

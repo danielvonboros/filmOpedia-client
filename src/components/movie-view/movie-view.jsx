@@ -1,4 +1,7 @@
 import React from "react";
+
+import { connect } from "react-redux";
+
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -6,15 +9,45 @@ import axiosInstance from "../../config";
 
 import { Link } from "react-router-dom";
 
+import { setMovies, setUser } from "../../actions/actions";
+
 import "./movie-view.scss";
 
-export class MovieView extends React.Component {
+class MovieView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      movie: {},
+    };
+  }
   keypressCallback(event) {
     console.log(event.key);
   }
 
   componentDidMount() {
-    document.addEventListener("keypress", this.keypressCallback);
+    this.getMovies();
+    this.getMovie();
+    console.log(this.props);
+  }
+
+  getMovies() {
+    axiosInstance
+      .get("/movies")
+      .then((response) => {
+        // console.log(response);
+        this.props.setMovies(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  getMovie() {
+    console.log(this.props, "get movie");
+    const movie = this.props.movies.find(
+      (m) => m._id === this.props.match.params.movieId
+    );
+    this.setState({ movie });
   }
 
   handleAdd(movie) {
@@ -31,11 +64,12 @@ export class MovieView extends React.Component {
     document.removeEventListener("keypress", this.keypressCallback);
   }
   render() {
-    const { movie, onBackClick } = this.props;
+    // const { movie, onBackClick } = this.props;
+    console.log(this.state.movie, "movie from state");
 
     return (
       <Row className="justify-content-center">
-        <Col sm={12} md={10} lg={8} xl={6}>
+        {/* <Col sm={12} md={10} lg={8} xl={6}>
           <div>
             <div className="movie-poster">
               <img className="img-center-align" src={movie.imageUrl} />
@@ -88,8 +122,14 @@ export class MovieView extends React.Component {
               </li>
             </ul>
           </div>
-        </Col>
+        </Col> */}
       </Row>
     );
   }
 }
+
+let mapStateToProps = (state) => {
+  return { movies: state.movies, user: state.user };
+};
+
+export default connect(mapStateToProps, { setMovies, setUser })(MovieView);

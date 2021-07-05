@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -7,6 +8,7 @@ import "./navbar.scss";
 
 class NavBar extends Component {
   render() {
+    const { username } = this.props.user.user;
     return (
       <Navbar expand="lg" fixed="top">
         <Navbar.Brand>filmOpedia{"  "}</Navbar.Brand>
@@ -14,17 +16,17 @@ class NavBar extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href={`/users/${this.props.thisUser}`}>{this.props.thisUser}</Nav.Link>
+            <Nav.Link href={`/users/${username}`}>{username}</Nav.Link>
             <Nav.Link>
-            <Button
-              variant="outline-secondary"
-              className="button-float-right"
-              type="button"
-              onClick={this.props.onLogout}
-            >
-              Logout
-            </Button>
-          </Nav.Link>
+              <Button
+                variant="outline-secondary"
+                className="button-float-right"
+                type="button"
+                onClick={this.props.onLogout}
+              >
+                Logout
+              </Button>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -32,4 +34,8 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+let mapStateToProps = (state) => {
+  return { user: state.user };
+};
+
+export default connect(mapStateToProps)(NavBar);
