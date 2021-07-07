@@ -33418,7 +33418,6 @@ function movies() {
 }
 
 var userState = JSON.parse(localStorage.getItem("user")) || {};
-console.log(userState);
 
 function user() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
@@ -47662,11 +47661,11 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       console.log(event.key);
     }
   }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.getMovies();
-      this.getMovie();
-      console.log(this.props);
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevStates) {
+      if (this.props.movies !== prevProps.movies) {
+        this.getMovie();
+      }
     }
   }, {
     key: "getMovies",
@@ -47674,7 +47673,6 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       _config.default.get("/movies").then(function (response) {
-        // console.log(response);
         _this2.props.setMovies(response.data);
       }).catch(function (error) {
         console.log(error);
@@ -47685,13 +47683,12 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     value: function getMovie() {
       var _this3 = this;
 
-      console.log(this.props, "get movie");
       var movie = this.props.movies.find(function (m) {
         return m._id === _this3.props.match.params.movieId;
       });
-      this.setState({
+      return {
         movie: movie
-      });
+      };
     }
   }, {
     key: "handleAdd",
@@ -47699,7 +47696,6 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       var _this4 = this;
 
       _config.default.post("/users/".concat(this.props.user, "/") + movie._id).then(function (response) {
-        console.log(response);
         alert(_this4.props.movie.title + " has been added to your favorites!");
       }).catch(function (error) {
         return console.error(error);
@@ -47713,11 +47709,76 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // const { movie, onBackClick } = this.props;
-      console.log(this.state.movie, "movie from state");
+      var _this5 = this;
+
+      var _this$getMovie = this.getMovie(),
+          movie = _this$getMovie.movie;
+
+      var onBackClick = this.props.onBackClick;
       return /*#__PURE__*/_react.default.createElement(_Row.default, {
         className: "justify-content-center"
-      });
+      }, movie && /*#__PURE__*/_react.default.createElement(_Col.default, {
+        sm: 12,
+        md: 10,
+        lg: 8,
+        xl: 6
+      }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+        className: "movie-poster"
+      }, /*#__PURE__*/_react.default.createElement("img", {
+        className: "img-center-align",
+        src: movie.imageUrl
+      })), /*#__PURE__*/_react.default.createElement("ul", {
+        className: "movie-view list-group"
+      }, /*#__PURE__*/_react.default.createElement("li", {
+        className: "movie-title list-group-item"
+      }, /*#__PURE__*/_react.default.createElement("span", {
+        className: "value"
+      }, movie.title), /*#__PURE__*/_react.default.createElement("span", {
+        className: "value"
+      }, " (", movie.year, ")")), /*#__PURE__*/_react.default.createElement("li", {
+        className: "movie-genre list-group-item"
+      }, /*#__PURE__*/_react.default.createElement("span", {
+        className: "label"
+      }, "Genre: "), /*#__PURE__*/_react.default.createElement("span", {
+        className: "value"
+      }, movie.genre.name)), /*#__PURE__*/_react.default.createElement("li", {
+        className: "movie-description list-group-item"
+      }, /*#__PURE__*/_react.default.createElement("span", {
+        className: "label"
+      }, "Description: "), /*#__PURE__*/_react.default.createElement("span", {
+        className: "value"
+      }, movie.description)), /*#__PURE__*/_react.default.createElement("li", {
+        className: "movie-director list-group-item"
+      }, /*#__PURE__*/_react.default.createElement("span", {
+        className: "label"
+      }, "Directed by: "), /*#__PURE__*/_react.default.createElement("span", {
+        className: "value"
+      }, movie.director.name)), /*#__PURE__*/_react.default.createElement("li", {
+        className: "list-group-item"
+      }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+        to: "/director/".concat(movie.director.name)
+      }, /*#__PURE__*/_react.default.createElement(_Button.default, {
+        className: "button-float-left",
+        variant: "danger"
+      }, movie.director.name)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+        to: "/genres/".concat(movie.genre.name)
+      }, /*#__PURE__*/_react.default.createElement(_Button.default, {
+        className: "button-float-left",
+        variant: "danger"
+      }, movie.genre.name)), /*#__PURE__*/_react.default.createElement(_Button.default, {
+        className: "button-float-right",
+        variant: "outline-danger",
+        onClick: onBackClick
+      }, "Back")), /*#__PURE__*/_react.default.createElement("li", {
+        className: "list-group-item"
+      }, /*#__PURE__*/_react.default.createElement(_Button.default, {
+        className: "button-float-right",
+        type: "button",
+        variant: "danger",
+        onClick: function onClick() {
+          return _this5.handleAdd(movie);
+        }
+      }, "Add to favorites"))))));
     }
   }]);
 
@@ -48597,6 +48658,8 @@ var _reactRouterDom = require("react-router-dom");
 
 var _actions = require("../../actions/actions");
 
+var _reducers = _interopRequireDefault(require("../../reducers/reducers"));
+
 var _moviesList = _interopRequireDefault(require("../movies-list/movies-list"));
 
 var _navbar = _interopRequireDefault(require("../navbar/navbar.jsx"));
@@ -48672,7 +48735,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.user.isAuth) {
         this.getMovies();
-        this.getUsers(); // this.props.setUser(user);
+        this.getUsers();
       }
     }
   }, {
@@ -48712,14 +48775,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     key: "onLoggedIn",
     value: function onLoggedIn(authData) {
       this.setState({
-        // user: authData.user.username,
         token: authData.token
       });
       localStorage.setItem("token", authData.token);
       localStorage.setItem("user", JSON.stringify(authData.user));
       this.getMovies();
-      this.props.setUser(authData.user); // this.getUsers(authData.token);
-
+      this.props.setUser(authData.user);
       window.location.reload();
     }
   }, {
@@ -48736,8 +48797,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var movies = this.props.movies;
       var _this$props$user = this.props.user,
           isAuth = _this$props$user.isAuth,
-          user = _this$props$user.user; // let { user, token } = this.state;
-
+          user = _this$props$user.user;
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement(_navbar.default, {
         onLogout: this.handleLogout
       }), /*#__PURE__*/_react.default.createElement(_Container.default, null, /*#__PURE__*/_react.default.createElement(_Row.default, {
@@ -48779,10 +48839,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             md: 10
           }, /*#__PURE__*/_react.default.createElement(_movieView.default, {
             user: user,
-            match: match // movie={movies.find(
-            //   (m) => m._id === match.params.movieId
-            // )}
-            ,
+            match: match,
             onBackClick: function onBackClick() {
               return history.goBack();
             }
@@ -48892,7 +48949,7 @@ var _default = (0, _reactRedux.connect)(mapStateToProps, {
 })(MainView);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../../config/":"config/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../../actions/actions":"actions/actions.js","../movies-list/movies-list":"components/movies-list/movies-list.jsx","../navbar/navbar.jsx":"components/navbar/navbar.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Spinner":"../node_modules/react-bootstrap/esm/Spinner.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","./main-view.scss":"components/main-view/main-view.scss"}],"index.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../config/":"config/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../../actions/actions":"actions/actions.js","../../reducers/reducers":"reducers/reducers.js","../movies-list/movies-list":"components/movies-list/movies-list.jsx","../navbar/navbar.jsx":"components/navbar/navbar.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Spinner":"../node_modules/react-bootstrap/esm/Spinner.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","./main-view.scss":"components/main-view/main-view.scss"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -48999,7 +49056,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58951" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56456" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

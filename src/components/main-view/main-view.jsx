@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 
 import { setMovies, setUser } from "../../actions/actions";
+import moviesApp from "../../reducers/reducers";
 
 import MoviesList from "../movies-list/movies-list";
 
@@ -42,7 +43,6 @@ class MainView extends React.Component {
     if (this.props.user.isAuth) {
       this.getMovies();
       this.getUsers();
-      // this.props.setUser(user);
     }
   }
 
@@ -76,7 +76,6 @@ class MainView extends React.Component {
 
   onLoggedIn(authData) {
     this.setState({
-      // user: authData.user.username,
       token: authData.token,
     });
 
@@ -84,7 +83,6 @@ class MainView extends React.Component {
     localStorage.setItem("user", JSON.stringify(authData.user));
     this.getMovies();
     this.props.setUser(authData.user);
-    // this.getUsers(authData.token);
     window.location.reload();
   }
 
@@ -96,7 +94,6 @@ class MainView extends React.Component {
   render() {
     let { movies } = this.props;
     let { isAuth, user } = this.props.user;
-    // let { user, token } = this.state;
 
     return (
       <>
@@ -151,9 +148,6 @@ class MainView extends React.Component {
                       <MovieView
                         user={user}
                         match={match}
-                        // movie={movies.find(
-                        //   (m) => m._id === match.params.movieId
-                        // )}
                         onBackClick={() => history.goBack()}
                       />
                     </Col>

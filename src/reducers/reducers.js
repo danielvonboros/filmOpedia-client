@@ -21,7 +21,6 @@ function movies(state = [], action) {
 }
 
 const userState = JSON.parse(localStorage.getItem("user")) || {};
-console.log(userState);
 
 function user(
   state = {
