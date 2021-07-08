@@ -26054,7 +26054,7 @@ function _interopRequireDefault(obj) {
     };
 }
 var instance = _axios["default"].create({
-    baseURL: 'http://filmopedia.herokuapp.com'
+    baseURL: "https://filmopedia.herokuapp.com"
 });
 instance.interceptors.request.use(function(config) {
     if (!config.headers.Authorization) {

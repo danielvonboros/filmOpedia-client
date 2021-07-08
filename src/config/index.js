@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 const instance = axios.create({
-  baseURL: 'http://filmopedia.herokuapp.com'
+  baseURL: "https://filmopedia.herokuapp.com",
 });
 
 instance.interceptors.request.use(
-  config => {
+  (config) => {
     if (!config.headers.Authorization) {
       const token = localStorage.getItem("token");
       if (token) {
@@ -15,7 +15,7 @@ instance.interceptors.request.use(
 
     return config;
   },
-  error => Promise.reject(error)
+  (error) => Promise.reject(error)
 );
 
 export default instance;
