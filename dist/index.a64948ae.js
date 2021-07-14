@@ -30258,7 +30258,7 @@ function RegistrationView(props) {
     };
     var handleRegister = function handleRegister1(e) {
         e.preventDefault();
-        /* Send a request to the server for authentication */ if (newUsername.length === 0 || newPassword.length === 0 || newEmail.length === 0 || newBirthday.length === 0) {
+        /* Send a request to the server for authentication */ if (username.length === 0 || password.length === 0 || email.length === 0 || birthday.length === 0) {
             alert("Please fill all the fields");
             return false;
         }
