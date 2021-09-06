@@ -6,6 +6,9 @@ Not just another internet movie database
 
 ### Description
 
+Internet movie database that allows registered users to browse movies by Title, Genre, Director.
+Users can change their username, email adress and birthday. While browsing the movies collection, users can add movies to their list of favorites.
+
 ### Tools used
 
 | Property          | Tool       |
