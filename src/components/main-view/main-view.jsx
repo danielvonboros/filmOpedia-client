@@ -1,43 +1,253 @@
-import React from 'react';
-import {MovieCard} from '../movie-card/movie-card';
-import {MovieView} from '../movie-view/movie-view';
+import React from "react";
+import axiosInstance from "../../config/";
 
-export class MainView extends React.Component {
-    constructor() {
-        super(); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
-        this.state = {
-            movies: [
-               {_id:1, title: 'Inception', description: 'Dom Cobb (Leonardo DiCaprio) is a thief with the rare ability to enter people\'s dreams and steal their secrets from their subconscious. His skill has made him a hot commodity in the world of corporate espionage but has also cost him everything he loves. Cobb gets a chance at redemption when he is offered a seemingly impossible task: Plant an idea in someone\'s mind. If he succeeds, it will be the perfect crime, but a dangerous enemy anticipates Cobb\'s every move.', imagePath:'https://resizing.flixster.com/4MrL62heb7yBgBt8zllSeqNZxg4=/206x305/v2/https://flxt.tmsimg.com/assets/p7825626_p_v10_af.jpg'},
-               {_id:2, title: 'The Shawshank Redemption', description: 'Andy Dufresne (Tim Robbins) is sentenced to two consecutive life terms in prison for the murders of his wife and her lover and is sentenced to a tough prison. However, only Andy knows he didn\'t commit the crimes. While there, he forms a friendship with Red (Morgan Freeman), experiences brutality of prison life, adapts, helps the warden, etc., all in 19 years.', imagePath:'https://resizing.flixster.com/U8DOCAyL0efMS6cA0UmrNi8oyQk=/206x305/v2/https://flxt.tmsimg.com/NowShowing/3725/3725_aa.jpg'},
-               {_id:3, title: 'Gladiator', description: 'Commodus (Joaquin Phoenix) takes power and strips rank from Maximus (Russell Crowe), one of the favored generals of his predecessor and father, Emperor Marcus Aurelius, the great stoical philosopher. Maximus is then relegated to fighting to the death in the gladiator arenas.', imagePath:'https://resizing.flixster.com/z1uxBIn8PvwL-9RdEvzLbHJbc9Y=/206x305/v2/https://flxt.tmsimg.com/assets/p24674_p_v13_bc.jpg'} 
-            ],
-            selectedMovie: null
-        }
+import { connect } from "react-redux";
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Link,
+} from "react-router-dom";
+
+import { setMovies, setUser } from "../../actions/actions";
+import moviesApp from "../../reducers/reducers";
+
+import MoviesList from "../movies-list/movies-list";
+
+import NavBar from "../navbar/navbar.jsx";
+import MovieView from "../movie-view/movie-view";
+import LoginView from "../login-view/login-view";
+import GenreView from "../genre-view/genre-view";
+import DirectorView from "../director-view/director-view";
+import ProfileView from "../profile-view/profile-view";
+import RegistrationView from "../registration-view/registration-view";
+
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Spinner from "react-bootstrap/Spinner";
+import Container from "react-bootstrap/Container";
+
+import "./main-view.scss";
+
+class MainView extends React.Component {
+  constructor(props) {
+    super(props); // refers to OOP, means call the constructor of the parent class, in this case 'React.Component'
+    this.state = {
+      user: null,
+    };
+  }
+
+  componentDidMount() {
+    const user = JSON.parse(localStorage.getItem(user));
+    if (this.props.user.isAuth) {
+      this.getMovies();
+      this.getUsers();
     }
+  }
 
-    setSelectedMovie(newSelectedMovie) {
+  getMovies() {
+    axiosInstance
+      .get("/movies")
+      .then((response) => {
+        this.props.setMovies(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  getUsers() {
+    this.setState({ userLoading: true });
+    axiosInstance
+      .get("/users")
+      .then((response) => {
+        // Assign the result to the state
         this.setState({
-            selectedMovie: newSelectedMovie
+          users: response.data,
+          userLoading: false,
         });
-    }
+      })
+      .catch(function (error) {
+        console.log(error);
+        this.setState({ userLoading: false });
+      });
+  }
 
-    render() {
-        const {movies, selectedMovie } = this.state;
+  onLoggedIn(authData) {
+    this.setState({
+      token: authData.token,
+    });
 
-        if (movies.length === 0) return <div class="main-view">'The list is empty'</div>;
+    localStorage.setItem("token", authData.token);
+    localStorage.setItem("user", JSON.stringify(authData.user));
+    this.getMovies();
+    this.props.setUser(authData.user);
+    window.location.reload();
+  }
 
-        return (
-            // <React.Fragment> or <>
-            <div className="main-view">
-                {selectedMovie
-                ? <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-                : movies.map(movie => (
-                    <MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }}/>
-        ))
-      }
-    </div>
-            // </React.Fragment> or </>
-        );
-    }
+  handleLogout() {
+    localStorage.clear();
+    window.open("/", "_self");
+  }
+
+  render() {
+    let { movies } = this.props;
+    let { isAuth, user } = this.props.user;
+
+    return (
+      <>
+        <Router>
+          <NavBar onLogout={this.handleLogout} />
+          <Container>
+            <Row
+              className="main-view justify-content-md-center"
+              key="main-view"
+            >
+              <Route
+                exact
+                path="/"
+                render={() => {
+                  if (!isAuth)
+                    return (
+                      <Col>
+                        <LoginView
+                          onLoggedIn={(user) => this.onLoggedIn(user)}
+                        />
+                      </Col>
+                    );
+                  // if (movies.length === 0) return <div className="main-view" />;
+                  return <MoviesList movies={movies} />;
+                }}
+              />
+
+              <Route
+                path="/register"
+                render={() => {
+                  if (isAuth) return <Redirect to="/" />;
+                  return (
+                    <Col>
+                      <RegistrationView />
+                    </Col>
+                  );
+                }}
+              />
+              <Route
+                path="/movies/:movieId"
+                render={({ match, history }) => {
+                  if (!isAuth)
+                    return (
+                      <Col>
+                        <LoginView
+                          onLoggedIn={(user) => this.onLoggedIn(user)}
+                        />
+                      </Col>
+                    );
+                  return (
+                    <Col md={10}>
+                      <MovieView
+                        user={user}
+                        match={match}
+                        onBackClick={() => history.goBack()}
+                      />
+                    </Col>
+                  );
+                }}
+              />
+              <Route
+                path="/director/:name"
+                render={({ match, history }) => {
+                  if (movies.length === 0) return <div className="main-view" />;
+                  if (!isAuth)
+                    return (
+                      <Col>
+                        <LoginView
+                          onLoggedIn={(user) => this.onLoggedIn(user)}
+                        />
+                      </Col>
+                    );
+                  return this.state.loading ? (
+                    <Spinner animation="border" />
+                  ) : (
+                    <Col md={10}>
+                      <DirectorView
+                        director={
+                          movies.find(
+                            (m) => m.director.name === match.params.name
+                          ).director
+                        }
+                        onBackClick={() => history.goBack()}
+                        movies={movies}
+                      />
+                    </Col>
+                  );
+                }}
+              />
+              <Route
+                path="/genres/:name"
+                render={({ match, history }) => {
+                  if (movies.length === 0) return <div className="main-view" />;
+                  if (!isAuth)
+                    return (
+                      <Col>
+                        <LoginView
+                          onLoggedIn={(user) => this.onLoggedIn(user)}
+                        />
+                      </Col>
+                    );
+                  return this.state.loading ? (
+                    <Spinner animation="border" />
+                  ) : (
+                    <Col md={10}>
+                      <GenreView
+                        genre={
+                          movies.find((m) => m.genre.name === match.params.name)
+                            .genre
+                        }
+                        onBackClick={() => history.goBack()}
+                        movies={movies}
+                      />
+                    </Col>
+                  );
+                }}
+              />
+              <Route
+                path="/users/:username"
+                render={({ match, history }) => {
+                  if (movies.length === 0) return <div className="main-view" />;
+                  if (!isAuth)
+                    return (
+                      <Col>
+                        <LoginView
+                          onLoggedIn={(user) => this.onLoggedIn(user)}
+                        />
+                      </Col>
+                    );
+                  return this.state.userLoading ? (
+                    <Spinner animation="border" />
+                  ) : (
+                    <Col md={10} lg={10}>
+                      <ProfileView
+                        onBackClick={() => history.goBack()}
+                        // token={token}
+                        // onUpdate={(data) => this.updateUser(data)}
+                        movies={movies}
+                        onMovieDelete={(data) => this.onMovieAddOrDelete(data)}
+                      />
+                    </Col>
+                  );
+                }}
+              />
+            </Row>
+          </Container>
+        </Router>
+      </>
+    );
+  }
 }
-export default MainView;
+
+let mapStateToProps = (state) => {
+  return { movies: state.movies, user: state.user };
+};
+
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);
