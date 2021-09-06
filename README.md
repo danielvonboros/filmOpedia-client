@@ -1,4 +1,4 @@
-![alt filmOpediaReactLogo](https://github.com/danielvonboros/filmopedia/blob/main/src/mat/filmopediaReactLogo.png?raw=true)
+![alt filmOpediaReactLogo](https://github.com/danielvonboros/filmOpedia-client/blob/main/src/mat/filmopediaReactLogo.png?raw=true)
 Not just another internet movie database
 
 <p>React frontend application for <a href="https://github.com/danielvonboros/filmOpedia">filmopedia API</a></p>
