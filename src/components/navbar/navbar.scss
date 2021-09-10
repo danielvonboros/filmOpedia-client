@@ -1,5 +1,6 @@
 .navbar-light {
-  background-color: #FFD4D2;
+  background-color: #1b064c;
+  color: #f72684;
 }
 
 .navbar-nav {
@@ -13,4 +14,20 @@
 .span {
   font-style: italic;
   font-size: 0.75rem;
+}
+
+.navbar-logo {
+  max-height: 55px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #f72684;
+}
+
+.navbar-nav:hover .nav-link:hover {
+  color: white;
+}
+
+.button-float-right {
+  background-color: #f72684;
 }

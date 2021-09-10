@@ -152,11 +152,11 @@ export default function RegistrationView(props) {
           />
           <span className="validation-feedback">{validateBirthday}</span>
         </Form.Group>
-        <Button variant="danger" type="submit" onClick={handleRegister}>
+        <Button className="details-button" variant="danger" type="submit" onClick={handleRegister}>
           Submit
         </Button>{" "}
         <Link to={`/`}>
-          <Button variant="outline-secondary" className="button-float-right">
+          <Button  variant="danger" className="details-button button-float-right">
             Back
           </Button>
         </Link>

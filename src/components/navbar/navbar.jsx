@@ -5,21 +5,25 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./navbar.scss";
+import logo from '../../mat/filmOpediaReactLogoRosa.png'
+
+
 
 class NavBar extends Component {
+
   render() {
     const { username } = this.props.user.user;
     return (
       <Navbar expand="lg" fixed="top">
-        <Navbar.Brand>filmOpedia{"  "}</Navbar.Brand>
+        <img src={logo} alt='filmOpedia React' className="navbar-logo" />
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href={`/users/${username}`}>{username}</Nav.Link>
-            <Nav.Link>
+            <Nav.Link className="nav-link-light" href="/">Home</Nav.Link>
+            <Nav.Link className="nav-link-light" href={`/users/${username}`}>{username}</Nav.Link>
+            <Nav.Link className="nav-link-light">
               <Button
-                variant="outline-secondary"
+                variant="danger"
                 className="button-float-right"
                 type="button"
                 onClick={this.props.onLogout}

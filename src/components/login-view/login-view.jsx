@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import axiosInstance from "../../config/";
+import logo from '../../mat/filmopediaReactLogo.png'
 
 import { Link } from "react-router-dom";
 
@@ -36,6 +37,8 @@ export default function LoginView(props) {
     <Row className="login-margin-top justify-content-md-center">
       <Col sm={12} md={6} lg={6} xl={4}>
         <Form>
+          <img src={logo} className="login-logo" alt='filmOpedia client'/>
+          <p className='login-text'>not just another Internet movie database</p>
           <Form.Group controlId="formUsername">
             <Form.Label>Username: </Form.Label>
             <Form.Control
@@ -52,13 +55,13 @@ export default function LoginView(props) {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-          <Button variant="danger" type="submit" onClick={handleSubmit}>
+          <Button className='details-button' variant="danger" type="submit" onClick={handleSubmit}>
             Submit
           </Button>{" "}
           <Link to={`/register`}>
             <Button
-              variant="outline-secondary"
-              className="button-float-right"
+              variant="danger"
+              className="details-button button-float-right"
               type="button"
             >
               Register

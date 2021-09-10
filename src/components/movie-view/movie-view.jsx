@@ -50,7 +50,7 @@ class MovieView extends React.Component {
 
   handleAdd(movie) {
     axiosInstance
-      .post(`/users/${this.props.user}/` + movie._id)
+      .post(`/users/${this.props.user}/favoritemovies/` + movie._id)
       .then((response) => {
         alert(this.props.movie.title + " has been added to your favorites!");
       })
@@ -74,8 +74,8 @@ class MovieView extends React.Component {
               </div>
               <ul className="movie-view list-group">
                 <li className="movie-title list-group-item">
-                  <span className="value">{movie.title}</span>
-                  <span className="value"> ({movie.year})</span>
+                  <span>{movie.title}</span>
+                  <span> ({movie.year})</span>
                 </li>
                 <li className="movie-genre list-group-item">
                   <span className="label">Genre: </span>
@@ -91,18 +91,18 @@ class MovieView extends React.Component {
                 </li>
                 <li className="list-group-item">
                   <Link to={`/director/${movie.director.name}`}>
-                    <Button className="button-float-left" variant="danger">
+                    <Button className="details-button button-float-left" variant="danger">
                       {movie.director.name}
                     </Button>
                   </Link>
                   <Link to={`/genres/${movie.genre.name}`}>
-                    <Button className="button-float-left" variant="danger">
+                    <Button className="details-button button-float-left" variant="danger">
                       {movie.genre.name}
                     </Button>
                   </Link>
                   <Button
-                    className="button-float-right"
-                    variant="outline-danger"
+                    className="details-button button-float-right"
+                    variant="danger"
                     onClick={onBackClick}
                   >
                     Back
@@ -110,7 +110,7 @@ class MovieView extends React.Component {
                 </li>
                 <li className="list-group-item">
                   <Button
-                    className="button-float-right"
+                    className="details-button button-float-right"
                     type="button"
                     variant="danger"
                     onClick={() => this.handleAdd(movie)}

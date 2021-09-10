@@ -1,16 +1,26 @@
 .img-center-align {
-    display: flex;
-    justify-content:center;
-    width:99.5%;
-    margin-bottom: 10px;
-    margin-top:10px;
+  display: flex;
+  justify-content: center;
+  width: 99.5%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.movie-title {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  color: #1b064c;
+}
+
+.details-button {
+  background-color: #1b064c;
 }
 
 .button-float-right {
-    float: right;
+  float: right;
 }
 
 .button-float-left {
-    float: left;
-    margin-right: 10px;
+  float: left;
+  margin-right: 10px;
 }

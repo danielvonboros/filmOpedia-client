@@ -45,8 +45,8 @@ export default function DirectorView(props) {
             </li>
             <li className="back-button list-group-item">
               <Button
-                className="button-float-right"
-                variant="outline-danger"
+                className="details-button button-float-right"
+                variant="danger"
                 onClick={() => onBackClick()}
               >
                 Back

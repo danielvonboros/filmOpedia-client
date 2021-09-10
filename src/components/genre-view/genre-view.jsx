@@ -36,8 +36,8 @@ export default class GenreView extends React.Component {
               </li>
               <li className="list-group-item">
                 <Button
-                  className="button-float-right"
-                  variant="outline-danger"
+                  className="details-button button-float-right"
+                  variant="danger"
                   onClick={() => onBackClick()}
                 >
                   Back

@@ -158,7 +158,7 @@ export default function ProfileView({ movies, onBackClick }) {
       return fav.map((fav) => (
         <div key={fav._id}>
           {fav.title}{" "}
-          <Button onClick={() => removeFavorite(fav._id)}>Remove</Button>
+          <Button variant='btn-sm btn-outline-dark' onClick={() => removeFavorite(fav._id)}>remove</Button>
         </div>
       ));
     }
@@ -261,13 +261,13 @@ export default function ProfileView({ movies, onBackClick }) {
                 </Form.Group>
               </li>
             </Form>
-            <li className="list-group-item">
-              <Button variant="danger" type="submit" onClick={updateUser}>
+            <li className=" list-group-item">
+              <Button className='details-button' variant="danger" type="submit" onClick={updateUser}>
                 Update User
               </Button>{" "}
               <Button
                 variant="danger"
-                className="button-float-right"
+                className="details-button button-float-right"
                 type="submit"
                 onClick={() => console.log(deleteAccount)}
               >
@@ -276,8 +276,8 @@ export default function ProfileView({ movies, onBackClick }) {
             </li>
             <li className="list-group-item">
               <Button
-                variant="outline-secondary"
-                className="button-float-right"
+                variant="danger"
+                className="details-button button-float-right"
                 onClick={() => {
                   onBackClick(null);
                 }}
