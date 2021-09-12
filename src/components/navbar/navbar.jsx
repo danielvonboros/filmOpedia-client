@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./navbar.scss";
-import logo from '../../mat/filmopediaReactLogoRosa.png'
+import logo from 'https://raw.githubusercontent.com/danielvonboros/filmOpedia-client/Redux/src/mat/filmopediaReactLogoRosa.png';
 
 
 
