@@ -1,0 +1,9 @@
+export const ROUTE_MAIN = "/";
+export const ROUTE_MOVIE = "/movie";
+export const ROUTE_MOVIE_ID = "/:movieId";
+export const ROUTE_DIRECTOR = "/director";
+export const ROUTE_GENRE = "/genres";
+export const ROUTE_USER = "/user";
+export const ROUTE_USER_ID = "/:id";
+export const ROUTE_LOGIN = "/login";
+export const ROUTE_REGISTER = "/register";
