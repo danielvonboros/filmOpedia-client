@@ -12,8 +12,9 @@ import MovieList from '../movie-list/movie-list';
 import { ProfileView } from '../profile-view/profile-view';
 
 import { AuthData } from '../context/context';
-import { ROUTE_DIRECTOR, ROUTE_GENRE, ROUTE_LOGIN, ROUTE_MAIN, ROUTE_MOVIE, ROUTE_MOVIE_ID, ROUTE_USER, ROUTE_USER_ID } from '../../utils/constants/routes';
+import { ROUTE_DIRECTOR, ROUTE_GENRE, ROUTE_LOGIN, ROUTE_MAIN, ROUTE_MOVIE, ROUTE_MOVIE_ID, ROUTE_USER, ROUTE_USER_ID, ROUTE_EDIT } from '../../utils/constants/routes';
 import PageWrapper from '../page-wrapper/page-wrapper';
+import ProfileEditView from '../profile-edit-view/profile-edit-view';
 
 export default function Router(props) {
 
@@ -37,7 +38,8 @@ export default function Router(props) {
                 <Switch>
                     <Route exact path={ROUTE_MAIN} component={MovieList}/>
                     <Route exact path={ROUTE_MOVIE+ROUTE_MOVIE_ID} component={MovieView}/>
-                    <Route path={ROUTE_USER+ROUTE_USER_ID} component={ProfileView} />
+                    <Route exact path={ROUTE_USER+ROUTE_USER_ID} component={ProfileView} />
+                    <Route path={ROUTE_USER+ROUTE_EDIT+ROUTE_USER_ID} component={ProfileEditView} />
                     <Route path={ROUTE_MOVIE+ROUTE_MOVIE_ID+ROUTE_DIRECTOR} component={DirectorView}/>
                     <Route path={ROUTE_MOVIE+ROUTE_MOVIE_ID+ROUTE_GENRE} component={GenreView}/>
                 </Switch>

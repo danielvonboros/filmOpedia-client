@@ -57,10 +57,9 @@ class MovieView extends React.Component {
         }
 
         if(this.state.movie === null){
-            return <span>Ooops, Error!</span>
+            return <span>An error occurred</span>
         }
 
-        const { onBackClick } = this.props;
         const movie = this.state.movie;
 
         return (
